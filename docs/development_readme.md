@@ -6,15 +6,14 @@
 
 ## Minimum Viable Product
 
-Noted is a web application for collecting and organizing beautiful notes, built using Ruby on Rails and React / Redux. The inspiration for this app was derived from both Google Keep and Evernote.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data, and sufficient CSS styling:
+Noted is a web application for collecting and organizing beautiful notes, built using Ruby on Rails and React / Redux. The inspiration for this app was derived from Google Keep and Evernote.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data, and sufficient CSS styling:
 
 - [ ] Hosting on Heroku
 - [ ] New account creation, login, and guest/demo login
 - [ ] Notes in a tile view
-- [ ] Folders for organizing notes (i.e. "collections")
+- [ ] Collections for organizing notes (hybrid of notebooks & tags)
 - [ ] Rich Text Editing
-- [ ] Infinite Scroll
-- [ ] Search notes by title / content / label
+- [ ] Search notes by title / body / collection
 - [ ] Production README [sample](../README.md)
 
 ## Design Docs
@@ -34,7 +33,7 @@ Noted is a web application for collecting and organizing beautiful notes, built 
 
 ## Implementation Timeline
 
-### Phase 1: Backend setup and Front End User Authentication (2 days)
+### Phase 1: Backend setup & Front End User Authentication (Tues 8/30, Wed 8/31)
 
 **Objective:** Functioning rails project with front-end Authentication
 
@@ -46,15 +45,31 @@ Noted is a web application for collecting and organizing beautiful notes, built 
 - [ ] `APIUtil` to interact with the API
 - [ ] Redux cycle for frontend authentication
 - [ ] User signup/signin components
-- [ ] Blank landing component after signup/signin
 - [ ] Style signup/signin components
+- [ ] Landing component after signup/signin includes header on home page with logged in username
+- [ ] Style home page header
 - [ ] Seed users
 - [ ] Review phase 1
 
-### Phase 2: Notes Model, API, and components (2 days)
+### Phase 2: Sidebar & Collections Model, API, and components(Thur 9/1, Fri 9/2 AM)
 
-**Objective:** Notes can be created, read, edited and destroyed through
-the API.
+**Objective:** Note collections that can be created, read, edited, and destroyed through the API.
+
+- [ ] `Collection` model
+- [ ] Seed database with a small amount of test data
+- [ ] CRUD API for collections (`CollectionssController`)
+- [ ] JBuilder views for collections
+- Collection components and respective Redux loops
+  - [ ] `CollectionsIndex`
+  - [ ] `CollectionsIndexItem`
+  - [ ] `CollectionForm`
+- [ ] Create sidebar component
+- [ ] Style sidebar and collections components
+- [ ] Seed collections
+
+### Phase 3: Notes Model, API, and components (Fri 9/2 PM, Sat 9/3, Sun 9/4)
+
+**Objective:** Notes can be created, read, edited and destroyed through the API. Notes belong to Collections.
 
 - [ ] `Note` model
 - [ ] Seed database with a small amount of test data
@@ -64,57 +79,46 @@ the API.
   - [ ] `NotesIndex`
   - [ ] `NoteIndexItem`
   - [ ] `NoteForm`
-- [ ] Autosave notes feature
-- [ ] Style notes components
+- [ ] Integrate tile view using `React Masonry` for `NotesIndex`
 - [ ] Seed notes
 
-### Phase 3: Notebooks (2 day)
+### Phase 4: Note collection tags (Mon 9/5, Tues 9/6)
 
-**Objective:** Notes belong to Notebooks that can be created, read, edited and destroyed through the API.
+**Objective:** Notes can be tagged with multiple collections. Notes can be viewed by collection.
 
-- [ ] `Notebook` model
-- [ ] Seed database with a small amount of test data
-- [ ] CRUD API for notes (`NotebooksController`)
-- [ ] JBuilder views for notebooks
-- [ ] Adding notes requires a notebook
-- [ ] Moving notes between notebooks
-- [ ] Viewing notes by notebook
-- [ ] Style notebook components
-- [ ] Seed notebooks
+- [ ] `Collection Taggings` join table
+- [ ] Fetching collection tags for notes
+- [ ] Adding, editing, removing collection tags to notes
+- [ ] Style collection tag components
+- [ ] Viewing notes by collection. Update `NotesController#index` to accept collection filter params.
 
-### Phase 4: Tags (1 days)
+### Phase 5: Search (Wed 9/7, Thurs 9/8 AM)
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
+**Objective:** Can search for notes by keywords. Search will match results in title, body, and collection tags.
 
-- [ ] `Tag` model and `Taggings` join table
-- [ ] Fetching tags for notes
-- [ ] Adding tags to notes
-- [ ] Searching notes by tag
-- [ ] Style search & tag components
-- [ ] Seed tags with seed data
+- [ ] Update `NotesController#index` to accept search input params.
+- [ ] Create and style search component for `NoteSearchDefault` which shows when search bar is clicked in but has no input
+- [ ] Redux cycle for fetching and receiving search results from search input
+- [ ] Search results auto update as user types
 
-### Phase 5: Allow Complex Styling in Notes (1 days, W2 Th 6pm)
+### Phase 6: Allow Complex Styling in Notes (Thurs 9/8 PM, Fri 9/9 AM)
 
-**objective:** Allow rich text editing of notes.
+**Objective:** Allow rich text editing of notes.
 
 - [ ] Integrate `react-quill` (based on Quill.js).
 - [ ] Rails helpers to sanitize HTML before rendering.
 - [ ] Style Quill components.
 - [ ] Add Quill styling to seeded notes
 
-### Phase 6: - Pagination / infinite scroll for Notes Index (1 day, W2 F 6pm)
-
-**objective:** Add infinite scroll to Notes Index
-
-- [ ] Paginate Notes Index API to send 20 results at a time
-- [ ] Append next set of results when user scrolls and is near bottom
-- [ ] Style scroll components and transitions
-- [ ] Ensure seed data demonstrates infinite scroll
-
 ### Bonus Features (TBD)
-- [ ] Add images to notes. Images show up in tile view
+- [ ] Collection search in edit collections dropdown
+- [ ] New collection in edit collections dropdown
+- [ ] Infinite scroll
+- [ ] Collection and note stats
+- [ ] Add option to choose color for notes
+- [ ] Add images to notes. Images show up in tile view. Limiting to 1 image per note.
+- [ ] IBM Watson API for AI categorization of notes (natural language classifiers)
 - [ ] Search ranking
-- [ ] IBM Watson API for AI categorization of notes
-- [ ] Changelogs for Notes
-- [ ] Set reminders on notes (Google cal? Email? Text?)
-- [ ] Multiple sessions
+- [ ] Autosave
+- [ ] Changelogs for notes
+- [ ] Set reminders on notes
