@@ -1,4 +1,5 @@
-```{
+```json
+{
   currentUser: {
     id: 1,
     username: "guest-demo"
