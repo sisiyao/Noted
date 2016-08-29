@@ -1,4 +1,4 @@
-{
+```{
   currentUser: {
     id: 1,
     username: "guest-demo"
@@ -32,4 +32,4 @@
   },
   collectionFilter: 1,
   searchInput: "quotes"
-}
+}```
