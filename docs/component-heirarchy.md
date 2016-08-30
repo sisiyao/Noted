@@ -76,8 +76,8 @@ CollectionFormContainer corresponds to two routes (new collection & edit collect
 
 |Path   | Component   |
 |-------|-------------|
-| "/sign-up" | "AuthFormContainer" |
-| "/sign-in" | "AuthFormContainer" |
+| "/signup" | "AuthFormContainer" |
+| "/login" | "AuthFormContainer" |
 | "/home" | "Home" |
 | "/new-note" | "NoteFormContainer" |
 | "/home/note/:noteId" | "NoteFormContainer" |
