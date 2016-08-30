@@ -4,7 +4,7 @@ export const login = function(user, success, error) {
 	$.ajax({
 		method: 'POST',
 		url: '/api/session',
-		data: user,
+		data: {user: user},
 		success,
 		error
 	});
@@ -14,7 +14,7 @@ export const signup = function(user, success, error) {
 	$.ajax({
 		method: 'POST',
 		url: '/api/user',
-		data: user,
+		data: {user: user},
 		success,
 		error
 	});

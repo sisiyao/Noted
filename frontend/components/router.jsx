@@ -30,7 +30,7 @@ class AppRouter extends React.Component{
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={ App }>
+        <Route path="/" component={ App } >
           <Route path="login" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="signup" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="home" component={ Home } onEnter={ this._ensureLoggedIn } />
