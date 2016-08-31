@@ -54,7 +54,7 @@ class SessionForm extends React.Component {
 
 	renderErrors(){
 		return(
-			<ul>
+			<ul className="auth-errors">
 				{this.props.errors.map( (error, idx) => (
 					<li key={`autherror${idx}`}>
 						{error}
@@ -77,33 +77,35 @@ class SessionForm extends React.Component {
 	render() {
 		return (
 			<div className="background-image">
-				<div className="greeting">
-					<h1>Noted</h1>
-					<h3>Keep thoughts organized.</h3>
-					<button onClick={this._guestDemoLogin} className="guest-demo-button">
-						GUEST DEMO
-					</button>
-				</div>
+				<div className="auth-content">
+					<div className="greeting" id="greeting">
+						<h1>Noted</h1>
+						<h3>Keep thoughts organized.</h3>
+						<button onClick={this._guestDemoLogin} className="guest-demo-button">
+							GUEST DEMO
+						</button>
+					</div>
 
-				<div className="auth-form-container">
-					<form onSubmit={this.handleSubmit} className="auth-form">
+					<div className="auth-form-container">
+						<form onSubmit={this.handleSubmit} className="auth-form">
+							<input type="text"
+								value={this.state.username}
+								onChange={this.update("username")}
+								placeholder="Username"
+								className="auth-form-input" />
+
+							<input type="password"
+								value={this.state.password}
+								onChange={this.update("password")}
+								placeholder="Password"
+								className="auth-form-input" />
+
+							<input type="submit" value={this.submitButtonText()}
+								className="auth-form-button"/>
+							{this.navLink()}
+						</form>
 						{ this.renderErrors() }
-						<input type="text"
-							value={this.state.username}
-							onChange={this.update("username")}
-							placeholder="Username"
-							className="auth-form-input" />
-
-						<input type="password"
-							value={this.state.password}
-							onChange={this.update("password")}
-							placeholder="Password"
-							className="auth-form-input" />
-
-						<input type="submit" value={this.submitButtonText()}
-							className="auth-form-button"/>
-						{this.navLink()}
-					</form>
+					</div>
 				</div>
 			</div>
 		);

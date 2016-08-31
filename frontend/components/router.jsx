@@ -1,17 +1,17 @@
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 import Home from './home';
 
 class AppRouter extends React.Component{
-  constructor(props){
+  constructor (props) {
     super(props);
     this._ensureLoggedIn = this._ensureLoggedIn.bind(this);
     this._redirectIfLoggedIn = this._redirectIfLoggedIn.bind(this);
   }
 
-  _ensureLoggedIn(nextState, replace){
+  _ensureLoggedIn (nextState, replace) {
     const currentState = this.context.store.getState();
     const currentUser = currentState.session.currentUser;
     if (!currentUser) {
@@ -19,7 +19,7 @@ class AppRouter extends React.Component{
     }
   }
 
-  _redirectIfLoggedIn(nextState, replace){
+  _redirectIfLoggedIn (nextState, replace) {
     const currentState = this.context.store.getState();
     const currentUser = currentState.session.currentUser;
     if (currentUser) {
@@ -30,7 +30,8 @@ class AppRouter extends React.Component{
   render(){
     return(
       <Router history={ hashHistory }>
-        <Route path="/" component={ App } >
+        <Route path="/" component={ App }>
+          <IndexRedirect to="/login" />
           <Route path="login" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="signup" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="home" component={ Home } onEnter={ this._ensureLoggedIn } />
