@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+
+:root {
+  --light-grey: #f5f5f5;
+  --med-grey: #bfbfbf;
+  --dark-grey: #494949;
+  --button-hover-grey: #cdcdcd;
+}
+
+/*background-color=var(--var-name)*/

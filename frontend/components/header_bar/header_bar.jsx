@@ -19,9 +19,33 @@ class HeaderBar extends React.Component {
 
   render () {
     return (
-      <div>
-        Logged in as {this.props.currentUser.username}
-        <button onClick={this.props.logout}>Logout</button>
+      <div className="header-bar">
+        <div className="header-bar-left">
+          <div className="header-menu-icon">
+            <i className="fa fa-bars" aria-hidden="true"></i>
+          </div>
+          <div className="header-logo">Noted</div>
+        </div>
+        <div className="header-search-container">
+        </div>
+        <div className="header-bar-right">
+          <div className="header-add-note">
+            <div className="header-add-note-icon">
+              <i className="fa fa-plus-circle" aria-hidden="true"></i>
+            </div>
+            <div className="header-add-note-text">Add Note</div>
+          </div>
+          <div className="header-admin">
+            <div className="header-profile-icon">
+              <div className="label">{this.props.currentUser.username}</div>
+              <i className="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div className="header-logout-icon" onClick={this.props.logout}>
+              <div className="label">Logout</div>
+              <i className="fa fa-sign-out" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

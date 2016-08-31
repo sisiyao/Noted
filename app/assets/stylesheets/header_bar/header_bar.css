@@ -1,0 +1,82 @@
+.header-bar, .header-bar-left, .header-bar-right, .header-add-note, .header-admin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-bar {
+  background-color: rgb(62, 80, 180);
+  height: 64px;
+  font-size: 14px;
+  color: white;
+  box-shadow: 2px 3px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #5878e5;
+}
+
+.header-bar-left, .header-bar-right {
+  height: 48px;
+}
+
+.header-bar-left {
+  margin-left: 25px;
+  width: 130px;
+}
+
+.header-bar-right {
+  margin-right: 35px;
+  width: 210px;
+}
+
+.header-add-note {
+  width: 92px;
+}
+
+.header-bar .fa {
+  font-size: 24px;
+}
+
+.header-bar .fa-plus-circle {
+  font-size: 28px;
+}
+
+.header-logo {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.header-menu-icon:hover, .header-add-note:hover, .header-profile-icon:hover, .header-logout-icon:hover {
+  color: var(--button-hover-grey);
+  cursor: pointer;
+}
+
+.header-logo {
+  cursor: pointer;
+  font-size: 26px;
+}
+
+.header-admin {
+  width: 80px;
+  vertical-align: middle;
+}
+
+.header-profile-icon, .header-logout-icon {
+  position: relative;
+}
+
+.header-profile-icon:hover .label, .header-logout-icon:hover .label {
+  display: block;
+}
+
+.label {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: -7px;
+  color: black;
+  background-color: var(--med-grey);
+  font-size: 12px;
+  color: black;
+  padding: 10px;
+  border-radius: 6px;
+  min-width: 50px;
+  text-align: center;
+}
