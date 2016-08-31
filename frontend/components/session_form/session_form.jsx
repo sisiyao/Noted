@@ -30,9 +30,9 @@ class SessionForm extends React.Component {
 
   navLink () {
     if (this.props.formType === "login") {
-      return <Link to="/signup">Sign up here</Link>;
+      return <Link to="/signup">Sign up instead</Link>;
     } else {
-      return <Link to="/login">Log in here</Link>;
+      return <Link to="/login">Log in instead</Link>;
     }
   }
 
@@ -76,29 +76,35 @@ class SessionForm extends React.Component {
 
 	render() {
 		return (
-			<div className="auth-form-container">
-				<div>
+			<div className="background-image">
+				<div className="greeting">
 					<h1>Noted</h1>
-					<h3>Beautiful, organized notes.</h3>
-					<button onClick={this._guestDemoLogin}>GUEST DEMO</button>
+					<h3>Keep thoughts organized.</h3>
+					<button onClick={this._guestDemoLogin} className="guest-demo-button">
+						GUEST DEMO
+					</button>
 				</div>
-				<form onSubmit={this.handleSubmit} className="auth-form">
-					{ this.renderErrors() }
-					<input type="text"
-						value={this.state.username}
-						onChange={this.update("username")}
-            placeholder="Username"
-						className="auth-form-input" />
 
-					<input type="password"
-						value={this.state.password}
-						onChange={this.update("password")}
-            placeholder="Password"
-						className="auth-form-input" />
+				<div className="auth-form-container">
+					<form onSubmit={this.handleSubmit} className="auth-form">
+						{ this.renderErrors() }
+						<input type="text"
+							value={this.state.username}
+							onChange={this.update("username")}
+							placeholder="Username"
+							className="auth-form-input" />
 
-          <input type="submit" value={this.submitButtonText()} />
-				</form>
-        {this.navLink()}
+						<input type="password"
+							value={this.state.password}
+							onChange={this.update("password")}
+							placeholder="Password"
+							className="auth-form-input" />
+
+						<input type="submit" value={this.submitButtonText()}
+							className="auth-form-button"/>
+						{this.navLink()}
+					</form>
+				</div>
 			</div>
 		);
 	}

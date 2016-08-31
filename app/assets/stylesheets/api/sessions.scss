@@ -1,3 +1,117 @@
 // Place all the styles related to the api/sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.background-image h1 {
+  font-size: 72px;
+  padding-bottom: 10px;
+}
+
+.background-image h3 {
+  font-size: 32px;
+}
+
+.background-image {
+  display: flex;
+  height: 650px;
+  position: relative;
+  background-image: url(https://hd.unsplash.com/photo-1470790376778-a9fbc86d70e2);
+  background-size: 1440px 2078px;
+  background-position: 0 -800px;
+}
+
+.auth-form-container {
+  height: 160px;
+  position: absolute;
+  left: 760px;
+  top: 190px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 90px;
+  font-size: 14px;
+  background: rgba(70, 72, 82, 0.3);
+  width: 180px;
+}
+
+.auth-form-input {
+  border: 0;
+  margin: 0;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border-bottom: 1px solid;
+  border-bottom-color: white;
+  padding: 10px 15px;
+  width: 250px;
+  color: black;
+  margin-bottom: 13px;
+  text-align: left;
+  font-size: 14px;
+  font-color: black;
+  outline: none;
+  background-color: transparent;
+}
+
+.auth-form-button {
+  border: 0;
+  padding: 8px 30px;
+  color: white;
+  background-color: #96aff8;
+  font-size: 14px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #87a3f7;
+  margin: 20px 0 20px 0;
+  width: 120px;
+  text-align: center;
+}
+
+.auth-form-button:hover {
+  // background-color: #4173c9;
+  cursor: pointer;
+  background-color: #87a3f7;
+}
+
+.auth-form > a {
+  color: #4962ac;
+}
+
+.auth-form > a:visited {
+  color: #4962ac;
+}
+
+.auth-form > a:hover {
+  color: #5470c4;
+}
+
+.guest-demo-button {
+  border: 0;
+  padding: 12px 38px;
+  color: white;
+  background-color: #698df6;
+  font-size: 18px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #5878e5;
+  margin-top: 40px;
+  width: 200px;
+}
+
+.guest-demo-button:hover {
+  cursor: pointer;
+  background-color: #5e7edd;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  height: 300px;
+  position: absolute;
+  left: 346px;
+  top: 140px;
+}
