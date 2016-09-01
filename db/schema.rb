@@ -11,10 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830050909) do
+ActiveRecord::Schema.define(version: 20160831234308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collection_taggings", force: :cascade do |t|
+    t.integer  "note_id",       null: false
+    t.integer  "collection_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "collection_taggings", ["collection_id"], name: "index_collection_taggings_on_collection_id", using: :btree
+  add_index "collection_taggings", ["note_id"], name: "index_collection_taggings_on_note_id", using: :btree
+
+  create_table "collections", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id",    null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string   "title",                        null: false
+    t.text     "body"
+    t.integer  "user_id",                      null: false
+    t.string   "color",      default: "white", null: false
+    t.string   "image_url"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false

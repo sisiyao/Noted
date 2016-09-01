@@ -1,7 +1,6 @@
 import { SessionConstants, receiveCurrentUser, receiveErrors }
   from '../actions/session_actions';
 import { login, signup, logout } from '../util/session_api_util';
-import { hashHistory } from 'react-router';
 
 const SessionMiddleware = ({getState, dispatch}) => next => action => {
   const success = user => dispatch(receiveCurrentUser(user));
@@ -14,12 +13,14 @@ const SessionMiddleware = ({getState, dispatch}) => next => action => {
   switch(action.type){
     case SessionConstants.LOGIN:
       login(action.user, success, error);
+      next(action);
       break;
     case SessionConstants.LOGOUT:
       logout(() => next(action));
       break;
     case SessionConstants.SIGNUP:
       signup(action.user, success, error);
+      next(action);
       break;
     default:
       return next(action);

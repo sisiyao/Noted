@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 
+//testing
+import { fetchAllCollections } from './util/collection_api_utils.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   if (window.currentUser) {

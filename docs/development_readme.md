@@ -111,6 +111,7 @@ Noted is a web application for collecting and organizing beautiful notes, built 
 - [ ] Add Quill styling to seeded notes
 
 ### Bonus Features (TBD)
+- [ ] Loading animation
 - [ ] Collection search in edit collections dropdown
 - [ ] New collection in edit collections dropdown
 - [ ] Infinite scroll
