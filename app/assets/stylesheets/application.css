@@ -36,7 +36,6 @@ body {
 }
 
 .dashboard {
-  border: 1px solid red;
   width: 100%;
 }
 
@@ -48,7 +47,6 @@ body {
 ::-webkit-scrollbar-track:vertical {
 }*/
 
-/* Handle */
 ::-webkit-scrollbar-thumb:vertical {
     background: var(--med-light-grey);
 }
