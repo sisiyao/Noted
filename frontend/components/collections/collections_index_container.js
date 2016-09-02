@@ -5,12 +5,11 @@ import { fetchAllCollections, destroyCollection }
 import collectionsSelector from '../../util/collection_selector';
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser,
   collections: collectionsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllCollections: userId => dispatch(fetchAllCollections(userId)),
+  fetchAllCollections: userId => dispatch(fetchAllCollections()),
   destroyCollection: collectionId => dispatch(destroyCollection(collectionId))
 });
 

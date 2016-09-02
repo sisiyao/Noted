@@ -3,16 +3,20 @@
 }
 
 .sidebar-show {
-  border: 1px solid red;
   min-width: 280px;
   font-size: 13px;
   font-weight: bold;
   color: var(--dark-grey);
-  overflow-y: scroll;
-  height: 500px;
+  overflow-y: hidden;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-.sidebar-show, .sidebar-top, .sidebar-bottom, .sidebar-collections {
+.sidebar-show:hover {
+  overflow-y: scroll;
+}
+
+.sidebar-top, .sidebar-bottom, .sidebar-collections {
   display: flex;
   flex-direction: column;
 }
@@ -61,7 +65,6 @@
   max-width: 160px;
 }
 
-
 .sidebar-collection-item > .sidebar-item-icon {
   font-size: 18px;
 }
@@ -78,9 +81,9 @@
 }
 
 .sidebar-collection-item:hover .collection-item-options {
-  display: inline-block;;
+  display: block;
 }
-/*
+
 .sidebar-space {
-  height: 120px;
-}*/
+  height: 100px;
+}

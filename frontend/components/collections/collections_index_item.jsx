@@ -2,8 +2,7 @@ import React from 'react';
 
 const CollectionsIndexItem = ({collection}) => {
   return (
-    <div className="sidebar-collection-item"
-      key={`${collection.id}${collection.name}`}>
+    <div className="sidebar-collection-item">
       <div className="sidebar-item-icon">
         <i className="fa fa-folder-open" aria-hidden="true"></i>
       </div>

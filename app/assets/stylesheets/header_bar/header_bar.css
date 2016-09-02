@@ -1,3 +1,7 @@
+.header-dummy {
+  height: 64px;
+}
+
 .header-bar, .header-bar-left, .header-bar-right, .header-add-note, .header-admin {
   display: flex;
   flex-direction: row;
@@ -34,7 +38,11 @@
 }
 
 .header-bar .fa {
-  font-size: 24px;
+  font-size: 22px;
+}
+
+.header-bar .fa-bars {
+  font-size: 16px;
 }
 
 .header-bar .fa-plus-circle {

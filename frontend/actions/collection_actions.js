@@ -9,9 +9,8 @@ export const CollectionConstants = {
   RECEIVE_ERRORS: "RECEIVE_ERRORS"
 };
 
-export const fetchAllCollections = userId => ({
-  type: CollectionConstants.FETCH_ALL_COLLECTIONS,
-  userId
+export const fetchAllCollections = () => ({
+  type: CollectionConstants.FETCH_ALL_COLLECTIONS
 });
 
 export const createCollection = collection => ({

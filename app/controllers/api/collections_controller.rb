@@ -1,6 +1,6 @@
 class Api::CollectionsController < ApplicationController
   def index
-    @collections = Collection.where(user_id: params[:user_id])
+    @collections = Collection.where(user_id: current_user.id)
   end
 
   def create

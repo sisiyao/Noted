@@ -1,8 +1,7 @@
-export const fetchAllCollections = (userId, success) => {
+export const fetchAllCollections = (success) => {
   $.ajax({
     url: "/api/collections",
     method: "GET",
-    data: {user_id: userId},
     success
   });
 };
@@ -30,7 +29,7 @@ export const updateCollection = (collection, success, error) => {
 export const destroyCollection = (collectionId, success, error) => {
   $.ajax({
     url: `/api/collections/${collectionId}`,
-    method: "DELTE",
+    method: "DELETE",
     success,
     error
   });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 class HeaderBar extends React.Component {
   constructor (props) {

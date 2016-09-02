@@ -14,7 +14,7 @@ const CollectionsMiddleware = ({getState, dispatch}) => next => action => {
   switch(action.type){
     case CollectionConstants.FETCH_ALL_COLLECTIONS:
       success = collections => dispatch(receiveAllCollections(collections));
-      fetchAllCollections(action.userId, success);
+      fetchAllCollections(success);
       next(action);
       break;
     case CollectionConstants.CREATE_COLLECTION:
