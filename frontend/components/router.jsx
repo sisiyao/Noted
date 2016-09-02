@@ -3,6 +3,7 @@ import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
 import App from './structural/app';
 import SessionFormContainer from './session_form/session_form_container';
 import Home from './structural/home';
+import CollectionForm from '../components/collections/collection_form';
 
 class AppRouter extends React.Component{
   constructor (props) {
@@ -35,6 +36,9 @@ class AppRouter extends React.Component{
           <Route path="login" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="signup" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="home" component={ Home } onEnter={ this._ensureLoggedIn } />
+          <Route component={ Home }>
+            <Route path="edit-collection" component={ CollectionForm } />
+          </ Route>
         </Route>
       </Router>
     );

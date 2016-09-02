@@ -30,6 +30,7 @@ const CollectionsMiddleware = ({getState, dispatch}) => next => action => {
     case CollectionConstants.DESTROY_COLLECTION:
       success = (collection) => dispatch(removeCollection(collection.id));
       destroyCollection(action.collectionId, success, error);
+      next(action);
       break;
     default:
       return next(action);

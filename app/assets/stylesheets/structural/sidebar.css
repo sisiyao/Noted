@@ -60,6 +60,11 @@
   box-sizing: border-box;
 }
 
+.collection-header {
+  padding: 8px 20px;
+  color: black;
+}
+
 .sidebar-collection-item > .sidebar-item-text {
   min-width: 160px;
   max-width: 160px;
