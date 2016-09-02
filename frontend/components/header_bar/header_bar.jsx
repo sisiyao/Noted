@@ -21,7 +21,7 @@ class HeaderBar extends React.Component {
     return (
       <div className="header-bar">
         <div className="header-bar-left">
-          <div className="header-menu-icon">
+          <div className="header-menu-icon" onClick={this.props.sidebarToggle}>
             <i className="fa fa-bars" aria-hidden="true"></i>
           </div>
           <div className="header-logo">Noted</div>

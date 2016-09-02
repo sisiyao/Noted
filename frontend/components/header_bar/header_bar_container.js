@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import HeaderBar from './header_bar';
 import { logout } from '../../actions/session_actions';
+import { sidebarToggle } from '../../actions/sidebar_actions';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
@@ -8,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  sidebarToggle: () => dispatch(sidebarToggle())
 });
 
 export default connect(

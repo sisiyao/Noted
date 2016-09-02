@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
-import App from './app';
+import App from './structural/app';
 import SessionFormContainer from './session_form/session_form_container';
-import Home from './home';
+import Home from './structural/home';
 
 class AppRouter extends React.Component{
   constructor (props) {

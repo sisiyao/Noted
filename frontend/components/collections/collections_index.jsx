@@ -1,4 +1,5 @@
 import React from 'react';
+import CollectionsIndexItem from './collections_index_item';
 
 class CollectionsIndex extends React.Component {
   constructor (props) {
@@ -11,10 +12,10 @@ class CollectionsIndex extends React.Component {
 
   render () {
     const collections = this.props.collections.map(collection => (
-      <div>{collection.name}</div>
+      <CollectionsIndexItem collection={collection} />
     ));
     return (
-      <div className="collections-list">{collections}</div>
+      <div className="sidebar-collections">{collections}</div>
     );
   }
 }
