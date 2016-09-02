@@ -20,7 +20,7 @@ export const updateCollection = (collection, success, error) => {
   $.ajax({
     url: `/api/collections/${collection.id}`,
     method: "PATCH",
-    data: {collection: collection},
+    data: {collection: {name: collection.name}},
     success,
     error
   });

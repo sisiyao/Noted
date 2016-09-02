@@ -43,13 +43,11 @@ body {
     width: 8px;
     color: var(--med-gray)
 }
-/*
-::-webkit-scrollbar-track:vertical {
+
+/*::-webkit-scrollbar-track:vertical {
+  background: var(--background-grey);
 }*/
 
 ::-webkit-scrollbar-thumb:vertical {
-    background: var(--med-light-grey);
-}
-::-webkit-scrollbar-thumb:window-inactive {
-	background: var(--med-light-grey);
+  background: var(--med-light-grey);
 }

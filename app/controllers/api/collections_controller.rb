@@ -5,6 +5,7 @@ class Api::CollectionsController < ApplicationController
 
   def create
     @collection = Collection.new(collection_params)
+    @collection.user = current_user;
 
     if @collection.save
       render :show
@@ -14,22 +15,30 @@ class Api::CollectionsController < ApplicationController
   end
 
   def update
-    @collection = Collection.find(params[:id])
+    if  current_user.collections.exists?(params[:id])
+      @collection = Collection.find(params[:id])
 
-    if @collection.update(collection_params)
-      render :show
+      if @collection.update(collection_params)
+        render :show
+      else
+        render json: @collection.errors.full_messages
+      end
     else
-      render json: @collection.errors.full_messages
+      render json: ["Not found"], status: 404
     end
   end
 
   def destroy
-    @collection = Collection.find(params[:id])
+    if  current_user.collections.exists?(params[:id])
+      @collection = Collection.find(params[:id])
 
-    if @collection.destroy
-      render :show
+      if @collection.destroy
+        render :show
+      else
+        render json: ["Unsuccessful delete request"], status: 404
+      end
     else
-      render json: ["Unsuccessful delete request"], status: 404
+      render json: ["Not found"], status: 404
     end
   end
 
