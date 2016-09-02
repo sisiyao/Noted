@@ -6,7 +6,7 @@ export const CollectionConstants = {
   RECEIVE_ALL_COLLECTIONS: "RECEIVE_ALL_COLLECTIONS",
   RECEIVE_SINGLE_COLLECTION: "RECEIVE_SINGLE_COLLECTION",
   REMOVE_COLLECTION: "REMOVE_COLLECTION",
-  RECEIVE_ERRORS: "RECEIVE_ERRORS"
+  RECEIVE_COLLECTION_ERRORS: "RECEIVE_COLLECTION_ERRORS"
 };
 
 export const fetchAllCollections = () => ({
@@ -43,7 +43,7 @@ export const removeCollection = collectionId => ({
   collectionId
 });
 
-export const receiveErrors = errors => ({
-  type: CollectionConstants.RECEIVE_ERRORS,
+export const receiveCollectionErrors = errors => ({
+  type: CollectionConstants.RECEIVE_COLLECTION_ERRORS,
   errors
 });

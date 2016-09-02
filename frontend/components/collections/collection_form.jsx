@@ -20,9 +20,7 @@ class CollectionForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault();
     const collection = this.state;
-    const action = (this.props.type === 'edit') ? this.props.updateCollection
-      : this.props.createCollection;
-    action(collection);
+    this.props.formAction(collection);
     this.props.closeModal();
   }
 

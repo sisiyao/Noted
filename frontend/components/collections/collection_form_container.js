@@ -3,14 +3,14 @@ import CollectionForm from './collection_form';
 import { createCollection, updateCollection }
   from "../../actions/collection_actions";
 
-const mapStateToProps = (state, ownProps) => ({
-  formType: ownProps.type
+const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const formAction = ownProps.type === 'edit' ? updateCollection : createCollection;
+
   return {
-    createCollection: collection => dispatch(createCollection(collection)),
-    updateCollection: collection => dispatch(updateCollection(collection))
+    formAction: collection => dispatch(formAction(collection))
   };
 };
 

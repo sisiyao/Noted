@@ -19,7 +19,7 @@ const CollectionsReducer = (state = _nullCollections, action) => {
       const filteredCollections = merge({}, state.collections);
       delete filteredCollections[`${action.collectionId}`];
       return merge({}, _nullCollections, {collections: filteredCollections});
-    case CollectionConstants.RECEIVE_ERRORS:
+    case CollectionConstants.RECEIVE_COLLECTIONS_ERRORS:
       return merge({}, state, {errors: action.errors});
     default:
       return state;

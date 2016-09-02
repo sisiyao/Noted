@@ -1,12 +1,12 @@
 import { CollectionConstants, receiveAllCollections, receiveSingleCollection,
-  removeCollection, receiveErrors } from '../actions/collection_actions';
+  removeCollection, receiveCollectionErrors } from '../actions/collection_actions';
 import { fetchAllCollections, createCollection, updateCollection,
   destroyCollection } from '../util/collection_api_utils';
 
 const CollectionsMiddleware = ({getState, dispatch}) => next => action => {
   const error = xhr => {
     const errors = xhr.responseJSON;
-    dispatch(receiveErrors(errors));
+    dispatch(receiveCollectionErrors(errors));
   };
 
   let success;
