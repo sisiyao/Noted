@@ -8,6 +8,7 @@ class CollectionForm extends React.Component {
       name: this.props.collection.name,
       id: this.props.collection.id
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   update (field) {
@@ -16,12 +17,13 @@ class CollectionForm extends React.Component {
     );
 	}
 
-  _handleSubmit (collection) {
-    return (e) => {
-      e.preventDefault();
-      this.props.processForm(collection);
-      this.props.closeModal();
-    };
+  handleSubmit (e) {
+    e.preventDefault();
+    const collection = this.state;
+    const action = (this.props.type === 'edit') ? this.props.updateCollection
+      : this.props.createCollection;
+    action(collection);
+    this.props.closeModal();
   }
 
   render () {
@@ -42,7 +44,7 @@ class CollectionForm extends React.Component {
           </div>
 
           <form className="collection-form"
-            onSubmit={this._handleSubmit(this.state)}>
+            onSubmit={this.handleSubmit}>
             <input type='text' value={this.state.name}
               onChange={this.update("name")}
               placeholder="Name"/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import CollectionForm from './collection_form';
+import CollectionFormContainer from './collection_form_container';
 
 // ({collection, destroyCollection, router})
 
@@ -38,7 +38,7 @@ class CollectionsIndexItem extends React.Component {
           <i className="fa fa-trash-o" aria-hidden="true"></i>
         </div>
 
-        <CollectionForm modalOpen={this.state.modalOpen}
+        <CollectionFormContainer modalOpen={this.state.modalOpen}
           closeModal={this.closeModal} collection={this.props.collection}
           type="edit" />
       </div>
