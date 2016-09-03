@@ -4,9 +4,6 @@ import Root from './components/root';
 import configureStore from './store/store';
 import Modal from 'react-modal';
 
-//testing
-import { fetchAllCollections } from './util/collection_api_utils.js';
-
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   if (window.currentUser) {

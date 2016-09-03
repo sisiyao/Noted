@@ -5,6 +5,7 @@ import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 class HeaderBar extends React.Component {
   constructor (props) {
     super(props);
+    this.linkToHome = this.linkToHome.bind(this);
   }
 
   shouldComponentUpdate (nextProps) {
@@ -18,6 +19,10 @@ class HeaderBar extends React.Component {
 		}
   }
 
+  linkToHome () {
+    this.props.router.push("/home");
+  }
+
   render () {
     return (
       <div className="header-bar">
@@ -25,7 +30,7 @@ class HeaderBar extends React.Component {
           <div className="header-menu-icon" onClick={this.props.sidebarToggle}>
             <i className="fa fa-bars" aria-hidden="true"></i>
           </div>
-          <div className="header-logo">Noted</div>
+          <div className="header-logo" onClick={this.linkToHome}>Noted</div>
         </div>
         <div className="header-search-container">
         </div>

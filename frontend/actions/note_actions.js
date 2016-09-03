@@ -13,34 +13,34 @@ export const fetchAllNotes = () => ({
   type: NoteConstants.FETCH_ALL_NOTES
 });
 
-export const createNote = collection => ({
+export const createNote = note => ({
   type: NoteConstants.CREATE_NOTE,
-  collection
+  note
 });
 
-export const updateNote = collection => ({
+export const updateNote = note => ({
   type: NoteConstants.UPDATE_NOTE,
-  collection
+  note
 });
 
-export const destroyNote = collectionId => ({
+export const destroyNote = noteId => ({
   type: NoteConstants.DESTROY_NOTE,
-  collectionId
+  noteId
 });
 
-export const receiveAllNotes = collections => ({
+export const receiveAllNotes = notes => ({
   type: NoteConstants.RECEIVE_ALL_NOTES,
-  collections
+  notes
 });
 
-export const receiveSingleNote = collection => ({
+export const receiveSingleNote = note => ({
   type: NoteConstants.RECEIVE_SINGLE_NOTE,
-  collection
+  note
 });
 
-export const removeNote = collectionId => ({
+export const removeNote = noteId => ({
   type: NoteConstants.REMOVE_NOTE,
-  collectionId
+  noteId
 });
 
 export const receiveNoteErrors = errors => ({

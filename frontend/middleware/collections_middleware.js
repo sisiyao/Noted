@@ -1,9 +1,9 @@
 import { CollectionConstants, receiveAllCollections, receiveSingleCollection,
   removeCollection, receiveCollectionErrors } from '../actions/collection_actions';
 import { fetchAllCollections, createCollection, updateCollection,
-  destroyCollection } from '../util/collection_api_utils';
+  destroyCollection } from '../util/collection_api_util';
 
-const CollectionsMiddleware = ({getState, dispatch}) => next => action => {
+const CollectionsMiddleware = ({dispatch}) => next => action => {
   const error = xhr => {
     const errors = xhr.responseJSON;
     dispatch(receiveCollectionErrors(errors));

@@ -34,6 +34,3 @@ export const destroyCollection = (collectionId, success, error) => {
     error
   });
 };
-
-// testing
-window.fetchAllCollections = fetchAllCollections;

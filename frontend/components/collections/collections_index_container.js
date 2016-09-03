@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllCollections: userId => dispatch(fetchAllCollections()),
+  fetchAllCollections: () => dispatch(fetchAllCollections()),
   destroyCollection: collectionId => dispatch(destroyCollection(collectionId)),
 });
 

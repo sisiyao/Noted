@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SidebarItem = ({item, icon}) => {
+const SidebarItem = ({item, icon, link}) => {
   return (
-    <div className="sidebar-item">
+    <div className="sidebar-item" onClick={link}>
       <div className="sidebar-item-icon">
         <i className={icon} aria-hidden="true"></i>
       </div>

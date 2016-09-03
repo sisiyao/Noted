@@ -1,9 +1,9 @@
 import React from 'react';
-import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRedirect, IndexRoute, hashHistory } from 'react-router';
 import App from './structural/app';
 import SessionFormContainer from './session_form/session_form_container';
 import Home from './structural/home';
-import CollectionForm from '../components/collections/collection_form';
+import NotesIndex from './notes/notes_index_container';
 
 class AppRouter extends React.Component{
   constructor (props) {
@@ -35,9 +35,10 @@ class AppRouter extends React.Component{
           <IndexRedirect to="/login" />
           <Route path="login" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
           <Route path="signup" component={ SessionFormContainer } onEnter={this._redirectIfLoggedIn} />
-          <Route path="home" component={ Home } onEnter={ this._ensureLoggedIn } />
+          <Route path="home" component={ Home } onEnter={ this._ensureLoggedIn } >
+            <IndexRoute component={ NotesIndex } />
+          </Route>
           <Route component={ Home }>
-            <Route path="edit-collection" component={ CollectionForm } />
           </ Route>
         </Route>
       </Router>
