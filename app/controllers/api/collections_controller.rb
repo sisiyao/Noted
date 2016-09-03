@@ -21,7 +21,7 @@ class Api::CollectionsController < ApplicationController
       if @collection.update(collection_params)
         render :show
       else
-        render json: @collection.errors.full_messages
+        render json: @collection.errors.full_messages, status: 422
       end
     else
       render json: ["Not found"], status: 404

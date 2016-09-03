@@ -10,6 +10,7 @@ class CollectionForm extends React.Component {
       id: this.props.collection.id
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   update (field) {
@@ -22,6 +23,22 @@ class CollectionForm extends React.Component {
     e.preventDefault();
     const collection = this.state;
     this.props.formAction(collection);
+    // this.resetState();
+  }
+
+  closeModal () {
+    this.props.clearErrors();
+    this.resetState();
+  }
+
+  resetState () {
+    if (this.props.type === 'create') {
+      this.setState({name: "", id: null});
+    } else {
+      this.setState(
+        {name: this.props.collection.name, id: this.props.collection.id}
+      );
+    }
   }
 
   render () {
@@ -31,19 +48,13 @@ class CollectionForm extends React.Component {
     ));
 
     return (
-      <Modal
-        isOpen={this.props.modalOpen}
-        onRequestClose={this.props.closeModal}
+      <Modal isOpen={this.props.modalOpen} onRequestClose={this.closeModal}
         style={style}>
 
         <div className="collection-form-modal">
           <div className="create-collection-icon">
-            <i className="fa fa-folder-open-o" aria-hidden="true"></i>
-          </div>
-
-          <div className="form-title">
-            {formText} collection
-          </div>
+            <i className="fa fa-folder-open-o" aria-hidden="true"></i></div>
+            <div className="form-title">{formText} collection</div>
 
           <form className="collection-form"
             onSubmit={this.handleSubmit}>
@@ -53,14 +64,9 @@ class CollectionForm extends React.Component {
             <input type='submit' value={formText} />
           </form>
 
-          <ul className="collection-form-errors">
-            {errors}
-          </ul>
-
-          <div className="close-collection-form" onClick={this.props.closeModal}>
-            Cancel
-          </div>
-
+          <ul className="collection-form-errors">{errors}</ul>
+          <div className="close-collection-form" onClick={this.closeModal}>
+            Cancel</div>
         </div>
       </Modal>
     );

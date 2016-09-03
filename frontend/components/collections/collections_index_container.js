@@ -5,12 +5,13 @@ import { fetchAllCollections, destroyCollection }
 import collectionsSelector from '../../util/collection_selector';
 
 const mapStateToProps = state => ({
-  collections: collectionsSelector(state)
+  collections: collectionsSelector(state),
+  errors: state.collections.errors
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchAllCollections: userId => dispatch(fetchAllCollections()),
-  destroyCollection: collectionId => dispatch(destroyCollection(collectionId))
+  destroyCollection: collectionId => dispatch(destroyCollection(collectionId)),
 });
 
 export default connect(

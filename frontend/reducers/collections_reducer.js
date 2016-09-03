@@ -21,6 +21,8 @@ const CollectionsReducer = (state = _nullCollections, action) => {
       return merge({}, _nullCollections, {collections: filteredCollections});
     case CollectionConstants.RECEIVE_COLLECTION_ERRORS:
       return merge({}, state, {errors: action.errors});
+    case CollectionConstants.CLEAR_COLLECTION_FORM_ERRORS:
+      return {collections: state.collections, errors: []};
     default:
       return state;
   }
