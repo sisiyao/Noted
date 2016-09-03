@@ -5,15 +5,21 @@ const style = {
     left            : 0,
     right           : 0,
     bottom          : 0,
-    backgroundColor : 'rgba(30, 30, 30, 0.55)'
+    backgroundColor : 'rgba(30, 30, 30, 0.55)',
+    'zIndex'       : 2
   },
   content : {
-    position        : 'relative',
+    position        : 'fixed',
     margin          : 'auto',
+    top             : '10%',
     border          : '1px solid #fff',
-    padding         : '30px',
-    'minWidth'     : '400px',
-    'maxWidth'     : '400px'
+    padding         : '50px 80px',
+    'minWidth'      : '400px',
+    'maxWidth'      : '400px',
+    'minHeight'     : '220px',
+    'maxHeight'     : '220px',
+    'zIndex'        : 3,
+    'boxSizing'     : 'border-box'
   }
 };
 
