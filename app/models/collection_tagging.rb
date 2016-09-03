@@ -1,7 +1,7 @@
 class CollectionTagging < ActiveRecord::Base
-  validates :user_id, :collection_id, presence: true
+  validates :user, :collection, presence: true
 
   belongs_to :user
-  
+
   belongs_to :collection
 end

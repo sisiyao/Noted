@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import style from './collection_modal_style';
 
 class CollectionForm extends React.Component {
   constructor (props) {
@@ -21,20 +22,23 @@ class CollectionForm extends React.Component {
     e.preventDefault();
     const collection = this.state;
     this.props.formAction(collection);
-    this.props.closeModal();
   }
 
   render () {
-    let formText = (this.props.type === "edit") ? "Update" : "Create";
+    const formText = (this.props.type === "edit") ? "Update" : "Create";
+    const errors = this.props.errors.map((error, idx) => (
+      <li key={`${idx}${error}`}>{error}</li>
+    ));
 
     return (
       <Modal
         isOpen={this.props.modalOpen}
-        onRequestClose={this.props.closeModal}>
+        onRequestClose={this.props.closeModal}
+        style={style}>
 
         <div className="collection-form-modal">
-          <div className="close-form-icon" onClick={this.props.closeModal}>
-            <i className="fa fa-times" aria-hidden="true"></i>
+          <div className="create-collection-icon">
+            <i className="fa fa-folder-open-o" aria-hidden="true"></i>
           </div>
 
           <div className="form-title">
@@ -48,6 +52,15 @@ class CollectionForm extends React.Component {
               placeholder="Name"/>
             <input type='submit' value={formText} />
           </form>
+
+          <ul className="collection-form-errors">
+            {errors}
+          </ul>
+
+          <div className="close-collection-form" onClick={this.props.closeModal}>
+            Cancel
+          </div>
+
         </div>
       </Modal>
     );

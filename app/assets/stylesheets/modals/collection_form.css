@@ -1,0 +1,10 @@
+.collection-form-modal {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-form {
+  display: flex;
+  flex-direction: column;
+}

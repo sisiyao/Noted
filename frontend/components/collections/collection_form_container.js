@@ -4,6 +4,7 @@ import { createCollection, updateCollection }
   from "../../actions/collection_actions";
 
 const mapStateToProps = state => ({
+  errors: state.collections.errors
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

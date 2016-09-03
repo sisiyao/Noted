@@ -1,5 +1,6 @@
 class Collection < ActiveRecord::Base
   validates :name, :user, presence: true
+  validates :name, uniqueness: { scope: :user_id }
 
   belongs_to :user
 

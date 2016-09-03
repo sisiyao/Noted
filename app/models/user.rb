@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
-  has_many :collections;
+  has_many :collections
+  has_many :notes
 
   attr_reader :password
 
