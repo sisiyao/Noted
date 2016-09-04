@@ -11,7 +11,7 @@ export const createNote = (note, success, error) => {
   $.ajax({
     url: "/api/notes",
     method: "POST",
-    data: {note: {name: note.name}},
+    data: {note: {title: note.title, body: note.body}},
     success,
     error
   });
@@ -21,7 +21,7 @@ export const updateNote = (note, success, error) => {
   $.ajax({
     url: `/api/notes/${note.id}`,
     method: "PATCH",
-    data: {note: {name: note.name}},
+    data: {note: {title: note.title, body: note.body}},
     success,
     error
   });

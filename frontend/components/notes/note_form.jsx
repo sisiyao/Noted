@@ -1,15 +1,18 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 class NoteForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = { id: "", title: "", body: ""};
-    this.buttonText = this.buttonText.bind(this);
+    this.deleteButton = this.deleteButton.bind(this);
     this.textAreaChange = this.textAreaChange.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  buttonText () {
-    return this.props.formType === "new-note" ? "x" : "Delete";
+  deleteButton () {
+    return this.props.formType === "new-note" ? false : true;
   }
 
   update (field) {
@@ -25,20 +28,32 @@ class NoteForm extends React.Component {
     };
   }
 
+  cancel () {
+    this.props.router.push('/home');
+  }
 
+  handleSubmit () {
+    this.props.processForm(this.state);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.errors.length === 0) {
+      this.props.router.push('/home');
+    }
+  }
 
   render () {
     return (
       <div className="note-container">
         <div className="note-form-options">
           <div className="note-form-toolbar">Toolbar</div>
-          <button className="note-form-action">{this.buttonText()}</button>
+          <button className="note-form-action" onClick={this.cancel}>x</button>
         </div>
 
         <div className="note-form-container">
           <div className="note-form">
             <div className="note-tags">Tags</div>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <input type="text"
                 value={this.state.title}
 								onChange={this.update("title")}
@@ -59,4 +74,4 @@ class NoteForm extends React.Component {
   }
 }
 
-export default NoteForm;
+export default withRouter(NoteForm);

@@ -4,7 +4,8 @@ import { createNote, updateNote, destroyNote }
 import NoteForm from './note_form';
 
 const mapStateToProps = state => ({
-  errors: state.notes.errors
+  errors: state.notes.errors,
+  notes: state.notes.notes
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
