@@ -73,6 +73,19 @@
   background-color: transparent;
 }
 
+.auth-form-input::-webkit-input-placeholder {
+   color: white;
+}
+.auth-form-input:-moz-placeholder { /* Firefox 18- */
+   color: white;
+}
+.auth-form-input::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+}
+.auth-form-input:-ms-input-placeholder {
+   color: white;
+}
+
 .auth-form-button {
   border: 0;
   padding: 8px 30px;

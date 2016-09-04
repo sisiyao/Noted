@@ -8,6 +8,7 @@ class CollectionsIndex extends React.Component {
     super(props);
     this.state = { modalOpen: false };
     this.openModal = this.openModal.bind(this);
+    this.listCollections = this.listCollections.bind(this);
   }
 
   componentDidMount () {
@@ -24,19 +25,21 @@ class CollectionsIndex extends React.Component {
     }
   }
 
-  render () {
-    const collections = this.props.collections.map(collection => (
+  listCollections () {
+    return this.props.collections.map(collection => (
       <CollectionsIndexItem collection={collection}
         key={`${collection.id}${collection.name}`}
         destroyCollection={this.props.destroyCollection}
         openModal={this.openModal} modalOpen={this.state.modalOpen}
         errors={this.props.errors} />
     ));
+  }
 
+  render () {
     return (
       <div className="sidebar-collections">
         <div className="collection-header">Collections</div>
-        {collections}
+        {this.listCollections()}
         <div onClick={this.openModal}>
           <SidebarItem item="Create new collection" icon="fa fa-plus" /></div>
         <CollectionFormContainer modalOpen={this.state.modalOpen}

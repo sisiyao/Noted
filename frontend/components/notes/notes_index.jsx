@@ -1,9 +1,15 @@
 import React from 'react';
 import NoteIndexItem from './note_index_item';
+import Masonry from 'react-masonry-component';
+
+const masonryOptions = {
+    transitionDuration: 0
+};
 
 class NotesIndex extends React.Component {
   constructor (props) {
     super(props);
+    this.listNotes = this.listNotes.bind(this);
   }
 
   componentDidMount () {
@@ -15,14 +21,20 @@ class NotesIndex extends React.Component {
     // }
   }
 
-  render () {
-    const notes = this.props.notes.map(note => {
+  listNotes () {
+    return this.props.notes.map(note => {
       return <NoteIndexItem key={`${note.id}${note.title}`} note={note}/>;
     });
+  }
 
+  render () {
     return (
       <div className="note-index">
-        {notes}
+        <Masonry className={'my-gallery-class'} elementType={'div'}
+          options={masonryOptions} disableImagesLoaded={false}
+          updateOnEachImageLoad={false}>
+            {this.listNotes()}
+        </Masonry>
       </div>
     );
   }

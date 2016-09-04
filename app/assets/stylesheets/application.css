@@ -31,17 +31,20 @@ body {
 .body {
   display: flex;
   flex-direction: row;
-  height: 100vh;
-  overflow: auto;
+  height: 100%;
+  position: relative;
 }
 
 .dashboard {
   width: 100%;
+  position: relative;
+  height: 90vh;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    color: var(--med-gray)
+  width: 8px;
+  color: var(--med-gray)
 }
 
 ::-webkit-scrollbar-track:vertical {

@@ -1,17 +1,19 @@
 .sidebar-hide {
-  position: relative;
+  position: fixed;
   left: -280px;
+  top: 64px;
   transition: left 0.2s linear;
 }
 
 .sidebar-show {
-  position: relative;
+  position: fixed;
   left: 0;
+  top: 64px;
   transition: left 0.2s linear;
 }
 
 .sidebar-width1 {
-  width: 280px;
+  min-width: 280px;
   transition: width 0.2s linear;
 }
 

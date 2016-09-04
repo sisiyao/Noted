@@ -6,6 +6,7 @@ class HeaderBar extends React.Component {
   constructor (props) {
     super(props);
     this.linkToHome = this.linkToHome.bind(this);
+    this.linkToNewNote = this.linkToNewNote.bind(this);
   }
 
   shouldComponentUpdate (nextProps) {
@@ -21,6 +22,10 @@ class HeaderBar extends React.Component {
 
   linkToHome () {
     this.props.router.push("/home");
+  }
+
+  linkToNewNote () {
+    this.props.router.push("/new-note");
   }
 
   render () {
@@ -39,7 +44,8 @@ class HeaderBar extends React.Component {
             <div className="header-add-note-icon">
               <i className="fa fa-plus-circle" aria-hidden="true"></i>
             </div>
-            <div className="header-add-note-text">Add Note</div>
+            <div className="header-add-note-text" onClick={this.linkToNewNote}>
+              Add Note</div>
           </div>
           <div className="header-admin">
             <div className="header-profile-icon">

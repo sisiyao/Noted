@@ -1,8 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
-const NoteIndexItem = ({note}) => {
+const NoteIndexItem = ({note, router}) => {
+  const linkToNote = () => router.push(`/note/${note.id}`);
+
   return (
-    <div className="note">
+    <div className="note" onClick={linkToNote}>
       <div>{note.title}</div>
       <div>{note.body}</div>
       <div className="note-labels"></div>
@@ -18,4 +21,4 @@ const NoteIndexItem = ({note}) => {
   );
 };
 
-export default NoteIndexItem;
+export default withRouter(NoteIndexItem);

@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const formAction = ownProps.type === 'edit' ? updateCollection : createCollection;
+  const processForm = ownProps.type === 'edit' ? updateCollection : createCollection;
 
   return {
-    formAction: collection => dispatch(formAction(collection)),
+    processForm: collection => dispatch(formAction(collection)),
     clearErrors: () => dispatch(clearCollectionFormErrors())
   };
 };
