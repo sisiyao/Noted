@@ -19,13 +19,15 @@ class Api::NotesController < ApplicationController
   end
 
   def update
-    if current_user.notes.exists?(params[:id])
-      @note = Note.find(params[:id])
+    p params[:id]
+    p params[:id].to_i
+    if current_user.notes.exists?(params[:id].to_i)
+      @note = Note.find(params[:id].to_i)
 
       if @note.update(note_params)
         render :show
       else
-        render json: @note.errors.full_messages
+        render json: @note.errors.full_messages, status: 422
       end
     else
       render json: ["Not found"], status: 404
@@ -33,8 +35,8 @@ class Api::NotesController < ApplicationController
   end
 
   def destroy
-    if  current_user.notes.exists?(params[:id])
-      @note = Note.find(params[:id])
+    if  current_user.notes.exists?(params[:id].to_i)
+      @note = Note.find(params[:id].to_i)
 
       if @note.destroy
         render :show

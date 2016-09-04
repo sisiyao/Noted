@@ -107,6 +107,12 @@
   font-size: 14px;
 }
 
+.note-form-errors {
+  padding: 10px 0;
+  font-size: 11px;
+  color: red;
+}
+
 .note-form-title::-webkit-input-placeholder, .note-form-body::-webkit-input-placeholder {
    color: var(--dark-grey);
 }

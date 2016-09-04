@@ -4,7 +4,15 @@ import { withRouter } from 'react-router';
 class NoteForm extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { id: "", title: "", body: ""};
+
+    if (this.props.formType === 'new-note') {
+      this.state = { id: "", title: "", body: ""};
+    } else {
+      const noteId = this.props.location.pathname.slice(6);
+      const note = this.props.notes[noteId];
+      this.state = { id: note.id, title: note.title, body: note.body };
+    }
+
     this.deleteButton = this.deleteButton.bind(this);
     this.textAreaChange = this.textAreaChange.bind(this);
     this.cancel = this.cancel.bind(this);
@@ -12,7 +20,7 @@ class NoteForm extends React.Component {
   }
 
   deleteButton () {
-    return this.props.formType === "new-note" ? false : true;
+    return this.props.formType === 'new-note' ? false : true;
   }
 
   update (field) {
@@ -32,7 +40,8 @@ class NoteForm extends React.Component {
     this.props.router.push('/home');
   }
 
-  handleSubmit () {
+  handleSubmit (e) {
+    e.preventDefault();
     this.props.processForm(this.state);
   }
 
@@ -40,6 +49,12 @@ class NoteForm extends React.Component {
     if (nextProps.errors.length === 0) {
       this.props.router.push('/home');
     }
+  }
+
+  errors () {
+    return this.props.errors.map((error, idx) => (
+      <li key={`${idx}${error}`}>{error}</li>
+    ));
   }
 
   render () {
@@ -68,7 +83,7 @@ class NoteForm extends React.Component {
             </form>
           </div>
         </div>
-
+        <ul className='note-form-errors'>{this.errors()}</ul>
       </div>
     );
   }
