@@ -9,8 +9,9 @@ export const NoteConstants = {
   RECEIVE_NOTE_ERRORS: "RECEIVE_NOTE_ERRORS"
 };
 
-export const fetchAllNotes = () => ({
-  type: NoteConstants.FETCH_ALL_NOTES
+export const fetchAllNotes = (filters) => ({
+  type: NoteConstants.FETCH_ALL_NOTES,
+  filters
 });
 
 export const createNote = note => ({

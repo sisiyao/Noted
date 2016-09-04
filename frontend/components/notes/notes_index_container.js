@@ -6,11 +6,11 @@ import notesSelector from '../../util/note_selector';
 
 const mapStateToProps = state => ({
   notes: notesSelector(state),
-  errors: state.notes.errors
+  errors: state.notes.errors,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllNotes: () => dispatch(fetchAllNotes()),
+  fetchAllNotes: (filters) => dispatch(fetchAllNotes(filters)),
   destroyNote: noteId => dispatch(destroyNote(noteId)),
 });
 
