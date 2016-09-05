@@ -40,12 +40,11 @@ class HeaderBar extends React.Component {
         <div className="header-search-container">
         </div>
         <div className="header-bar-right">
-          <div className="header-add-note">
+          <div className="header-add-note" onClick={this.linkToNewNote}>
             <div className="header-add-note-icon">
               <i className="fa fa-plus-circle" aria-hidden="true"></i>
             </div>
-            <div className="header-add-note-text" onClick={this.linkToNewNote}>
-              Add Note</div>
+            <div className="header-add-note-text">Add Note</div>
           </div>
           <div className="header-admin">
             <div className="header-profile-icon">

@@ -7,6 +7,14 @@ export const fetchAllNotes = (filters, success) => {
   });
 };
 
+export const fetchSingleNote = (noteId, success) => {
+  $.ajax({
+    url: `/api/notes/${noteId}`,
+    method: "GET",
+    success
+  });
+};
+
 export const createNote = (note, success, error) => {
   $.ajax({
     url: "/api/notes",

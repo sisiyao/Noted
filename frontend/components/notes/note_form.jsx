@@ -5,18 +5,31 @@ class NoteForm extends React.Component {
   constructor (props) {
     super(props);
 
-    if (this.props.formType === 'new-note') {
-      this.state = { id: "", title: "", body: ""};
-    } else {
-      const noteId = this.props.location.pathname.slice(6);
-      const note = this.props.notes[noteId];
-      this.state = { id: note.id, title: note.title, body: note.body };
-    }
+    this.state = { id: "", title: "", body: ""};
 
+    if (this.props.formType !== 'new-note') {
+      this.noteId = this.props.location.pathname.slice(6);
+    }
+    
     this.deleteButton = this.deleteButton.bind(this);
     this.textAreaChange = this.textAreaChange.bind(this);
     this.cancel = this.cancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    if (this.props.formType !== 'new-note') {
+      this.props.fetchSingleNote(this.noteId);
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.formStatus === 'found') {
+      const note = nextProps.notes[this.noteId];
+      this.setState({ id: note.id, title: note.title, body: note.body });
+    } else if (nextProps.formStatus !== 'error') {
+      this.props.router.push('/home');
+    }
   }
 
   deleteButton () {
@@ -28,8 +41,8 @@ class NoteForm extends React.Component {
   }
 
   textAreaChange (field) {
-    const textarea = document.getElementById('textarea');
     return e => {
+      const textarea = document.getElementById('textarea');
       this.setState({ [field]: e.currentTarget.value });
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
@@ -43,12 +56,6 @@ class NoteForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault();
     this.props.processForm(this.state);
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.errors.length === 0) {
-      this.props.router.push('/home');
-    }
   }
 
   errors () {

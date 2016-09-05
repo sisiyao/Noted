@@ -3,7 +3,7 @@ import HeaderBar from './header_bar';
 import { logout } from '../../actions/session_actions';
 import { sidebarToggle } from '../../actions/sidebar_actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   currentUser: state.session.currentUser,
   loggedIn: Boolean(state.session.currentUser)
 });

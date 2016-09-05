@@ -7,9 +7,20 @@ class Api::NotesController < ApplicationController
     end
   end
 
+  def show
+    if current_user.notes.exists?(params[:id].to_i)
+      @note = Note.find(params[:id].to_i)
+      @status = "found"
+      render :show
+    else
+      render json: ["Not found"], status: 404
+    end
+  end
+
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id;
+    @status = "created"
 
     if @note.save
       render :show
@@ -19,10 +30,9 @@ class Api::NotesController < ApplicationController
   end
 
   def update
-    p params[:id]
-    p params[:id].to_i
     if current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
+      @status = "updated"
 
       if @note.update(note_params)
         render :show

@@ -1,6 +1,6 @@
 import { NoteConstants, receiveAllNotes, receiveSingleNote,
   removeNote, receiveNoteErrors } from '../actions/note_actions';
-import { fetchAllNotes, createNote, updateNote,
+import { fetchAllNotes, fetchSingleNote, createNote, updateNote,
   destroyNote } from '../util/note_api_util';
 
 const NotesMiddleware = ({dispatch}) => next => action => {
@@ -15,6 +15,11 @@ const NotesMiddleware = ({dispatch}) => next => action => {
     case NoteConstants.FETCH_ALL_NOTES:
       success = notes => dispatch(receiveAllNotes(notes));
       fetchAllNotes(action.filters, success);
+      next(action);
+      break;
+    case NoteConstants.FETCH_SINGLE_NOTE:
+      success = note => dispatch(receiveSingleNote(note));
+      fetchSingleNote(action.noteId, success);
       next(action);
       break;
     case NoteConstants.CREATE_NOTE:

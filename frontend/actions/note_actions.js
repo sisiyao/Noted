@@ -1,5 +1,6 @@
 export const NoteConstants = {
   FETCH_ALL_NOTES: "FETCH_ALL_NOTES",
+  FETCH_SINGLE_NOTE: "FETCH_SINGLE_NOTE",
   CREATE_NOTE: "CREATE_NOTE",
   UPDATE_NOTE: "UPDATE_NOTE",
   DESTROY_NOTE: "DESTROY_NOTE",
@@ -12,6 +13,11 @@ export const NoteConstants = {
 export const fetchAllNotes = filters => ({
   type: NoteConstants.FETCH_ALL_NOTES,
   filters
+});
+
+export const fetchSingleNote = noteId => ({
+  type: NoteConstants.FETCH_SINGLE_NOTE,
+  noteId
 });
 
 export const createNote = note => ({
