@@ -63,6 +63,6 @@ class Api::NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:title, :body, :color, :image_url)
+    params.require(:note).permit(:title, :body, :color, :image_url, collection_ids: [])
   end
 end

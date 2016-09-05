@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import NoteFormHeader from './note_form_header';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -80,33 +81,24 @@ class NoteForm extends React.Component {
   render () {
     return (
       <div className="note-container">
-        <div className="note-form-options">
-          <div className="note-form-toolbar">
-            Toolbar
-            <div className="note-form-delete"
-              onClick={this.handleDelete}>
-              {this.deleteButton()}</div>
-          </div>
-          <button className="note-form-action" onClick={this.cancel}>x</button>
-        </div>
+        <NoteFormHeader handleDelete={this.handleDelete}
+          deleteButton={this.deleteButton} cancel={this.cancel} />
 
         <div className="note-form-container">
-          <div className="note-form">
-            <div className="note-tags">Tags</div>
-            <form onSubmit={this.handleSubmit}>
-              <textarea id='textarea-title'
-								onChange={this.textAreaChange("title")}
-								placeholder="Title"
-								className="note-form-title"
-                value={this.state.title} rows='1'/>
-              <textarea id='textarea-body'
-								onChange={this.textAreaChange("body")}
-								placeholder="Take a note..."
-								className="note-form-body"
-                value={this.state.body} rows='14' />
-              <input className="note-submit-button" type="submit" value="DONE" />
-            </form>
-          </div>
+          <div className="note-tags">Tags</div>
+          <form onSubmit={this.handleSubmit}>
+            <textarea id='textarea-title'
+							onChange={this.textAreaChange("title")}
+							placeholder="Title"
+							className="note-form-title"
+              value={this.state.title} rows='1'/>
+            <textarea id='textarea-body'
+							onChange={this.textAreaChange("body")}
+							placeholder="Take a note..."
+							className="note-form-body"
+              value={this.state.body} rows='14' />
+            <input className="note-submit-button" type="submit" value="DONE" />
+          </form>
         </div>
         <ul className='note-form-errors'>{this.errors()}</ul>
       </div>

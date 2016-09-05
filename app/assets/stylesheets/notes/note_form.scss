@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 10%;
+  top: 13%;
 }
 
 .note-form-options {
@@ -12,6 +12,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .note-form-options {
@@ -91,7 +92,7 @@
   background-color: transparent;
 }
 
-.note-submit-button:hover, .note-form-action:hover, .note-form-delete:hover {
+.note-submit-button:hover, .note-form-delete:hover {
   background-color: var(--med-light-grey);
 }
 
@@ -106,10 +107,17 @@
 }
 
 .note-form-action {
-  height: 25px;
   background-color: transparent;
   padding: 4px 8px;
-  font-size: 14px;
+  font-size: 40px;
+  color: var(--med-light-grey);
+  position: absolute;
+  right: -75px;
+  top: -30px;
+}
+
+.note-form-action:hover {
+  color: var(--dark-grey);
 }
 
 .note-form-errors {
