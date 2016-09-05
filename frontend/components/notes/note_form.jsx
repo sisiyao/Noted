@@ -48,16 +48,6 @@ class NoteForm extends React.Component {
     };
   }
 
-  // THIS DOES NOT WORK
-  // textAreaHeight (field) {
-  //   const textarea = document.getElementById(`textarea-${field}`);
-  //   if (this.state.body !== '' && textarea) {
-  //     textarea.style.height = textarea.scrollHeight+'px';
-  //   } else {
-  //     return 'auto';
-  //   }
-  // }
-
   cancel () {
     this.props.router.push('/home');
   }
@@ -96,7 +86,7 @@ class NoteForm extends React.Component {
 							onChange={this.textAreaChange("body")}
 							placeholder="Take a note..."
 							className="note-form-body"
-              value={this.state.body} rows='14' />
+              value={this.state.body} rows='10' />
             <input className="note-submit-button" type="submit" value="DONE" />
           </form>
         </div>
