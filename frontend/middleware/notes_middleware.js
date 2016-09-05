@@ -33,7 +33,7 @@ const NotesMiddleware = ({dispatch}) => next => action => {
       next(action);
       break;
     case NoteConstants.DESTROY_NOTE:
-      success = (note) => dispatch(removeNote(note.id));
+      success = note => dispatch(removeNote(note.note.id));
       destroyNote(action.noteId, success, error);
       next(action);
       break;

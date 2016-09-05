@@ -47,6 +47,7 @@ class Api::NotesController < ApplicationController
   def destroy
     if  current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
+      @status = "deleted"
 
       if @note.destroy
         render :show

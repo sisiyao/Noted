@@ -3,7 +3,11 @@ import NoteIndexItem from './note_index_item';
 import Masonry from 'react-masonry-component';
 
 const masonryOptions = {
-    transitionDuration: 0
+    itemSelector: '.note-index-item',
+    gutter: 15,
+    fitWidth: true,
+    stagger: 30,
+    transitionDuration: '0.2s'
 };
 
 class NotesIndex extends React.Component {
@@ -23,7 +27,8 @@ class NotesIndex extends React.Component {
 
   listNotes () {
     return this.props.notes.map(note => {
-      return <NoteIndexItem key={`${note.id}${note.title}`} note={note}/>;
+      return <NoteIndexItem key={`${note.id}${note.title}`}
+        destroyNote={this.props.destroyNote} note={note}/>;
     });
   }
 

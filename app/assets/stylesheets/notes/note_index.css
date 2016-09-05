@@ -1,0 +1,70 @@
+.note-index {
+  width: 87%;
+  margin: auto;
+  margin-top: 80px;
+}
+
+.my-gallery-class {
+  margin: 0 auto;
+}
+
+.note-index-item {
+  box-sizing: border-box;
+  width: 240px;
+  margin-bottom: 15px;
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.note-index-item:hover {
+  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.14),2px 6px 1px -4px rgba(0,0,0,0.2),4px 2px 10px 4px rgba(0,0,0,0.12);
+}
+
+.note-index-item:hover .note-options {
+  color: var(--dark-grey);
+}
+
+.note-index-content {
+  min-height: 20px;
+  box-sizing: border-box;
+}
+
+.note-index-content > div {
+  padding: 15px 15px 0 15px;
+}
+
+.note-index-title {
+  font-size: 15px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+
+.note-index-body {
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  word-wrap: break-word;
+}
+
+.note-labels, .note-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.note-options {
+  font-size: 15px;
+  color: transparent;
+}
+
+.note-options > div {
+  padding: 15px 0 7px 0;
+  margin-left: 15px;
+}
+
+.note-options > div:hover {
+  color: black;
+}
+
+.note-options-space {
+  width: 100%;
+}
