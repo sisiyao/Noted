@@ -1,10 +1,80 @@
-.collection-form-modal {
-  text-align: center;
+.collection-form-container, .collection-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.collection-form {
-  display: flex;
-  flex-direction: column;
+.collection-form-container {
+  top: 25%;
+  position: relative;
+}
+
+.collection-form-icon {
+  font-size: 30px;
+  color: var(--med-grey);
+}
+
+.collection-form-title {
+  font-size: 18px;
+  color: var(--med-grey);
+}
+
+.collection-form-input {
+  border: 0;
+  margin: 0;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border-bottom: 1px solid;
+  border-bottom-color: var(--med-grey);
+  padding: 10px 15px;
+  width: 350px;
+  margin: 40px 0 10px 0;
+  text-align: center;
+  font-size: 18px;
+  color: black;
+  outline: none;
+  background-color: transparent;
+}
+
+.close-collection-form {
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  color: var(--dark-grey);
+}
+
+.submit-collection-form {
+  border: 0;
+  padding: 8px 30px;
+  color: white;
+  background-color: #96aff8;
+  font-size: 14px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #87a3f7;
+  margin: 30px 0 20px 0;
+  width: 120px;
+  text-align: center;
+  outline: none;
+}
+
+.submit-collection-form:hover {
+  cursor: pointer;
+  background-color: #87a3f7;
+}
+
+.close-collection-form:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.close-collection-form:hover, .submit-collection-form:hover {
+  cursor: pointer;
+}
+
+.collection-form-errors {
+  font-size: 12px;
+  color: red;
+  min-height: 18px;
 }

@@ -47,7 +47,7 @@ class CollectionForm extends React.Component {
 	}
 
   formText () {
-    return (this.props.formType === "new-collection") ? "Create" : "Update";
+    return (this.props.formType === "new-collection") ? "Create" : "Rename";
   }
 
   errors () {
@@ -68,18 +68,20 @@ class CollectionForm extends React.Component {
 
   render () {
     return (
-      <div className="collection-form">
-        <div className="create-collection-icon">
+      <div className="collection-form-container">
+        <div className="collection-form-icon">
           <i className="fa fa-folder-open-o" aria-hidden="true"></i></div>
-          <div className="form-title">{this.formText()} collection</div>
+        <div className="collection-form-title">{this.formText()} collection</div>
 
-        <form className="collection-form" onSubmit={this.handleSubmit}>
-          <input type='text' value={this.state.name}
-            onChange={this.update("name")}
-            placeholder="Name"/>
-          <ul className="collection-form-errors">{this.errors()}</ul>
-          <input type='submit' value={this.formText()} />
-        </form>
+        <div>
+          <form className="collection-form" onSubmit={this.handleSubmit}>
+            <input className="collection-form-input" type='text' value={this.state.name}
+              onChange={this.update("name")}
+              placeholder="Name"/>
+            <ul className="collection-form-errors">{this.errors()}</ul>
+            <input className="submit-collection-form" type='submit' value={this.formText()} />
+          </form>
+        </div>
 
         <div className="close-collection-form" onClick={this.cancel}>Cancel</div>
       </div>
