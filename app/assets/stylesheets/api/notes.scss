@@ -35,6 +35,11 @@
   position: relative;
 }
 
+.note-form-toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
 .note-tags {
   padding: 20px 20px 10px 20px;
   font-size: 12px;
@@ -86,8 +91,14 @@
   box-sizing: border-box;
 }
 
-.note-submit-button:hover, .note-form-action:hover {
-  background-color: var(--med-light-grey)
+.note-form-delete {
+  padding: 0 10px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.note-submit-button:hover, .note-form-action:hover, .note-form-delete:hover {
+  background-color: var(--med-light-grey);
 }
 
 .note-submit-button {

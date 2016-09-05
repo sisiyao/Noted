@@ -6,15 +6,15 @@ class NoteForm extends React.Component {
     super(props);
 
     this.state = { id: "", title: "", body: ""};
-
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
-    
+
     this.deleteButton = this.deleteButton.bind(this);
     this.textAreaChange = this.textAreaChange.bind(this);
     this.cancel = this.cancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount () {
@@ -33,7 +33,8 @@ class NoteForm extends React.Component {
   }
 
   deleteButton () {
-    return this.props.formType === 'new-note' ? false : true;
+    return this.props.formType === 'new-note' ? ""
+      : <i className="fa fa-trash-o" aria-hidden="true" />;
   }
 
   update (field) {
@@ -64,11 +65,21 @@ class NoteForm extends React.Component {
     ));
   }
 
+  handleDelete (e) {
+    e.preventDefault();
+    this.props.destroyNote(this.noteId);
+  }
+
   render () {
     return (
       <div className="note-container">
         <div className="note-form-options">
-          <div className="note-form-toolbar">Toolbar</div>
+          <div className="note-form-toolbar">
+            Toolbar
+            <div className="note-form-delete"
+              onClick={this.handleDelete}>
+              {this.deleteButton()}</div>
+          </div>
           <button className="note-form-action" onClick={this.cancel}>x</button>
         </div>
 
