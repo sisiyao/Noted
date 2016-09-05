@@ -12,8 +12,15 @@
   transition: left 0.2s linear;
 }
 
+.sidebar-hide, .sidebar-show {
+  background-color: var(--light-grey);
+  border-right: 1px solid;
+  border-color: var(--light-grey);
+}
+
 .sidebar-width1 {
   min-width: 280px;
+  border-color:
   transition: width 0.2s linear;
 }
 
@@ -48,7 +55,7 @@
 
 .sidebar-top, .sidebar-collections {
   border-bottom: 1px solid;
-  border-color: var(--light-grey);
+  border-color: #dbdbdb;
 }
 
 .sidebar-item, .sidebar-collection-item {

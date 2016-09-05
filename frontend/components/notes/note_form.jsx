@@ -103,7 +103,7 @@ class NoteForm extends React.Component {
 								onChange={this.textAreaChange("body")}
 								placeholder="Take a note..."
 								className="note-form-body"
-                value={this.state.body} rows='20' />
+                value={this.state.body} rows='14' />
               <input className="note-submit-button" type="submit" value="DONE" />
             </form>
           </div>

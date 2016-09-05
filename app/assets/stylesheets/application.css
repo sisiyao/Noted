@@ -48,7 +48,7 @@ body {
 }
 
 ::-webkit-scrollbar-track:vertical {
-  background: var(--background-grey);
+  background: var(--light-grey);
 }
 
 ::-webkit-scrollbar-thumb:vertical {
