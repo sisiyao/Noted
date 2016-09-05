@@ -37,18 +37,24 @@ class NoteForm extends React.Component {
       : <i className="fa fa-trash-o" aria-hidden="true" />;
   }
 
-  update (field) {
-    return e => this.setState({ [field]: e.currentTarget.value });
-  }
-
   textAreaChange (field) {
     return e => {
-      const textarea = document.getElementById('textarea');
       this.setState({ [field]: e.currentTarget.value });
+      const textarea = document.getElementById(`textarea-${field}`);
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
     };
   }
+
+  // THIS DOES NOT WORK
+  // textAreaHeight (field) {
+  //   const textarea = document.getElementById(`textarea-${field}`);
+  //   if (this.state.body !== '' && textarea) {
+  //     textarea.style.height = textarea.scrollHeight+'px';
+  //   } else {
+  //     return 'auto';
+  //   }
+  // }
 
   cancel () {
     this.props.router.push('/home');
@@ -87,16 +93,16 @@ class NoteForm extends React.Component {
           <div className="note-form">
             <div className="note-tags">Tags</div>
             <form onSubmit={this.handleSubmit}>
-              <input type="text"
-                value={this.state.title}
-								onChange={this.update("title")}
+              <textarea id='textarea-title'
+								onChange={this.textAreaChange("title")}
 								placeholder="Title"
-								className="note-form-title" />
-              <textarea type="text" id='textarea'
+								className="note-form-title"
+                value={this.state.title} rows='1'/>
+              <textarea id='textarea-body'
 								onChange={this.textAreaChange("body")}
 								placeholder="Take a note..."
 								className="note-form-body"
-                value={this.state.body} rows='10'></textarea>
+                value={this.state.body} rows='20' />
               <input className="note-submit-button" type="submit" value="DONE" />
             </form>
           </div>

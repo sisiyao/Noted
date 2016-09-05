@@ -62,6 +62,9 @@
   resize: none;
   margin-bottom: 35px;
   padding-bottom: 0;
+  padding-top: 0;
+  font-size: 14px;
+  min-height: 55px;
 }
 
 .note-form-title {
@@ -70,12 +73,7 @@
   font-family: 'Roboto Condensed', sans-serif;
   letter-spacing: 0.7px;
   font-weight: bold;
-}
-
-.note-form-body {
-  padding-top: 0;
-  font-size: 14px;
-  min-height: 55px;
+  resize: none;
 }
 
 .note-submit-button, .note-form-action {
