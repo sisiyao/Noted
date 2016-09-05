@@ -1,5 +1,6 @@
 export const CollectionConstants = {
   FETCH_ALL_COLLECTIONS: "FETCH_ALL_COLLECTIONS",
+  FETCH_SINGLE_COLLECTION: "FETCH_SINGLE_COLLECTION",
   CREATE_COLLECTION: "CREATE_COLLECTION",
   UPDATE_COLLECTION: "UPDATE_COLLECTION",
   DESTROY_COLLECTION: "DESTROY_COLLECTION",
@@ -7,11 +8,15 @@ export const CollectionConstants = {
   RECEIVE_SINGLE_COLLECTION: "RECEIVE_SINGLE_COLLECTION",
   REMOVE_COLLECTION: "REMOVE_COLLECTION",
   RECEIVE_COLLECTION_ERRORS: "RECEIVE_COLLECTION_ERRORS",
-  CLEAR_COLLECTION_FORM_ERRORS: "CLEAR_COLLECTION_FORM_ERRORS"
 };
 
 export const fetchAllCollections = () => ({
   type: CollectionConstants.FETCH_ALL_COLLECTIONS
+});
+
+export const fetchSingleCollection = collectionId => ({
+  type: CollectionConstants.FETCH_SINGLE_COLLECTION,
+  collectionId
 });
 
 export const createCollection = collection => ({
@@ -47,8 +52,4 @@ export const removeCollection = collectionId => ({
 export const receiveCollectionErrors = errors => ({
   type: CollectionConstants.RECEIVE_COLLECTION_ERRORS,
   errors
-});
-
-export const clearCollectionFormErrors = () => ({
-  type: CollectionConstants.CLEAR_COLLECTION_FORM_ERRORS
 });

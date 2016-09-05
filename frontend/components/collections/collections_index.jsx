@@ -1,38 +1,29 @@
 import React from 'react';
 import CollectionsIndexItem from './collections_index_item';
 import SidebarItem from '../structural/sidebar_item';
-import CollectionFormContainer from './collection_form_container';
+import { withRouter } from 'react-router';
 
 class CollectionsIndex extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { modalOpen: false };
-    this.openModal = this.openModal.bind(this);
     this.listCollections = this.listCollections.bind(this);
+    this.newNote = this.newNote.bind(this);
   }
 
   componentDidMount () {
     this.props.fetchAllCollections();
   }
 
-  openModal () {
-    this.setState({ modalOpen: true });
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.errors.length === 0) {
-      this.setState({ modalOpen: false });
-    }
-  }
-
   listCollections () {
     return this.props.collections.map(collection => (
       <CollectionsIndexItem collection={collection}
         key={`${collection.id}${collection.name}`}
-        destroyCollection={this.props.destroyCollection}
-        openModal={this.openModal} modalOpen={this.state.modalOpen}
-        errors={this.props.errors} />
+        destroyCollection={this.props.destroyCollection} />
     ));
+  }
+
+  newNote () {
+    this.props.router.push('/new-collection');
   }
 
   render () {
@@ -40,13 +31,12 @@ class CollectionsIndex extends React.Component {
       <div className="sidebar-collections">
         <div className="collection-header">Collections</div>
         {this.listCollections()}
-        <div onClick={this.openModal}>
-          <SidebarItem item="Create new collection" icon="fa fa-plus" /></div>
-        <CollectionFormContainer modalOpen={this.state.modalOpen}
-          collection={{name: "", id: null}} type="create" />
+        <div>
+          <SidebarItem item="Create new collection" icon="fa fa-plus"
+            link={this.newNote}/></div>
       </div>
     );
   }
 }
 
-export default CollectionsIndex;
+export default withRouter(CollectionsIndex);

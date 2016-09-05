@@ -3,9 +3,20 @@ class Api::CollectionsController < ApplicationController
     @collections = Collection.where(user_id: current_user.id).order(:name)
   end
 
+  def show
+    if current_user.collections.exists?(params[:id].to_i)
+      @collection = Collection.find(params[:id].to_i)
+      @status = "found"
+      render :show
+    else
+      render json: ["Not found"], status: 404
+    end
+  end
+
   def create
     @collection = Collection.new(collection_params)
     @collection.user = current_user;
+    @status = "created"
 
     if @collection.save
       render :show
@@ -16,7 +27,8 @@ class Api::CollectionsController < ApplicationController
 
   def update
     if  current_user.collections.exists?(params[:id])
-      @collection = Collection.find(params[:id])
+      @collection = Collection.find(params[:id].to_i)
+      @status = "updated"
 
       if @collection.update(collection_params)
         render :show
@@ -30,7 +42,8 @@ class Api::CollectionsController < ApplicationController
 
   def destroy
     if  current_user.collections.exists?(params[:id])
-      @collection = Collection.find(params[:id])
+      @collection = Collection.find(params[:id].to_i)
+      @status = "deleted"
 
       if @collection.destroy
         render :show

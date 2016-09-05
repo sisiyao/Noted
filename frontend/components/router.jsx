@@ -6,6 +6,7 @@ import SessionFormContainer from './session_form/session_form_container';
 import Home from './structural/home';
 import NotesIndex from './notes/notes_index_container';
 import NoteFormContainer from './notes/note_form_container';
+import CollectionFormContainer from './collections/collection_form_container';
 
 class AppRouter extends React.Component{
   constructor (props) {
@@ -47,6 +48,8 @@ class AppRouter extends React.Component{
           <Route component={ Home }>
             <Route path="/new-note" component={ NoteFormContainer } />
             <Route path="/note/:noteId" component={ NoteFormContainer } />
+            <Route path="/new-collection" component={ CollectionFormContainer } />
+            <Route path="/collection/:collectionId" component={ CollectionFormContainer } />
           </ Route>
         </Route>
       </Router>

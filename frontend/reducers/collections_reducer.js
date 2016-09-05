@@ -1,28 +1,29 @@
 import { CollectionConstants } from '../actions/collection_actions';
 import merge from 'lodash/merge';
 
-const _nullCollections = {collections: {}, errors: []};
+const _nullCollections = {collections: {}, errors: [], formStatus: null};
 
 const CollectionsReducer = (state = _nullCollections, action) => {
+  let newCollections;
   switch (action.type) {
     case CollectionConstants.RECEIVE_ALL_COLLECTIONS:
       return merge({}, _nullCollections, {collections: action.collections});
     case CollectionConstants.RECEIVE_SINGLE_COLLECTION:
-      const collectionId = action.collection.id;
-      const newCollections = merge(
+      const status = action.collection.status;
+      const collectionId = action.collection.collection.id;
+      newCollections = merge(
         {},
         state.collections,
-        {[collectionId]: action.collection}
+        {[collectionId]: action.collection.collection}
       );
-      return merge({}, _nullCollections, {collections: newCollections});
+      return merge({}, _nullCollections,
+        {collections: newCollections, formStatus: status});
     case CollectionConstants.REMOVE_COLLECTION:
-      const filteredCollections = merge({}, state.collections);
-      delete filteredCollections[`${action.collectionId}`];
-      return merge({}, _nullCollections, {collections: filteredCollections});
+      newCollections = merge({}, state.collections);
+      delete newCollections[`${action.collectionId}`];
+      return merge({}, _nullCollections, {collections: newCollections});
     case CollectionConstants.RECEIVE_COLLECTION_ERRORS:
-      return merge({}, state, {errors: action.errors});
-    case CollectionConstants.CLEAR_COLLECTION_FORM_ERRORS:
-      return {collections: state.collections, errors: []};
+      return merge({}, state, {errors: action.errors, formStatus: 'error'});
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import { CollectionConstants, receiveAllCollections, receiveSingleCollection,
   removeCollection, receiveCollectionErrors } from '../actions/collection_actions';
-import { fetchAllCollections, createCollection, updateCollection,
-  destroyCollection } from '../util/collection_api_util';
+import { fetchAllCollections, fetchSingleCollection, createCollection,
+  updateCollection, destroyCollection } from '../util/collection_api_util';
 
 const CollectionsMiddleware = ({dispatch}) => next => action => {
   const error = xhr => {
@@ -17,6 +17,11 @@ const CollectionsMiddleware = ({dispatch}) => next => action => {
       fetchAllCollections(success);
       next(action);
       break;
+    case CollectionConstants.FETCH_SINGLE_COLLECTION:
+      success = collection => dispatch(receiveSingleCollection(collection));
+      fetchSingleCollection(action.collectionId, success);
+      next(action);
+      break;
     case CollectionConstants.CREATE_COLLECTION:
       success = collection => dispatch(receiveSingleCollection(collection));
       createCollection(action.collection, success, error);
@@ -28,7 +33,7 @@ const CollectionsMiddleware = ({dispatch}) => next => action => {
       next(action);
       break;
     case CollectionConstants.DESTROY_COLLECTION:
-      success = (collection) => dispatch(removeCollection(collection.id));
+      success = (collection) => dispatch(removeCollection(collection.collection.id));
       destroyCollection(action.collectionId, success, error);
       next(action);
       break;

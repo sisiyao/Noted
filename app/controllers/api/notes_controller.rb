@@ -1,5 +1,6 @@
 class Api::NotesController < ApplicationController
   def index
+    # params[:collection_id] is wrong, it should be search params
     if params[:collection_id]
       @notes = Note.all.where(user_id: current_user.id, collection_id: params[:collection_id])
     else

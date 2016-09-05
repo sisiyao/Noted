@@ -27,7 +27,8 @@ class NoteForm extends React.Component {
     if (nextProps.formStatus === 'found') {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body });
-    } else if (nextProps.formStatus !== 'error') {
+    } else if (nextProps.formStatus === 'updated' ||
+      nextProps.formStatus === 'created') {
       this.props.router.push('/home');
     }
   }

@@ -6,7 +6,6 @@ import collectionsSelector from '../../util/collection_selector';
 
 const mapStateToProps = state => ({
   collections: collectionsSelector(state),
-  errors: state.collections.errors
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,18 +1,43 @@
 import React from 'react';
 import Modal from 'react-modal';
 import style from './collection_modal_style';
+import { withRouter } from 'react-router';
 
 class CollectionForm extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      name: this.props.collection.name,
-      id: this.props.collection.id
-    };
+
+    this.state = { id: "", name: ""};
+
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.formText = this.formText.bind(this);
-    this.listErrors = this.listErrors.bind(this);
+    this.errors = this.errors.bind(this);
+    this.cancel = this.cancel.bind(this);
+  }
+
+  componentDidMount () {
+    if (this.props.formType !== 'new-collection') {
+      this.props.fetchSingleCollection(this.props.location.pathname.slice(12));
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    let collectionId;
+    if (this.props.formType !== 'new-collection') {
+      collectionId = nextProps.location.pathname.slice(12);
+    }
+
+    if (nextProps.formType === 'new-collection') {
+      this.setState({ id: '', name: '' });
+    } else if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.props.fetchSingleCollection(nextProps.location.pathname.slice(12));
+    } else if (nextProps.formStatus === 'found') {
+      const collection = nextProps.collections[collectionId];
+      this.setState({ id: collection.id, name: collection.name });
+    } else if (nextProps.formStatus === 'created' ||
+      nextProps.formStatus === 'updated') {
+      this.props.router.push('/home');
+    }
   }
 
   update (field) {
@@ -22,10 +47,10 @@ class CollectionForm extends React.Component {
 	}
 
   formText () {
-    return (this.props.type === "edit") ? "Update" : "Create";
+    return (this.props.formType === "new-collection") ? "Create" : "Update";
   }
 
-  listErrors () {
+  errors () {
     return this.props.errors.map((error, idx) => (
       <li key={`${idx}${error}`}>{error}</li>
     ));
@@ -35,49 +60,31 @@ class CollectionForm extends React.Component {
     e.preventDefault();
     const collection = this.state;
     this.props.processForm(collection);
-    // this.resetState();
   }
 
-  closeModal () {
-    this.props.clearErrors();
-    this.resetState();
-  }
-
-  resetState () {
-    if (this.props.type === 'create') {
-      this.setState({name: "", id: null});
-    } else {
-      this.setState(
-        {name: this.props.collection.name, id: this.props.collection.id}
-      );
-    }
+  cancel () {
+    this.props.router.push('/home');
   }
 
   render () {
     return (
-      <Modal isOpen={this.props.modalOpen} onRequestClose={this.closeModal}
-        style={style}>
+      <div className="collection-form">
+        <div className="create-collection-icon">
+          <i className="fa fa-folder-open-o" aria-hidden="true"></i></div>
+          <div className="form-title">{this.formText()} collection</div>
 
-        <div className="collection-form-modal">
-          <div className="create-collection-icon">
-            <i className="fa fa-folder-open-o" aria-hidden="true"></i></div>
-            <div className="form-title">{this.formText()} collection</div>
+        <form className="collection-form" onSubmit={this.handleSubmit}>
+          <input type='text' value={this.state.name}
+            onChange={this.update("name")}
+            placeholder="Name"/>
+          <ul className="collection-form-errors">{this.errors()}</ul>
+          <input type='submit' value={this.formText()} />
+        </form>
 
-          <form className="collection-form"
-            onSubmit={this.handleSubmit}>
-            <input type='text' value={this.state.name}
-              onChange={this.update("name")}
-              placeholder="Name"/>
-            <input type='submit' value={this.formText()} />
-          </form>
-
-          <ul className="collection-form-errors">{this.listErrors}</ul>
-          <div className="close-collection-form" onClick={this.closeModal}>
-            Cancel</div>
-        </div>
-      </Modal>
+        <div className="close-collection-form" onClick={this.cancel}>Cancel</div>
+      </div>
     );
   }
 }
 
-export default CollectionForm;
+export default withRouter(CollectionForm);

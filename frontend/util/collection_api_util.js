@@ -6,6 +6,14 @@ export const fetchAllCollections = (success) => {
   });
 };
 
+export const fetchSingleCollection = (collectionId, success) => {
+  $.ajax({
+    url: `/api/collections/${collectionId}`,
+    method: "GET",
+    success
+  });
+};
+
 export const createCollection = (collection, success, error) => {
   $.ajax({
     url: "/api/collections",
