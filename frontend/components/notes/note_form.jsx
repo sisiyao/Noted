@@ -7,7 +7,8 @@ class NoteForm extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = { id: "", title: "", body: "", collection_ids: []};
+    this.state = { id: "", title: "", body: "", collection_ids: [],
+      dropdownStatus: 'hide'};
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
@@ -18,6 +19,7 @@ class NoteForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.updateCheckbox = this.updateCheckbox.bind(this);
+    this.showDropdown = this.showDropdown.bind(this);
   }
 
   componentDidMount () {
@@ -90,6 +92,11 @@ class NoteForm extends React.Component {
     this.props.destroyNote(this.noteId);
   }
 
+  showDropdown () {
+    const status = this.state.dropdownStatus === 'show' ? 'hide' : 'show';
+    this.setState({dropdownStatus: status});
+  }
+
   render () {
     return (
       <div className="note-container">
@@ -100,7 +107,9 @@ class NoteForm extends React.Component {
           <div className="note-tags">Tags</div>
           <form onSubmit={this.handleSubmit}>
             <TagFormContainer collectionIds={this.state.collection_ids}
-              updateCheckbox={this.updateCheckbox.bind(this)} />
+              updateCheckbox={this.updateCheckbox.bind(this)}
+              showDropdown={this.showDropdown}
+              dropdownStatus={this.state.dropdownStatus} />
 
             <textarea id='textarea-title'
 							onChange={this.textAreaChange("title")}

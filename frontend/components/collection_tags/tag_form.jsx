@@ -23,12 +23,13 @@ class TagForm extends React.Component {
 
   render () {
     return (
-      <div className="tag-form">
+      <div className="tag-form" onClick={this.props.showDropdown}>
         <div className="tag-form-label">
           <span>Edit collections</span>
           <i className="fa fa-caret-down" aria-hidden="true" />
         </div>
-        <div className="tag-form-checkboxes">{this.checkboxes()}</div>
+        <div className={`tag-form-checkboxes-${this.props.dropdownStatus}`}>
+          {this.checkboxes()}</div>
       </div>
     );
   }

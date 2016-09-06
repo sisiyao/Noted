@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.tag-form-checkboxes {
+.tag-form-checkboxes-show, .tag-form-checkboxes-hide {
   position: absolute;
   top: 34px;
   right: 0px;
@@ -47,7 +47,15 @@
   z-index: 2;
 }
 
-.tag-form-checkboxes > .checkbox {
+.tag-form-checkboxes-show {
+  display: block;
+}
+
+.tag-form-checkboxes-hide {
+  display: none;
+}
+
+.tag-form-checkboxes-show > .checkbox {
   white-space: nowrap;
   display: block;
   padding: 6px 0;
@@ -57,6 +65,6 @@
   box-sizing: border-box;
 }
 
-.tag-form-checkboxes > .checkbox:hover {
+.tag-form-checkboxes-show > .checkbox:hover {
   background-color: var(--light-grey);
 }
