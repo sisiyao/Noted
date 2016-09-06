@@ -45,9 +45,9 @@ export const receiveSingleNote = note => ({
   note
 });
 
-export const removeNote = noteId => ({
+export const removeNote = note => ({
   type: NoteConstants.REMOVE_NOTE,
-  noteId
+  note
 });
 
 export const receiveNoteErrors = errors => ({

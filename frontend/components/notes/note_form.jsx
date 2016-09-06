@@ -27,15 +27,16 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.route.path === '/new-note') {
-      this.setState({ id: '', title: '', body: '', collection_ids: [] });
-    } else if (nextProps.formStatus === 'found') {
+    if (nextProps.formStatus === 'found') {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
         collection_ids: note.collection_ids });
     } else if (nextProps.formStatus === 'updated' ||
-      nextProps.formStatus === 'created') {
+      nextProps.formStatus === 'created' ||
+      nextProps.formStatus === 'deleted') {
       this.props.router.push('/home');
+    } else if (nextProps.route.path === '/new-note') {
+      this.setState({ id: '', title: '', body: '', collection_ids: [] });
     }
   }
 
@@ -73,7 +74,9 @@ class NoteForm extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    this.props.processForm(this.state);
+    const note = {id: this.state.id, title: this.state.title,
+      body: this.state.body, collection_ids: this.state.collection_ids};
+    this.props.processForm(note);
   }
 
   errors () {
@@ -88,7 +91,6 @@ class NoteForm extends React.Component {
   }
 
   render () {
-    console.log(this.state.collection_ids);
     return (
       <div className="note-container">
         <NoteFormHeader handleDelete={this.handleDelete}
