@@ -9,7 +9,7 @@ class TagForm extends React.Component {
     return this.props.collections.map(collection => {
       return (
         <div className="checkbox" key={`${collection.id}${collection.name}`}>
-          <label>
+          <label className="checkbox-label">
             <input type="checkbox" value="collection.name"
               checked={this.props.collectionIds.includes(collection.id)}
               onChange={this.props.updateCheckbox(collection.id)}
@@ -22,7 +22,6 @@ class TagForm extends React.Component {
   }
 
   render () {
-    console.log('render');
     return (
       <div className="tag-form">
         <div className="tag-form-label">

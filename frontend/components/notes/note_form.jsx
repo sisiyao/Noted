@@ -56,13 +56,14 @@ class NoteForm extends React.Component {
   updateCheckbox (collectionId) {
     const note = this;
     return () => {
+      const newCollectionIds = note.state.collection_ids.slice();
       const idx = note.state.collection_ids.indexOf(collectionId);
       if (idx === -1) {
-        note.state.collection_ids.push(collectionId);
+        newCollectionIds.push(collectionId);
       } else {
-        note.state.collection_ids.splice(idx, 1);
+        newCollectionIds.splice(idx, 1);
       }
-      console.log(note.state.collection_ids);
+      this.setState({collection_ids: newCollectionIds});
     };
   }
 
