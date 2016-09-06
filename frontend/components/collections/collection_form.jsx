@@ -11,8 +11,8 @@ class CollectionForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formText = this.formText.bind(this);
-    this.errors = this.errors.bind(this);
     this.cancel = this.cancel.bind(this);
+    this.errors = this.errors.bind(this);
   }
 
   componentDidMount () {
@@ -22,16 +22,14 @@ class CollectionForm extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    let collectionId;
-    if (this.props.formType !== 'new-collection') {
-      collectionId = nextProps.location.pathname.slice(12);
-    }
-
-    if (nextProps.formType === 'new-collection') {
-      this.setState({ id: '', name: '' });
-    } else if (this.props.location.pathname !== nextProps.location.pathname) {
+    if ((this.props.location.pathname !== nextProps.location.pathname)
+    && (nextProps.route.path !== '/new-collection')) {
       this.props.fetchSingleCollection(nextProps.location.pathname.slice(12));
+    } else if (nextProps.route.path === '/new-collection'
+    && nextProps.formStatus !== 'created') {
+      this.setState({ id: '', name: '' });
     } else if (nextProps.formStatus === 'found') {
+      const collectionId = nextProps.location.pathname.slice(12);
       const collection = nextProps.collections[collectionId];
       this.setState({ id: collection.id, name: collection.name });
     } else if (nextProps.formStatus === 'created' ||
@@ -50,12 +48,6 @@ class CollectionForm extends React.Component {
     return (this.props.formType === "new-collection") ? "Create" : "Rename";
   }
 
-  errors () {
-    return this.props.errors.map((error, idx) => (
-      <li key={`${idx}${error}`}>{error}</li>
-    ));
-  }
-
   handleSubmit (e) {
     e.preventDefault();
     const collection = this.state;
@@ -64,6 +56,28 @@ class CollectionForm extends React.Component {
 
   cancel () {
     this.props.router.push('/home');
+  }
+
+  errors () {
+    return this.props.errors.map((error, idx) => (
+      <li key={`${idx}${error}`}>{error}</li>
+    ));
+  }
+
+  submitButtonStyle () {
+    if (this.state.name === "") {
+      return "submit-collection-form-disabled";
+    } else {
+      return "submit-collection-form-enabled";
+    }
+  }
+
+  submitButtonStatus () {
+    if (this.state.name === "") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render () {
@@ -79,7 +93,8 @@ class CollectionForm extends React.Component {
               onChange={this.update("name")}
               placeholder="Name"/>
             <ul className="collection-form-errors">{this.errors()}</ul>
-            <input className="submit-collection-form" type='submit' value={this.formText()} />
+            <input className={this.submitButtonStyle()} type='submit'
+              value={this.formText()} disabled={this.submitButtonStatus()}/>
           </form>
         </div>
 

@@ -45,23 +45,30 @@
   color: var(--dark-grey);
 }
 
-.submit-collection-form {
+.submit-collection-form-enabled, .submit-collection-form-disabled {
   border: 0;
   padding: 8px 30px;
   color: white;
-  background-color: #96aff8;
   font-size: 14px;
   border-radius: 3px;
-  box-shadow: 2px 2px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #87a3f7;
   margin: 30px 0 20px 0;
   width: 120px;
   text-align: center;
   outline: none;
 }
 
-.submit-collection-form:hover {
+.submit-collection-form-enabled {
+  background-color: #3e50b4;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.19),inset 0 -2px 0 #314090;
+}
+
+.submit-collection-form-disabled {
+  background-color: #96aff8;
+}
+
+.submit-collection-form-enabled:hover {
   cursor: pointer;
-  background-color: #87a3f7;
+  background-color: #2b387d;
 }
 
 .close-collection-form:hover {
@@ -69,7 +76,7 @@
   font-weight: bold;
 }
 
-.close-collection-form:hover, .submit-collection-form:hover {
+.close-collection-form:hover, .submit-collection-form-enabled:hover {
   cursor: pointer;
 }
 

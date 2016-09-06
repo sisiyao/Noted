@@ -5,8 +5,8 @@ import { createCollection, updateCollection, fetchSingleCollection }
 
 const mapStateToProps = state => ({
   collections: state.collections.collections,
-  errors: state.collections.errors,
-  formStatus: state.collections.formStatus
+  formStatus: state.collections.formStatus,
+  errors: state.collections.errors
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -65,7 +65,7 @@
 }
 
 .sidebar-item:hover, .sidebar-collection-item:hover {
-  background-color: var(--light-grey);
+  background-color: #d4d4d4;
   cursor: pointer;
 }
 
