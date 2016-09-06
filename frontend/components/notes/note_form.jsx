@@ -96,37 +96,41 @@ class NoteForm extends React.Component {
     const status = this.state.dropdownStatus === 'show' ? 'hide' : 'show';
     this.setState({dropdownStatus: status});
   }
-
+  
   render () {
-    return (
-      <div className="note-container">
-        <NoteFormHeader handleDelete={this.handleDelete}
-          deleteButton={this.deleteButton} cancel={this.cancel} />
+    if (this.props.formType !== 'new-note' && this.state.id === "") {
+      return <div></div>;
+    } else {
+      return (
+        <div className="note-container">
+          <NoteFormHeader handleDelete={this.handleDelete}
+            deleteButton={this.deleteButton} cancel={this.cancel} />
 
-        <div className="note-form-container">
-          <div className="note-tags">Tags</div>
-          <form onSubmit={this.handleSubmit}>
-            <TagFormContainer collectionIds={this.state.collection_ids}
-              updateCheckbox={this.updateCheckbox.bind(this)}
-              showDropdown={this.showDropdown}
-              dropdownStatus={this.state.dropdownStatus} />
+          <div className="note-form-container">
+            <div className="note-tags">Tags</div>
+            <form onSubmit={this.handleSubmit}>
+              <TagFormContainer collectionIds={this.state.collection_ids}
+                updateCheckbox={this.updateCheckbox.bind(this)}
+                showDropdown={this.showDropdown}
+                dropdownStatus={this.state.dropdownStatus} />
 
-            <textarea id='textarea-title'
-							onChange={this.textAreaChange("title")}
-							placeholder="Title"
-							className="note-form-title"
-              value={this.state.title} rows='1'/>
-            <textarea id='textarea-body'
-							onChange={this.textAreaChange("body")}
-							placeholder="Take a note..."
-							className="note-form-body"
-              value={this.state.body} rows='10' />
-            <input className="note-submit-button" type="submit" value="DONE" />
-          </form>
+              <textarea id='textarea-title'
+  							onChange={this.textAreaChange("title")}
+  							placeholder="Title"
+  							className="note-form-title"
+                value={this.state.title} rows='1'/>
+              <textarea id='textarea-body'
+  							onChange={this.textAreaChange("body")}
+  							placeholder="Take a note..."
+  							className="note-form-body"
+                value={this.state.body} rows='10' />
+              <input className="note-submit-button" type="submit" value="DONE" />
+            </form>
+          </div>
+          <ul className='note-form-errors'>{this.errors()}</ul>
         </div>
-        <ul className='note-form-errors'>{this.errors()}</ul>
-      </div>
-    );
+      );
+    }
   }
 }
 
