@@ -67,4 +67,5 @@
 
 .tag-form-checkboxes-show > .checkbox:hover {
   background-color: var(--light-grey);
+  cursor: pointer;
 }

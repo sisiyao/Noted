@@ -79,7 +79,7 @@
   resize: none;
 }
 
-.note-submit-button, .note-form-action {
+.note-submit-button, .note-form-cancel {
   border: 0;
   font-weight: bold;
   border-radius: 3px;
@@ -96,6 +96,7 @@
 
 .note-submit-button:hover, .note-form-delete:hover {
   background-color: var(--med-light-grey);
+  cursor: pointer;
 }
 
 .note-submit-button {
@@ -108,7 +109,7 @@
   font-size: 12px;
 }
 
-.note-form-action {
+.note-form-cancel {
   background-color: transparent;
   padding: 4px 8px;
   font-size: 40px;
@@ -118,8 +119,9 @@
   top: -30px;
 }
 
-.note-form-action:hover {
+.note-form-cancel:hover {
   color: var(--dark-grey);
+  cursor: pointer;
 }
 
 .note-form-errors {

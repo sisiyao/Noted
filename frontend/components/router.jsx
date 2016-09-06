@@ -50,6 +50,7 @@ class AppRouter extends React.Component{
             <Route path="/note/:noteId" component={ NoteFormContainer } />
             <Route path="/new-collection" component={ CollectionFormContainer } />
             <Route path="/collection/:collectionId" component={ CollectionFormContainer } />
+            <Route path="/notes/:collectionName" component={ NotesIndex } />
           </ Route>
         </Route>
       </Router>

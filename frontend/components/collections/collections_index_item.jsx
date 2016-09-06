@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 
 class CollectionsIndexItem extends React.Component {
   constructor (props) {
@@ -14,12 +14,15 @@ class CollectionsIndexItem extends React.Component {
   render () {
     return (
       <div className="sidebar-collection-item">
-        <div className="sidebar-item-icon">
-          <i className="fa fa-folder" aria-hidden="true" />
-        </div>
-        <div className="sidebar-item-text">
-          {this.props.collection.name}
-        </div>
+        <Link to={`/notes/${this.props.collection.name}`}
+          className="select-collection-link">
+          <div className="sidebar-item-icon">
+            <i className="fa fa-folder" aria-hidden="true" />
+          </div>
+          <div className="sidebar-item-text">
+            {this.props.collection.name}
+          </div>
+        </Link>
         <div className="collection-item-options">
           <i className="fa fa-pencil" aria-hidden="true"
             onClick={this.linkToEditNote(this.props.collection.id)} />

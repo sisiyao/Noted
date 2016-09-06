@@ -8,7 +8,7 @@ const NoteFormHeader = ({handleDelete, deleteButton, cancel}) => (
         onClick={handleDelete}>
         {deleteButton()}</div>
     </div>
-    <button className="note-form-action" onClick={cancel}>x</button>
+    <button className="note-form-cancel" onClick={cancel}>x</button>
   </div>
 );
 

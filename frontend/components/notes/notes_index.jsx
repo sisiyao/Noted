@@ -17,12 +17,22 @@ class NotesIndex extends React.Component {
   }
 
   componentDidMount () {
-    if (this.props.location.pathname === '/home') {
+    const path = this.props.location.pathname;
+    if (path === '/home') {
       this.props.fetchAllNotes({});
+    } else if (path.slice(0,7) === '/notes/') {
+      this.props.fetchAllNotes({collection_name: path.slice(7)});
     }
-    // else if (this.props.location.pathname.incudes('collection')){
-    //   this.props.fetchAllNotes({collection_id: this.props.collectionFilter});
-    // }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const thisPath = this.props.location.pathname;
+    const nextPath = nextProps.location.pathname;
+    if (nextPath === '/home' && thisPath != nextPath) {
+      this.props.fetchAllNotes({});
+    } else if (nextPath.slice(0,7) === '/notes/' && thisPath != nextPath) {
+      this.props.fetchAllNotes({collection_name: nextPath.slice(7)});
+    }
   }
 
   listNotes () {
@@ -32,9 +42,18 @@ class NotesIndex extends React.Component {
     });
   }
 
+  notesHeader () {
+    if (this.props.location.pathname==='/home') {
+      return 'All notes';
+    } else {
+      return `${this.props.location.pathname.slice(7)}`;
+    }
+  }
+
   render () {
     return (
       <div className="note-index">
+        <div className="notes-header"> {this.notesHeader()} </div>
         <Masonry className={'my-gallery-class'} elementType={'div'}
           options={masonryOptions} disableImagesLoaded={false}
           updateOnEachImageLoad={false}>

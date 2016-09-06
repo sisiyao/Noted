@@ -119,3 +119,9 @@
 .sidebar-space {
   height: 100px;
 }
+
+.select-collection-link {
+  display: flex;
+  flex-direction: row;
+  color: var(--dark-grey);
+}
