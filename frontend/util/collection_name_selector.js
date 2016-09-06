@@ -4,7 +4,15 @@ const collectionNameSelector = (collections, collectionIds) => {
     selectedNames.push(collections[id].name);
   });
 
-  return selectedNames;
+  return selectedNames.sort((a, b) => {
+    if (a.toLowerCase() < b.toLowerCase()) {
+      return -1;
+    } else if (a.toLowerCase() > b.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
 };
 
 export default collectionNameSelector;
