@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
+import TagListContainer from '../collection_tags/tag_list_container';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -96,7 +97,7 @@ class NoteForm extends React.Component {
     const status = this.state.dropdownStatus === 'show' ? 'hide' : 'show';
     this.setState({dropdownStatus: status});
   }
-  
+
   render () {
     if (this.props.formType !== 'new-note' && this.state.id === "") {
       return <div></div>;
@@ -107,7 +108,7 @@ class NoteForm extends React.Component {
             deleteButton={this.deleteButton} cancel={this.cancel} />
 
           <div className="note-form-container">
-            <div className="note-tags">Tags</div>
+            <TagListContainer collectionIds={this.state.collection_ids}/>
             <form onSubmit={this.handleSubmit}>
               <TagFormContainer collectionIds={this.state.collection_ids}
                 updateCheckbox={this.updateCheckbox.bind(this)}

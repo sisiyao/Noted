@@ -1,0 +1,18 @@
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px 20px 10px 20px;
+  font-size: 12px;
+  width: 70%;
+}
+
+.individual-tag {
+  display: inline-block;
+  background-color: #dbdbdb;
+  font-size: 12px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 3px 5px;
+  border-radius: 2px;
+}
