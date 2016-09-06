@@ -44,6 +44,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
   color: var(--med-gray);
 }
 
@@ -52,6 +53,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:vertical {
+  background: var(--med-light-grey);
+}
+
+::-webkit-scrollbar-track:horizontal {
+  background: var(--light-grey);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
   background: var(--med-light-grey);
 }
 

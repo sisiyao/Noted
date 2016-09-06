@@ -1,12 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
+import TagFormContainer from '../collection_tags/tag_form_container';
 
 class NoteForm extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = { id: "", title: "", body: ""};
+    this.state = { id: "", title: "", body: "", collection_ids: []};
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
@@ -16,6 +17,7 @@ class NoteForm extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.updateCheckbox = this.updateCheckbox.bind(this);
   }
 
   componentDidMount () {
@@ -25,9 +27,12 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.formStatus === 'found') {
+    if (nextProps.route.path === '/new-note') {
+      this.setState({ id: '', title: '', body: '', collection_ids: [] });
+    } else if (nextProps.formStatus === 'found') {
       const note = nextProps.notes[this.noteId];
-      this.setState({ id: note.id, title: note.title, body: note.body });
+      this.setState({ id: note.id, title: note.title, body: note.body,
+        collection_ids: note.collection_ids });
     } else if (nextProps.formStatus === 'updated' ||
       nextProps.formStatus === 'created') {
       this.props.router.push('/home');
@@ -45,6 +50,19 @@ class NoteForm extends React.Component {
       const textarea = document.getElementById(`textarea-${field}`);
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
+    };
+  }
+
+  updateCheckbox (collectionId) {
+    const note = this;
+    return () => {
+      const idx = note.state.collection_ids.indexOf(collectionId);
+      if (idx === -1) {
+        note.state.collection_ids.push(collectionId);
+      } else {
+        note.state.collection_ids.splice(idx, 1);
+      }
+      console.log(note.state.collection_ids);
     };
   }
 
@@ -69,6 +87,7 @@ class NoteForm extends React.Component {
   }
 
   render () {
+    console.log(this.state.collection_ids);
     return (
       <div className="note-container">
         <NoteFormHeader handleDelete={this.handleDelete}
@@ -77,6 +96,9 @@ class NoteForm extends React.Component {
         <div className="note-form-container">
           <div className="note-tags">Tags</div>
           <form onSubmit={this.handleSubmit}>
+            <TagFormContainer collectionIds={this.state.collection_ids}
+              updateCheckbox={this.updateCheckbox.bind(this)} />
+
             <textarea id='textarea-title'
 							onChange={this.textAreaChange("title")}
 							placeholder="Title"
