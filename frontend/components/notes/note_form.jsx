@@ -27,14 +27,15 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.route.path === '/new-note') {
+    if (nextProps.route.path === '/new-note' && nextProps.formStatus !==
+    'created' && nextProps.formStatus !== 'deleted') {
       this.setState({ id: '', title: '', body: '', collection_ids: [] });
     } else if (nextProps.formStatus === 'found') {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
         collection_ids: note.collection_ids });
     } else if (nextProps.formStatus === 'updated' ||
-      nextProps.formStatus === 'created') {
+      nextProps.formStatus === 'created' || nextProps.formStatus === 'deleted') {
       this.props.router.push('/home');
     }
   }
