@@ -16,7 +16,7 @@ class HeaderBar extends React.Component {
 
   redirectIfLoggedOut (loggedIn) {
     if (!loggedIn) {
-			this.props.router.push("/login");
+			this.props.router.push("/");
 		}
   }
 

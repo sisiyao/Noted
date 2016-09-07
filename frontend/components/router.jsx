@@ -19,7 +19,7 @@ class AppRouter extends React.Component{
     const currentState = this.context.store.getState();
     const currentUser = currentState.session.currentUser;
     if (!currentUser) {
-      replace('/login');
+      replace('/');
     }
   }
 
@@ -35,13 +35,10 @@ class AppRouter extends React.Component{
     return(
       <Router history={ hashHistory }>
         <Route path="/" component={ App }>
-          <IndexRedirect to="/login" />
-          <Route path="login" component={ SessionFormContainer }
-              onEnter={this._redirectIfLoggedIn} />
-          <Route path="signup" component={ SessionFormContainer }
-              onEnter={this._redirectIfLoggedIn} />
+          <IndexRoute component={ SessionFormContainer }
+            onEnter={this._redirectIfLoggedIn}/>
 
-        <Route path="home" component={ Home }
+          <Route path="home" component={ Home }
               onEnter={ this._ensureLoggedIn } >
             <IndexRoute component={ NotesIndex } />
           </Route>

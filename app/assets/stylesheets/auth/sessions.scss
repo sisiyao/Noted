@@ -9,11 +9,21 @@
   background-repeat: no-repeat;
   position: absolute;
   width: 100%;
-  min-height: 570px;
-  height: 83%;
-  top: 64px;
+  min-height: 650px;
+  height: 100%;
+  top: 0;
   left: 0;
   z-index: -1;
+}
+
+.background-image:before {
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    content: "";
+    opacity: 0.3;
+    position: absolute;
+    z-index: -1;
 }
 
 .auth-header {
@@ -27,17 +37,15 @@
   align-items: center;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: transparent;
   width: 100%;
   box-sizing: border-box;
-  position: fixed;
+  color: white;
 }
 
 .auth-header-right {
-  color: var(--dark-grey);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  font-weight: bold;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,8 +55,12 @@
   min-width: 200px;
 }
 
+.auth-header-right > div {
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
 .auth-header-right > div:hover {
-  color: black;
   cursor: pointer;
 }
 
@@ -64,7 +76,7 @@
   top: 30%;
   font-size: 50px;
   color: white;
-  min-width: 650px;
+  min-width: 640px;
 }
 
 .auth-tagline {
@@ -89,6 +101,9 @@
   background-color: #314090;
 }
 
+.linkedin:visited {
+  color: white;
+}
 
 // .background-image h1 {
 //   font-size: 80px;

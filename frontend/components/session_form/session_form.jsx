@@ -1,15 +1,21 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import Modal from 'react-modal';
 
 class SessionForm extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
+			modalOpen: false,
+			formType: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this._guestDemoLogin = this._guestDemoLogin.bind(this);
+		this.submitButtonText = this.submitButtonText.bind(this);
+		this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 	}
 
 	update (field) {
@@ -28,19 +34,11 @@ class SessionForm extends React.Component {
 		}
 	}
 
-  navLink () {
-    if (this.props.formType === "login") {
-      return <Link to="/signup">Sign up instead</Link>;
-    } else {
-      return <Link to="/login">Log in instead</Link>;
-    }
-  }
-
   submitButtonText () {
-    if (this.props.formType === "login") {
-      return "LOG IN";
+    if (this.state.formType === "login") {
+      return "Log in";
     } else {
-      return "SIGN UP";
+      return "Sign up";
     }
   }
 
@@ -48,8 +46,11 @@ class SessionForm extends React.Component {
 		if (e) {
 			e.preventDefault();
 		}
-		const user = this.state;
-		this.props.processForm(user);
+		const user = {username: this.state.username,
+			password: this.state.password};
+	  const processForm = (this.state.formType === 'login') ?
+			this.props.login : this.props.signup;
+		processForm(user);
 	}
 
 	renderErrors(){
@@ -68,11 +69,22 @@ class SessionForm extends React.Component {
 		this.setState(
       { username: "guest", password: "password" },
 			() => {
-				const user = this.state;
+				const user = {username: this.state.username,
+					password: this.state.password};
 				this.props.login(user);
 			}
     );
 	}
+
+	closeModal () {
+    this.setState({ modalOpen: false });
+  }
+
+  openModal (formType) {
+    return () => {
+			this.setState({ modalOpen: true, formType: formType});
+		};
+  }
 
 	render() {
 		return (
@@ -80,44 +92,45 @@ class SessionForm extends React.Component {
 				<div className="auth-header">
 					<div>Noted</div>
 					<div className="auth-header-right">
-						<div>Log in</div>
-						<div>Sign up</div>
-						<div className="auth-header-info"><i className="fa fa-info-circle" aria-hidden="true" /></div>
+						<div onClick={this.openModal("login")}>Log in</div>
+						<div onClick={this.openModal("signup")}>Sign up</div>
+						<div className="auth-header-info">
+							<a className="linkedin" href="https://www.linkedin.com/in/sisiyao" target="_blank">
+								<i className="fa fa-info-circle" aria-hidden="true" />
+							</a>
+						</div>
 					</div>
 				</div>
 
 				<div className="auth-greeting">
-					<div className="auth-tagline">A digital notebook</div>
-					<div className="auth-tagline">for capturing your thoughts</div>
+					<div className="auth-tagline">Beautiful notes for</div>
+					<div className="auth-tagline">capturing all your thoughts</div>
 					<button onClick={this._guestDemoLogin} className="guest-demo-button">
 						GUEST DEMO
 					</button>
 				</div>
 
-				<div className="auth-content">
+				<Modal isOpen={this.state.modalOpen}
+          onRequestClose={this.closeModal}>
+					<div>{this.submitButtonText()}</div>
+					<form onSubmit={this.handleSubmit} className="auth-form">
+						<input type="text"
+							value={this.state.username}
+							onChange={this.update("username")}
+							placeholder="Username"
+							className="auth-form-input" />
 
+						<input type="password"
+							value={this.state.password}
+							onChange={this.update("password")}
+							placeholder="Password"
+							className="auth-form-input" />
 
-					<div className="auth-form-container">
-						<form onSubmit={this.handleSubmit} className="auth-form">
-							<input type="text"
-								value={this.state.username}
-								onChange={this.update("username")}
-								placeholder="Username"
-								className="auth-form-input" />
-
-							<input type="password"
-								value={this.state.password}
-								onChange={this.update("password")}
-								placeholder="Password"
-								className="auth-form-input" />
-
-							<input type="submit" value={this.submitButtonText()}
-								className="auth-form-button"/>
-							{this.navLink()}
-						</form>
-						{ this.renderErrors() }
-					</div>
-				</div>
+						<input type="submit" value={this.submitButtonText()}
+							className="auth-form-button"/>
+					</form>
+					{ this.renderErrors() }
+				</Modal>
 			</div>
 		);
 	}
