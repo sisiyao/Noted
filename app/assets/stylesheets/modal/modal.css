@@ -1,0 +1,25 @@
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.modal-buttons > div {
+  margin: 0 15px;
+  padding: 6px 9px;
+}
+
+.modal-buttons > div:hover {
+  background-color: var(--light-grey);
+  border-radius: 2px;
+}
+
+.modal-delete {
+  color: blue;
+}

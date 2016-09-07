@@ -28,7 +28,7 @@ class CollectionsIndexItem extends React.Component {
             onClick={this.linkToEditNote(this.props.collection.id)} />
         </div>
         <div className="collection-item-options"
-          onClick={this.props.destroyCollection.bind(null, this.props.collection.id)}>
+          onClick={this.props.delete}>
           <i className="fa fa-trash-o" aria-hidden="true" />
         </div>
       </div>

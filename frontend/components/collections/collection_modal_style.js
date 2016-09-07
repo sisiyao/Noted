@@ -13,13 +13,15 @@ const modalStyle = {
     margin          : 'auto',
     top             : '10%',
     border          : '1px solid #fff',
-    padding         : '50px 80px',
+    padding         : '36px 30px 30px 30px',
     'minWidth'      : '400px',
     'maxWidth'      : '400px',
-    'minHeight'     : '220px',
-    'maxHeight'     : '220px',
+    'minHeight'     : '163px',
+    'maxHeight'     : '163px',
     'zIndex'        : 3,
-    'boxSizing'     : 'border-box'
+    'boxSizing'     : 'border-box',
+    'fontSize'     : '14px',
+    'borderRadius'  : 0
   }
 };
 

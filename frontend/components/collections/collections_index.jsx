@@ -8,23 +8,34 @@ import modalStyle from './collection_modal_style';
 class CollectionsIndex extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {modalOpen: false};
+    this.state = {modalOpen: false, collectionToDelete: null};
 
     this.listCollections = this.listCollections.bind(this);
     this.newNote = this.newNote.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.deleteCollection = this.deleteCollection.bind(this);
   }
 
   componentDidMount () {
     this.props.fetchAllCollections();
   }
 
+  setCollectionToDelete (collectionId) {
+    this.setState({collectionToDelete: collectionId});
+    this.openModal();
+  }
+
+  deleteCollection () {
+    this.props.destroyCollection(this.state.collectionToDelete);
+    this.closeModal();
+  }
+
   listCollections () {
     return this.props.collections.map(collection => (
       <CollectionsIndexItem collection={collection}
         key={`${collection.id}${collection.name}`}
-        destroyCollection={this.props.destroyCollection} />
+        delete={this.setCollectionToDelete.bind(this, collection.id)} />
     ));
   }
 
@@ -50,19 +61,18 @@ class CollectionsIndex extends React.Component {
             link={this.newNote}/>
         </div>
 
-        <div onClick={this.openModal}>
-          <SidebarItem item="Create new collection" icon="fa fa-plus" />
-        </div>
-
         <Modal isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal} style={modalStyle}>
-
-            <div>We’ll delete this label and remove it from all of your
-              notes. Your notes won’t be deleted.</div>
-
-            <button>Cancel</button>
-            <button>Delete</button>
-
+            <div className='modal-body'>
+              <div>We’ll delete this label and remove it from all of your
+                notes. Your notes won’t be deleted.</div>
+              <div className='modal-buttons'>
+                <div className='modal-cancel'
+                  onClick={this.closeModal}>Cancel</div>
+                <div className='modal-delete'
+                  onClick={this.deleteCollection}>Delete</div>
+              </div>
+            </div>
         </Modal>
       </div>
     );

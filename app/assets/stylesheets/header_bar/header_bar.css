@@ -51,7 +51,8 @@
 }
 
 .header-logo {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.5px;
 }
 
 .header-menu-icon:hover, .header-add-note:hover, .header-profile-icon:hover, .header-logout-icon:hover {
@@ -93,6 +94,5 @@
 }
 
 .header-search-container {
-  /*border: 1px solid red;*/
   min-width: 200px;
 }

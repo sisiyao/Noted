@@ -37,8 +37,10 @@ class HeaderBar extends React.Component {
           </div>
           <div className="header-logo" onClick={this.linkToHome}>Noted</div>
         </div>
+
         <div className="header-search-container">
         </div>
+
         <div className="header-bar-right">
           <div className="header-add-note" onClick={this.linkToNewNote}>
             <div className="header-add-note-icon">

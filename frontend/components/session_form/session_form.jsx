@@ -77,14 +77,25 @@ class SessionForm extends React.Component {
 	render() {
 		return (
 			<div className="background-image">
-				<div className="auth-content">
-					<div className="greeting" id="greeting">
-						<h1>Noted</h1>
-						<h3>Keep thoughts organized.</h3>
-						<button onClick={this._guestDemoLogin} className="guest-demo-button">
-							GUEST DEMO
-						</button>
+				<div className="auth-header">
+					<div>Noted</div>
+					<div className="auth-header-right">
+						<div>Log in</div>
+						<div>Sign up</div>
+						<div className="auth-header-info"><i className="fa fa-info-circle" aria-hidden="true" /></div>
 					</div>
+				</div>
+
+				<div className="auth-greeting">
+					<div className="auth-tagline">A digital notebook</div>
+					<div className="auth-tagline">for capturing your thoughts</div>
+					<button onClick={this._guestDemoLogin} className="guest-demo-button">
+						GUEST DEMO
+					</button>
+				</div>
+
+				<div className="auth-content">
+
 
 					<div className="auth-form-container">
 						<form onSubmit={this.handleSubmit} className="auth-form">
