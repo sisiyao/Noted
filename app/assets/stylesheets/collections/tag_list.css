@@ -2,17 +2,16 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 20px 20px 10px 20px;
-  font-size: 12px;
-  width: 70%;
+  padding: 10px 5px 5px 5px;
+  width: 90%;
 }
 
 .individual-tag {
   display: inline-block;
   background-color: #dbdbdb;
-  font-size: 12px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding: 3px 5px;
+  font-size: 11px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  padding: 2px 5px;
   border-radius: 2px;
 }

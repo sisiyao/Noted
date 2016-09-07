@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import TagListContainer from '../collection_tags/tag_list_container';
 
 const NoteIndexItem = ({note, router, destroyNote}) => {
   const linkToNote = () => router.push(`/note/${note.id}`);
@@ -10,7 +11,9 @@ const NoteIndexItem = ({note, router, destroyNote}) => {
         <div className="note-index-title">{note.title}</div>
         <div className="note-index-body">{note.body}</div>
       </div>
-      <div className="note-labels" onClick={linkToNote}></div>
+      <div className="note-labels" onClick={linkToNote}>
+        <TagListContainer collectionIds={note.collection_ids} />
+      </div>
       <div className="note-options">
         <div><i className="fa fa-paint-brush" aria-hidden="true" /></div>
         <div><i className="fa fa-trash-o" onClick={destroyNote.bind(null, note.id)}

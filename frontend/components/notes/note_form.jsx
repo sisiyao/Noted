@@ -104,10 +104,9 @@ class NoteForm extends React.Component {
     } else {
       return (
         <div className="note-container">
-          <NoteFormHeader handleDelete={this.handleDelete}
-            deleteButton={this.deleteButton} cancel={this.cancel} />
-
           <div className="note-form-container">
+            <NoteFormHeader handleDelete={this.handleDelete}
+              deleteButton={this.deleteButton} cancel={this.cancel} />
             <TagListContainer collectionIds={this.state.collection_ids}/>
             <form onSubmit={this.handleSubmit}>
               <TagFormContainer collectionIds={this.state.collection_ids}
@@ -124,7 +123,7 @@ class NoteForm extends React.Component {
   							onChange={this.textAreaChange("body")}
   							placeholder="Take a note..."
   							className="note-form-body"
-                value={this.state.body} rows='10' />
+                value={this.state.body} />
               <input className="note-submit-button" type="submit" value="DONE" />
             </form>
           </div>
