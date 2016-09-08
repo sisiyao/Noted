@@ -2,14 +2,14 @@
   position: fixed;
   left: -280px;
   top: 64px;
-  transition: left 0.2s linear;
+  transition: left 0.08s linear;
 }
 
 .sidebar-show {
   position: fixed;
   left: 0;
   top: 64px;
-  transition: left 0.2s linear;
+  transition: left 0.08s linear;
 }
 
 .sidebar-hide, .sidebar-show {
@@ -20,12 +20,12 @@
 
 .sidebar-width1 {
   min-width: 280px;
-  transition: width 0.2s linear;
+  transition: width 0.08s linear;
 }
 
 .sidebar-width0 {
   width: 0;
-  transition: width 0.2s linear;
+  transition: width 0.08s linear;
 }
 
 .sidebar-show, .sidebar-hide {
