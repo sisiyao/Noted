@@ -28,10 +28,14 @@ class NotesIndex extends React.Component {
   componentWillReceiveProps (nextProps) {
     const thisPath = this.props.location.pathname;
     const nextPath = nextProps.location.pathname;
-    if (nextPath === '/home' && thisPath != nextPath) {
+    if (nextPath === '/home' && thisPath !== nextPath) {
       this.props.fetchAllNotes({});
-    } else if (nextPath.slice(0,7) === '/notes/' && thisPath != nextPath) {
+    } else if (nextPath.slice(0,7) === '/notes/' && thisPath !== nextPath) {
       this.props.fetchAllNotes({collection_name: nextPath.slice(7)});
+    } else if (nextPath === '/search' &&
+    Object.keys(nextProps.location.query).length !== 0) {
+      const searchParams = Object.keys(nextProps.location.query)[0];
+      this.props.fetchAllNotes({search: searchParams});
     }
   }
 
@@ -43,24 +47,35 @@ class NotesIndex extends React.Component {
   }
 
   notesHeader () {
-    if (this.props.location.pathname==='/home') {
+    if (this.props.location.pathname === '/home') {
       return 'All notes';
+    } else if (this.props.location.pathname === '/search') {
+      return "Search results";
     } else {
       return `${this.props.location.pathname.slice(7)}`;
     }
   }
 
   render () {
-    return (
-      <div className="note-index">
-        <div className="notes-header"> {this.notesHeader()} </div>
-        <Masonry className={'my-gallery-class'} elementType={'div'}
-          options={masonryOptions} disableImagesLoaded={false}
-          updateOnEachImageLoad={false}>
-            {this.listNotes()}
-        </Masonry>
-      </div>
-    );
+    if (this.props.location.pathname === '/search' &&
+      Object.keys(this.props.location.query).length === 0) {
+      return (
+        <div className="note-index">
+          <div className="notes-header"> {this.notesHeader()} </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="note-index">
+          <div className="notes-header"> {this.notesHeader()} </div>
+          <Masonry className={'my-gallery-class'} elementType={'div'}
+            options={masonryOptions} disableImagesLoaded={false}
+            updateOnEachImageLoad={false}>
+              {this.listNotes()}
+          </Masonry>
+        </div>
+      );
+    }
   }
 }
 

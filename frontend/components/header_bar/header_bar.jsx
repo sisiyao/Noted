@@ -1,6 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import { withRouter, hashHistory } from 'react-router';
+import Search from '../search/search';
 
 class HeaderBar extends React.Component {
   constructor (props) {
@@ -38,8 +38,7 @@ class HeaderBar extends React.Component {
           <div className="header-logo" onClick={this.linkToHome}>Noted</div>
         </div>
 
-        <div className="header-search-container">
-        </div>
+        <Search />
 
         <div className="header-bar-right">
           <div className="header-add-note" onClick={this.linkToNewNote}>

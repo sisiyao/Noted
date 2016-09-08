@@ -109,8 +109,8 @@ class SessionForm extends React.Component {
 				</div>
 
 				<div className="auth-greeting">
-					<div className="auth-tagline">Collect your thoughts</div>
-					<div className="auth-tagline">Keep them organized</div>
+					<div className="auth-tagline">Collect your thoughts.</div>
+					<div className="auth-tagline">Store them in one place.</div>
 					<button onClick={this._guestDemoLogin} className="guest-demo-button">
 						GUEST DEMO
 					</button>
