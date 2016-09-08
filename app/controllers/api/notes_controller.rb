@@ -8,8 +8,9 @@ class Api::NotesController < ApplicationController
     elsif params[:search]
       p params[:search].downcase
       search_term = params[:search].downcase
-      @notes = Note.all.where(user_id: current_user.id)
-        .where("lower(title) LIKE ? OR lower(body) LIKE ?", "%#{search_term}%", "%#{search_term}%")
+      @notes = Note.all.where(user_id: current_user.id).joins(:collections)
+        .where("lower(title) LIKE ? OR lower(body) LIKE ? OR lower(collections.name) LIKE ?",
+          "%#{search_term}%", "%#{search_term}%", "%#{search_term}%")
         .includes(:collections)
     else
       @notes = Note.all.where(user_id: current_user.id).includes(:collections)

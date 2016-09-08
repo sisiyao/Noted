@@ -1,5 +1,6 @@
 .note-index {
-  width: 90%;
+  min-width: 1035px;
+  max-width: 1035px;
   margin: auto;
   margin-top: 65px;
 }

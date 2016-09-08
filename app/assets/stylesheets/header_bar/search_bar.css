@@ -1,6 +1,5 @@
 .search-bar-container-true, .search-bar-container-false {
   min-width: 200px;
-  background-color: white;
   z-index: 2;
   color: black;
   display: flex;
@@ -14,6 +13,14 @@
   box-sizing: border-box;
 }
 
+.search-bar-container-true {
+  background-color: white;
+}
+
+.search-bar-container-false {
+  background-color: #5161bb;
+}
+
 .search-bar-container-true:hover {
   cursor: pointer;
 }
@@ -21,6 +28,10 @@
 .search-icon, .search-cancel-icon-true {
   color: var(--med-light-grey);
   padding: 5px 20px;
+}
+
+.search-bar-container-false > .search-icon {
+  color: #8b96d2;
 }
 
 .search-icon > .fa {
@@ -51,4 +62,18 @@
   appearance: none;
   box-shadow: none;
   outline: none;
+  background-color: transparent;
+}
+
+.search-bar-container-false .search-bar::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #8b96d2;
+}
+.search-bar-container-false .search-bar:::-moz-placeholder { /* Firefox 19+ */
+  color: #8b96d2;
+}
+.search-bar-container-false .search-bar::-ms-input-placeholder { /* IE 10+ */
+  color: #8b96d2;
+}
+.search-bar-container-false .search-bar::-moz-placeholder { /* Firefox 18- */
+  color: #8b96d2;
 }
