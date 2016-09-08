@@ -53,6 +53,9 @@
   font-family: 'Roboto Slab', serif;
   font-size: 20px;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  max-height: 215px;
+  overflow-y: hidden;
 }
 
 .note-labels, .note-options {
