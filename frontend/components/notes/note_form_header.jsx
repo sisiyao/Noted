@@ -2,7 +2,6 @@ import React from 'react';
 
 const NoteFormHeader = ({handleDelete, deleteButton, cancel}) => (
   <div className="note-form-options">
-    Toolbar
     <div className="note-form-delete"
       onClick={handleDelete}>
       {deleteButton()}</div>

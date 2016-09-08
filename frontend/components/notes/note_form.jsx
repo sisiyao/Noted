@@ -2,14 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
-import TagListContainer from '../collection_tags/tag_list_container';
 
 class NoteForm extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = { id: "", title: "", body: "", collection_ids: [],
-      dropdownStatus: 'hide'};
+    this.state = { id: "", title: "", body: "", collection_ids: []};
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
@@ -20,7 +18,6 @@ class NoteForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.updateCheckbox = this.updateCheckbox.bind(this);
-    this.showDropdown = this.showDropdown.bind(this);
   }
 
   componentDidMount () {
@@ -53,18 +50,12 @@ class NoteForm extends React.Component {
     };
   }
 
-  updateCheckbox (collectionId) {
-    const note = this;
-    return () => {
-      const newCollectionIds = note.state.collection_ids.slice();
-      const idx = note.state.collection_ids.indexOf(collectionId);
-      if (idx === -1) {
-        newCollectionIds.push(collectionId);
-      } else {
-        newCollectionIds.splice(idx, 1);
-      }
-      this.setState({collection_ids: newCollectionIds});
-    };
+  updateCheckbox (checkedBoxes) {
+    const collection_ids = [];
+    checkedBoxes.forEach(box => {
+      collection_ids.push(box.value);
+    });
+    this.setState({collection_ids: collection_ids});
   }
 
   cancel () {
@@ -89,26 +80,21 @@ class NoteForm extends React.Component {
     this.props.destroyNote(this.noteId);
   }
 
-  showDropdown () {
-    const status = this.state.dropdownStatus === 'show' ? 'hide' : 'show';
-    this.setState({dropdownStatus: status});
-  }
-
   render () {
     if (this.props.formType !== 'new-note' && this.state.id === "") {
       return <div></div>;
     } else {
       return (
         <div className="note-container">
-          <div className="note-form-container">
+          <div className="edit-coll-header">Edit Collections</div>
+          <div className="note-form-header">
+            <TagFormContainer collectionIds={this.state.collection_ids}
+              updateCheckbox={this.updateCheckbox.bind(this)} />
             <NoteFormHeader handleDelete={this.handleDelete}
               deleteButton={this.deleteButton} cancel={this.cancel} />
-            <TagListContainer collectionIds={this.state.collection_ids}/>
+          </div>
+          <div className="note-form-container">
             <form onSubmit={this.handleSubmit}>
-              <TagFormContainer collectionIds={this.state.collection_ids}
-                updateCheckbox={this.updateCheckbox.bind(this)}
-                showDropdown={this.showDropdown}
-                dropdownStatus={this.state.dropdownStatus} />
 
               <textarea id='textarea-title'
   							onChange={this.textAreaChange("title")}

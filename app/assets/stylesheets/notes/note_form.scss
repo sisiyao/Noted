@@ -4,16 +4,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 23%;
+  top: 15%;
   margin-left: 50px;
 }
 
-.note-container, .note-form-container {
+.note-container, .note-form-container, .note-form-header, .edit-coll-header {
   min-width: 670px;
+}
+
+.edit-coll-header {
+  font-size: 12px;
 }
 
 .note-form-container {
   max-width: 670px;
+}
+
+.note-form-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 33px;
 }
 
 .note-form-options {
@@ -21,17 +33,11 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  position: absolute;
-  left: 0;
-  top: -50px;
-}
-
-.note-form-options {
   min-height: 50px;
   max-height: 50px;
 }
 
-.note-form-container, .note-form-options {
+.note-form-container {
   flex: 1;
   width: 60%;
 }
@@ -71,7 +77,7 @@
 }
 
 .note-form-title {
-  padding-top: 10px;
+  padding-top: 30px;
   font-size: 24px;
   font-family: 'Roboto Condensed', sans-serif;
   letter-spacing: 0.7px;
