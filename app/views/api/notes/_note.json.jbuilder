@@ -5,3 +5,5 @@ json.color note.color
 json.image_url note.image_url
 json.updated_at note.updated_at
 json.collection_ids note.collections.map { |coll| coll.id }
+json.bodyHeight calculate_height(note, "body")
+json.titleHeight calculate_height(note, "title")

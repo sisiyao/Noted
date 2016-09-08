@@ -28,7 +28,7 @@ class NoteForm extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.route.path === '/new-note') {
-      this.setState({ id: '', title: '', body: '', collection_ids: [] });
+      this.setState({ id: '', title: '', body: '', collection_ids: []});
     } else if (nextProps.formStatus === 'found') {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
@@ -43,10 +43,10 @@ class NoteForm extends React.Component {
 
   textAreaChange (field) {
     return e => {
-      this.setState({ [field]: e.currentTarget.value });
       const textarea = document.getElementById(`textarea-${field}`);
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
+      this.setState({ [field]: e.currentTarget.value});
     };
   }
 
@@ -100,12 +100,12 @@ class NoteForm extends React.Component {
   							onChange={this.textAreaChange("title")}
   							placeholder="Title"
   							className="note-form-title"
-                value={this.state.title} rows='1'/>
+                value={this.state.title} rows='1' />
               <textarea id='textarea-body'
   							onChange={this.textAreaChange("body")}
   							placeholder="Take a note..."
   							className="note-form-body"
-                value={this.state.body} />
+                value={this.state.body} rows='10' />
               <input className="note-submit-button" type="submit" value="DONE" />
             </form>
           </div>

@@ -59,14 +59,12 @@ class NotesIndex extends React.Component {
   render () {
     if (this.props.location.pathname === '/search' &&
       Object.keys(this.props.location.query).length === 0) {
-        console.log("render nothing");
       return (
         <div className="note-index">
           <div className="notes-header"> {this.notesHeader()} </div>
         </div>
       );
     } else {
-      console.log("render list");
       return (
         <div className="note-index">
           <div className="notes-header"> {this.notesHeader()} </div>

@@ -11,10 +11,6 @@ class Search extends React.Component {
     this.redirectToSearch = this.redirectToSearch.bind(this);
   }
 
-  componentWillReceiveProps (nextProps) {
-    // this.setState({searchParams: "", atRoute: false});
-  }
-
   update (e) {
     this.setState({searchParams: e.currentTarget.value});
   }

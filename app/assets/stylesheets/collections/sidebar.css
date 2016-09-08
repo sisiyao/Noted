@@ -125,3 +125,7 @@
   flex-direction: row;
   color: var(--dark-grey);
 }
+
+.sidebar-about:visited {
+  color: var(--dark-grey);
+}

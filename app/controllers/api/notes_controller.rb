@@ -6,7 +6,6 @@ class Api::NotesController < ApplicationController
         .where("collections.name = ?", params[:collection_name])
         .includes(:collections)
     elsif params[:search]
-      p params[:search].downcase
       search_term = params[:search].downcase
       @notes = Note.all.where("notes.user_id = ?", current_user.id)
         .joins("LEFT JOIN collection_taggings ON notes.id = collection_taggings.note_id")

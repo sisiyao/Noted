@@ -16,7 +16,9 @@ const Sidebar = ({sidebar, router}) => {
         </div>
         <CollectionsIndexContainer />
         <div className="sidebar-bottom">
-          <SidebarItem item='About' icon='fa fa-info-circle' />
+          <a className="sidebar-about" href="https://www.linkedin.com/in/sisiyao" target="_blank">
+            <SidebarItem item='About the developer' icon='fa fa-info-circle' />
+          </a>
         </div>
         <div className="sidebar-space"></div>
       </div>
