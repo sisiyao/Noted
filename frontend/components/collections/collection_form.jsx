@@ -25,16 +25,12 @@ class CollectionForm extends React.Component {
     if ((this.props.location.pathname !== nextProps.location.pathname)
     && (nextProps.route.path !== '/new-collection')) {
       this.props.fetchSingleCollection(nextProps.location.pathname.slice(12));
-    } else if (nextProps.route.path === '/new-collection'
-    && nextProps.formStatus !== 'created') {
+    } else if (nextProps.route.path === '/new-collection') {
       this.setState({ id: '', name: '' });
     } else if (nextProps.formStatus === 'found') {
       const collectionId = nextProps.location.pathname.slice(12);
       const collection = nextProps.collections[collectionId];
       this.setState({ id: collection.id, name: collection.name });
-    } else if (nextProps.formStatus === 'created' ||
-      nextProps.formStatus === 'updated') {
-      this.props.router.push('/home');
     }
   }
 

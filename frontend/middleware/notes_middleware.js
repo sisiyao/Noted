@@ -2,6 +2,7 @@ import { NoteConstants, receiveAllNotes, receiveSingleNote,
   removeNote, receiveNoteErrors } from '../actions/note_actions';
 import { fetchAllNotes, fetchSingleNote, createNote, updateNote,
   destroyNote } from '../util/note_api_util';
+import { hashHistory } from 'react-router';
 
 const NotesMiddleware = ({dispatch}) => next => action => {
   const error = xhr => {
@@ -23,17 +24,26 @@ const NotesMiddleware = ({dispatch}) => next => action => {
       next(action);
       break;
     case NoteConstants.CREATE_NOTE:
-      success = note => dispatch(receiveSingleNote(note));
+      success = note => {
+        dispatch(receiveSingleNote(note));
+        hashHistory.push('/home');
+      };
       createNote(action.note, success, error);
       next(action);
       break;
     case NoteConstants.UPDATE_NOTE:
-      success = note => dispatch(receiveSingleNote(note));
+      success = note => {
+        dispatch(receiveSingleNote(note));
+        hashHistory.push('/home');
+      };
       updateNote(action.note, success, error);
       next(action);
       break;
     case NoteConstants.DESTROY_NOTE:
-      success = note => dispatch(removeNote(note));
+      success = note => {
+        dispatch(removeNote(note));
+        hashHistory.push('/home');
+      };
       destroyNote(action.noteId, success, error);
       next(action);
       break;
