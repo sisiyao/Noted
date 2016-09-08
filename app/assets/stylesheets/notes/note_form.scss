@@ -9,7 +9,11 @@
 }
 
 .note-container, .note-form-container {
-  min-width: 400px;
+  min-width: 670px;
+}
+
+.note-form-container {
+  max-width: 670px;
 }
 
 .note-form-options {
