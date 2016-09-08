@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import Modal from 'react-modal';
+import authModalStyle from './auth_modal_style';
 
 class SessionForm extends React.Component {
 	constructor (props) {
@@ -9,7 +10,8 @@ class SessionForm extends React.Component {
 			username: "",
 			password: "",
 			modalOpen: false,
-			formType: null
+			formType: null,
+			errors: this.props.errors
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this._guestDemoLogin = this._guestDemoLogin.bind(this);
@@ -24,8 +26,12 @@ class SessionForm extends React.Component {
     );
 	}
 
-	componentDidUpdate(){
+	componentDidUpdate () {
 		this.redirectIfLoggedIn();
+	}
+
+	componentWillReceiveProps (nextProps) {
+		this.setState({errors: nextProps.errors});
 	}
 
 	redirectIfLoggedIn(){
@@ -56,7 +62,7 @@ class SessionForm extends React.Component {
 	renderErrors(){
 		return(
 			<ul className="auth-errors">
-				{this.props.errors.map( (error, idx) => (
+				{this.state.errors.map( (error, idx) => (
 					<li key={`autherror${idx}`}>
 						{error}
 					</li>
@@ -77,12 +83,12 @@ class SessionForm extends React.Component {
 	}
 
 	closeModal () {
-    this.setState({ modalOpen: false });
+    this.setState({ modalOpen: false});
   }
 
   openModal (formType) {
     return () => {
-			this.setState({ modalOpen: true, formType: formType});
+			this.setState({ modalOpen: true, formType: formType, errors: []});
 		};
   }
 
@@ -90,7 +96,7 @@ class SessionForm extends React.Component {
 		return (
 			<div className="background-image">
 				<div className="auth-header">
-					<div>Noted</div>
+					<div className="auth-logo">Noted</div>
 					<div className="auth-header-right">
 						<div onClick={this.openModal("login")}>Log in</div>
 						<div onClick={this.openModal("signup")}>Sign up</div>
@@ -103,32 +109,34 @@ class SessionForm extends React.Component {
 				</div>
 
 				<div className="auth-greeting">
-					<div className="auth-tagline">Beautiful notes for</div>
-					<div className="auth-tagline">capturing all your thoughts</div>
+					<div className="auth-tagline">Collect your thoughts</div>
+					<div className="auth-tagline">Keep them organized</div>
 					<button onClick={this._guestDemoLogin} className="guest-demo-button">
 						GUEST DEMO
 					</button>
 				</div>
 
 				<Modal isOpen={this.state.modalOpen}
-          onRequestClose={this.closeModal}>
-					<div>{this.submitButtonText()}</div>
-					<form onSubmit={this.handleSubmit} className="auth-form">
-						<input type="text"
-							value={this.state.username}
-							onChange={this.update("username")}
-							placeholder="Username"
-							className="auth-form-input" />
+          onRequestClose={this.closeModal} style={authModalStyle}>
+					<div className="auth-form-container">
+						<div className="auth-form-header">{this.submitButtonText()}</div>
+						<form onSubmit={this.handleSubmit} className="auth-form">
+							<input type="text"
+								value={this.state.username}
+								onChange={this.update("username")}
+								placeholder="Username"
+								className="auth-form-input" />
 
-						<input type="password"
-							value={this.state.password}
-							onChange={this.update("password")}
-							placeholder="Password"
-							className="auth-form-input" />
+							<input type="password"
+								value={this.state.password}
+								onChange={this.update("password")}
+								placeholder="Password"
+								className="auth-form-input" />
 
-						<input type="submit" value={this.submitButtonText()}
-							className="auth-form-button"/>
-					</form>
+							<input type="submit" value={this.submitButtonText()}
+								className="auth-form-button"/>
+						</form>
+					</div>
 					{ this.renderErrors() }
 				</Modal>
 			</div>
