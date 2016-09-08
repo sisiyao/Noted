@@ -65,15 +65,18 @@
   background-color: transparent;
 }
 
-.search-bar-container-false .search-bar::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.search-bar-container-false .search-bar::-webkit-input-placeholder {
   color: #8b96d2;
 }
-.search-bar-container-false .search-bar:::-moz-placeholder { /* Firefox 19+ */
+
+.search-bar-container-false .search-bar::-moz-placeholder {
   color: #8b96d2;
 }
-.search-bar-container-false .search-bar::-ms-input-placeholder { /* IE 10+ */
+
+.search-bar-container-false .search-bar:-ms-input-placeholder {
   color: #8b96d2;
 }
-.search-bar-container-false .search-bar::-moz-placeholder { /* Firefox 18- */
+
+.search-bar-container-false .search-bar:-moz-placeholder {
   color: #8b96d2;
 }
