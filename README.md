@@ -10,11 +10,28 @@ Noted is a full-stack web application inspired by Google Keep.  It utilizes Ruby
 
 ### Single-Page App
 
-Noted is a single-page; the entire site delivers dynamic components via one static page through the react/redux framework.  Noted utilizes authentication on the backend using a SessionController and authentication on the frontend using a SessionStore to allow account creation and user login/logout.
+Noted is a single-page; the entire site delivers dynamic components via one static page through the react/redux framework.  Noted utilizes authentication on the backend using a SessionController and authentication on the frontend using a SessionStore to allow account creation and user login/logout. The only user information store in the backend are username, a session token, and a hashed version of the password. Sensitive user information like the session token and hashed password are never sent to the frontend.
+
+```Ruby
+class Api::SessionsController < ApplicationController
+  def create
+    @user = User.find_by_credentials(
+      params[:user][:username],
+      params[:user][:password]
+    )
+
+    if @user
+      login!(@user)
+      render 'api/users/show'
+    else
+      render json: ["Invalid username and password combination"], status: 401
+    end
+  end
+```
 
 ### Note Rendering and Editing
 
-Users can create, view, and store notes. On the home page of this app, notes are shown in a tile view using the React Masonry library. This tile view utilizes a NoteIndex component and NoteIndexItem components to render the list of notes. Each NoteIndexItem shows the first few lines of the note only. By hovering over each individual note, users can see a trash icon that allows them to delete that note.
+Users can create, view, and store notes. On the backend, notes are stored in one database table. On the home page of this app, notes are shown in a tile view using the React Masonry library. This tile view utilizes a NoteIndex component and NoteIndexItem components to render the list of notes. Each NoteIndexItem shows the first few lines of the note only. By hovering over each individual note, users can see a trash icon that allows them to delete that note.
 
 Users can navigate to a note by clicking on one in the tile view. This will take them to the NoteForm component where they can edit their existing note. The NoteForm component is also used to render the 'Add a note' functionality. Upon creating, updating, or deleting their note, users will be redirected to the home page.
 
@@ -22,13 +39,31 @@ Two other features in note editing include:
 1. Note color - Users can edit and save note colors that will appear in the tile and indiviudal note views
 2. Expandable text box - The NoteForm component starts out with a small text box to write in that expands as needed. The text box will remember its size upon saving the note.
 
+Note Index render method:
+```javascript
+render () {
+  const notes = this.listNotes();
+  return (
+    <div className="note-index">
+      <div className="notes-header"> {`${this.notesHeader()}: ${notes.length} total`} </div>
+      <Masonry className={'my-gallery-class'} elementType={'div'}
+        options={masonryOptions} disableImagesLoaded={false}
+        updateOnEachImageLoad={false}>
+          {notes}
+      </Masonry>
+    </div>
+    );
+  }
+}
+```
+
 ![notes index](docs/wireframes/tile.png)
 
 ![note](docs/wireframes/note.png)
 
 ### Collections
 
-Collections act as folders for note organization / note tagging. Users can add notes to multiple collections. On the backend, this is implemented through a joins table for Collection Taggings, allowing for a many to many association across Notes and Collections.
+Collections act as folders for note organization / note tagging. Users can add notes to multiple collections. On the backend, this is implemented through a joins table for Collection Taggings, allowing for a many to many association across Notes and Collections. Collections are stored in one database table on the backend.
 
 Collections are found in a collapsable sidebar component to the left of the page. This list is rendered via a CollectionIndex component and CollectionIndexItem components. When hovering over each individual Collection in the list, users can expose options to edit or delete the note.
 
