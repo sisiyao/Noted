@@ -1,7 +1,5 @@
 class Api::NotesController < ApplicationController
   def index
-    p "HERRREE"
-    p current_user.id
     if params[:collection_name]
       @notes = Note.all.joins(:collections)
         .where(user_id: current_user.id)
