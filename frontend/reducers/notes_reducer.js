@@ -1,7 +1,7 @@
 import { NoteConstants } from '../actions/note_actions';
 import merge from 'lodash/merge';
 
-const _nullNotes = {notes: {}, errors: []};
+const _nullNotes = {notes: {}, errors: [], formStatus: null};
 
 const NotesReducer = (state = _nullNotes, action) => {
   let newNotes;
@@ -19,7 +19,7 @@ const NotesReducer = (state = _nullNotes, action) => {
     case NoteConstants.REMOVE_NOTE:
       newNotes = merge({}, state.notes);
       delete newNotes[`${action.note.note.id}`];
-      return merge({}, _nullNotes, {notes: newNotes});
+      return merge({}, _nullNotes, {notes: newNotes, formStatus: "deleted"});
     case NoteConstants.RECEIVE_NOTE_ERRORS:
       return merge({}, state, {errors: action.errors});
     default:

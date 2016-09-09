@@ -39,7 +39,7 @@ class NoteForm extends React.Component {
     if (nextProps.route.path === '/new-note') {
       this.setState({ id: '', title: '', body: '', collection_ids: [],
         color: 'white', titleHeight: '1', bodyHeight: '1'});
-    } else {
+    } else if (nextProps.formStatus !== "deleted") {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
         collection_ids: note.collection_ids, color: note.color,

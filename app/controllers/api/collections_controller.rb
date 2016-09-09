@@ -1,5 +1,7 @@
 class Api::CollectionsController < ApplicationController
   def index
+    p "HERRREE"
+    p current_user.id
     @collections = Collection.where(user_id: current_user.id).order(:name)
   end
 
