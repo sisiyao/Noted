@@ -5,14 +5,6 @@ class Api::NotesController < ApplicationController
         .where(user_id: current_user.id)
         .where("collections.name = ?", params[:collection_name])
         .includes(:collections)
-    elsif params[:search]
-      search_term = params[:search].downcase
-      @notes = Note.all.where("notes.user_id = ?", current_user.id)
-        .joins("LEFT JOIN collection_taggings ON notes.id = collection_taggings.note_id")
-        .joins("LEFT JOIN collections ON collection_taggings.collection_id = collections.id")
-        .where("lower(notes.title) LIKE ? OR lower(notes.body) LIKE ? OR lower(collections.name) LIKE ?",
-          "%#{search_term}%", "%#{search_term}%", "%#{search_term}%")
-        .includes(:collections)
     else
       @notes = Note.all.where(user_id: current_user.id).includes(:collections)
     end
@@ -21,7 +13,6 @@ class Api::NotesController < ApplicationController
   def show
     if current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
-      @status = "found"
       render :show
     else
       render json: ["Not found"], status: 404
@@ -31,7 +22,6 @@ class Api::NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id;
-    @status = "created"
 
     if @note.save
       render :show
@@ -43,7 +33,6 @@ class Api::NotesController < ApplicationController
   def update
     if current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
-      @status = "updated"
 
       if @note.update(note_params)
         render :show
@@ -58,7 +47,6 @@ class Api::NotesController < ApplicationController
   def destroy
     if  current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
-      @status = "deleted"
 
       if @note.destroy
         render :show

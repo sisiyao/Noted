@@ -37,7 +37,8 @@ class NotesIndex extends React.Component {
   }
 
   listNotes () {
-    const notes = this.props.location.pathname === '/search' ?
+    const searchParams = Object.keys(this.props.location.query)[0];
+    const notes = this.props.location.pathname === '/search' && searchParams?
       noteSearch(Object.keys(this.props.location.query)[0],
       this.props.notes, this.props.collections) : this.props.notes;
     return notes.map(note => {
@@ -50,28 +51,29 @@ class NotesIndex extends React.Component {
     if (this.props.location.pathname === '/home') {
       return 'All notes';
     } else if (this.props.location.pathname === '/search') {
-      return "Search results";
+      return `Search results for "${Object.keys(this.props.location.query)[0]}"`;
     } else {
       return `${this.props.location.pathname.slice(7)}`;
     }
   }
 
   render () {
+    const notes = this.listNotes();
     if (this.props.location.pathname === '/search' &&
       Object.keys(this.props.location.query).length === 0) {
       return (
         <div className="note-index">
-          <div className="notes-header"> {this.notesHeader()} </div>
+          <div className="notes-header"> Type to search... </div>
         </div>
       );
     } else {
       return (
         <div className="note-index">
-          <div className="notes-header"> {this.notesHeader()} </div>
+          <div className="notes-header"> {`${this.notesHeader()}: ${notes.length} total`} </div>
           <Masonry className={'my-gallery-class'} elementType={'div'}
             options={masonryOptions} disableImagesLoaded={false}
             updateOnEachImageLoad={false}>
-              {this.listNotes()}
+              {notes}
           </Masonry>
         </div>
       );
