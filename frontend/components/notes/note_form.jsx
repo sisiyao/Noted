@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
 import NoteColor from './note_color';
+import TagListContainer from '../collection_tags/tag_list';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -55,12 +56,18 @@ class NoteForm extends React.Component {
     };
   }
 
-  updateCheckbox (checkedBoxes) {
-    const collection_ids = [];
-    checkedBoxes.forEach(box => {
-      collection_ids.push(box.value);
-    });
-    this.setState({collection_ids: collection_ids});
+  updateCheckbox (collectionId) {
+    const note = this;
+    return () => {
+      const newCollectionIds = note.state.collection_ids.slice();
+      const idx = note.state.collection_ids.indexOf(collectionId);
+      if (idx === -1) {
+        newCollectionIds.push(collectionId);
+      } else {
+        newCollectionIds.splice(idx, 1);
+      }
+      this.setState({collection_ids: newCollectionIds});
+    };
   }
 
   updateColor (color) {
@@ -106,14 +113,16 @@ class NoteForm extends React.Component {
           </div>
           <div className="note-form-header">
             <TagFormContainer collectionIds={this.state.collection_ids}
-              updateCheckbox={this.updateCheckbox.bind(this)} />
+              updateCheckbox={this.updateCheckbox.bind(this)}
+              showDropdown={this.showDropdown}
+              dropdownStatus={this.state.dropdownStatus} />
             <NoteColor color={this.state.color} updateColor={this.updateColor}/>
             <NoteFormHeader handleDelete={this.handleDelete}
               deleteButton={this.deleteButton} cancel={this.cancel} />
           </div>
           <div className={`note-form-container ${this.state.color}`}>
             <form onSubmit={this.handleSubmit}>
-
+              <TagListContainer collectionIds={this.state.collection_ids}/>
               <textarea id='textarea-title'
   							onChange={this.textAreaChange("title")}
   							placeholder="Title"
