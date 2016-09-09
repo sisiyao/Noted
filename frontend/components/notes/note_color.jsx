@@ -9,7 +9,7 @@ const NoteColor = ({color, updateColor}) => {
     {value: 'red', label: 'red', clearableValue: false}];
 
   return (
-    <div className="note-color">
+    <div className="note-color-container">
       <Select
         name="note-color" value={color}
         options={colors} clearable={false}

@@ -129,16 +129,21 @@ class NoteForm extends React.Component {
       return (
         <div className="note-container">
           <div className="note-form-header">
-            <div onClick={this.openCollModal}>Edit Collections</div>
+            <div className="note-form-edit-coll" onClick={this.openCollModal}>
+              <div>Edit Collections</div>
+              <div><i className="fa fa-pencil" aria-hidden="true" /></div>
+            </div>
             <TagFormContainer collectionIds={this.state.collection_ids}
               updateCheckbox={this.updateCheckbox.bind(this)}
               showDropdown={this.showDropdown}
               dropdownStatus={this.state.dropdownStatus}
               modalOpen={this.state.collModalOpen}
               closeModal={this.closeCollModal}/>
-            <NoteColor color={this.state.color} updateColor={this.updateColor}/>
-            <NoteFormHeader handleDelete={this.handleDelete}
-              deleteButton={this.deleteButton} cancel={this.cancel} />
+            <div className="note-form-header-right">
+              <NoteColor color={this.state.color} updateColor={this.updateColor}/>
+              <NoteFormHeader handleDelete={this.handleDelete}
+                deleteButton={this.deleteButton} cancel={this.cancel} />
+            </div>
           </div>
           <div className={`note-form-container ${this.state.color}`}>
             <form onSubmit={this.handleSubmit}>
@@ -153,7 +158,7 @@ class NoteForm extends React.Component {
   							placeholder="Take a note..."
   							className="note-form-body"
                 value={this.state.body} rows={this.state.bodyHeight} />
-              <input className="note-submit-button" type="submit" value="DONE" />
+              <input className="note-submit-button" type="submit" value="SAVE" />
             </form>
           </div>
           <ul className='note-form-errors'>{this.errors()}</ul>
