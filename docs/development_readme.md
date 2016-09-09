@@ -12,7 +12,7 @@ Noted is a web application for collecting and organizing beautiful notes, built 
 - [ ] New account creation, login, and guest/demo login
 - [ ] Notes in a tile view
 - [ ] Collections for organizing notes (hybrid of notebooks & tags)
-- [ ] Rich Text Editing
+- [ ] Note colors and autosizing note text box
 - [ ] Search notes by title / body / collection
 - [ ] Production README [sample](../README.md)
 
@@ -101,22 +101,21 @@ Noted is a web application for collecting and organizing beautiful notes, built 
 - [ ] Redux cycle for fetching and receiving search results from search input
 - [ ] Search results auto update as user types
 
-### Phase 6: Allow Complex Styling in Notes (Thurs 9/8 PM, Fri 9/9 AM)
+### Phase 6: Allow Styling for Notes (Thurs 9/8 PM, Fri 9/9 AM)
 
-**Objective:** Allow rich text editing of notes.
+**Objective:** Allow color choices for notes. Create autosizing note text boxes.
 
-- [ ] Integrate `react-quill` (based on Quill.js).
-- [ ] Rails helpers to sanitize HTML before rendering.
-- [ ] Style Quill components.
-- [ ] Add Quill styling to seeded notes
+- [ ] Add color options for notes. Save color to database
+- [ ] Render color on notes index and note form components
+- [ ] Create autosizing note text boxes that expand as you write / hit enter
+- [ ] Render note text boxes with the correct text box height
+- [ ] Render notes on note index with new line spacing. Cut off notes on note index after a certain amount of text
 
 ### Bonus Features (TBD)
-- [ ] Loading animation
 - [ ] Collection search in edit collections dropdown
 - [ ] New collection in edit collections dropdown
 - [ ] Infinite scroll
 - [ ] Collection and note stats
-- [ ] Add option to choose color for notes
 - [ ] Add images to notes. Images show up in tile view. Limiting to 1 image per note.
 - [ ] IBM Watson API for AI categorization of notes (natural language classifiers)
 - [ ] Search ranking
