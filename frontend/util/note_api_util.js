@@ -20,7 +20,7 @@ export const createNote = (note, success, error) => {
     url: "/api/notes",
     method: "POST",
     data: {note: {title: note.title, body: note.body,
-      collection_ids: note.collection_ids}},
+      collection_ids: note.collection_ids, color: note.color}},
     success,
     error
   });
@@ -31,7 +31,7 @@ export const updateNote = (note, success, error) => {
     url: `/api/notes/${note.id}`,
     method: "PATCH",
     data: {note: {title: note.title, body: note.body,
-      collection_ids: note.collection_ids}},
+      collection_ids: note.collection_ids, color: note.color}},
     success,
     error
   });

@@ -81,3 +81,23 @@
 .note-options-space {
   width: 100%;
 }
+
+.white {
+  background-color: white;
+}
+
+.yellow {
+  background-color: #FFF7C0;
+}
+
+.green {
+  background-color: #B4D8C0;
+}
+
+.blue {
+  background-color: #CAEBF2;
+}
+
+.red {
+  background-color: #EEB6B7;
+}

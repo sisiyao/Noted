@@ -17,6 +17,7 @@ class NotesIndex extends React.Component {
   }
 
   componentDidMount () {
+    console.log("mount");
     const path = this.props.location.pathname;
     if (path === '/home') {
       this.props.fetchAllNotes({});

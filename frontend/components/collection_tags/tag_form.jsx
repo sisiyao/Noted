@@ -19,7 +19,7 @@ class TagForm extends React.Component {
     return (
       <div className="tag-form">
         <Select
-          name="form-field-name" value={this.props.collectionIds}
+          name="tag-form" value={this.props.collectionIds}
           options={this.allCollections()} multi={true}
           onChange={this.props.updateCheckbox} />
       </div>

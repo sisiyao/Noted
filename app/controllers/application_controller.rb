@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     split_text = text.split("\n")
     split_text.each do |text|
       height += (text.length / 40.0).ceil if text.length > 0
-      height += 1 if text.length == 1
+      height += 1 if text.length == 0
     end
     height
   end

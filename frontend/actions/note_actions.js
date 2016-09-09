@@ -7,8 +7,7 @@ export const NoteConstants = {
   RECEIVE_ALL_NOTES: "RECEIVE_ALL_NOTES",
   RECEIVE_SINGLE_NOTE: "RECEIVE_SINGLE_NOTE",
   REMOVE_NOTE: "REMOVE_NOTE",
-  RECEIVE_NOTE_ERRORS: "RECEIVE_NOTE_ERRORS",
-  CLEAR_NOTES: "CLEAR_NOTES"
+  RECEIVE_NOTE_ERRORS: "RECEIVE_NOTE_ERRORS"
 };
 
 export const fetchAllNotes = filters => ({
@@ -54,8 +53,4 @@ export const removeNote = note => ({
 export const receiveNoteErrors = errors => ({
   type: NoteConstants.RECEIVE_NOTE_ERRORS,
   errors
-});
-
-export const clearNotes = () => ({
-  type: NoteConstants.CLEAR_NOTES
 });

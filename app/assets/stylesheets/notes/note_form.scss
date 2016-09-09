@@ -5,19 +5,27 @@
   justify-content: center;
   align-items: center;
   top: 15%;
-  margin-left: 50px;
+  margin-left: 20px;
+  margin-bottom: 40px;
 }
 
-.note-container, .note-form-container, .note-form-header, .edit-coll-header {
-  min-width: 670px;
+.note-container, .note-form-container, .note-form-header, .edit-headers {
+  min-width: 640px;
+}
+
+.edit-headers {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
 }
 
 .edit-coll-header {
-  font-size: 12px;
+  min-width: 77.5%;
+  max-width: 77.5%;
 }
 
 .note-form-container {
-  max-width: 670px;
+  max-width: 640px;
 }
 
 .note-form-header {
@@ -43,7 +51,6 @@
 }
 
 .note-form-container {
-  background-color: white;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
   height: 85%;
   position: relative;
@@ -135,4 +142,19 @@
 }
 .note-form-title:-ms-input-placeholder, .note-form-body::-webkit-input-placeholder {
    color: var(--dark-grey);
+}
+
+.tag-form, .note-color {
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.tag-form {
+  min-width: 80%;
+  max-width: 80%;
+}
+
+.note-color {
+  min-width: 85px;
+  max-width: 85px;
 }
