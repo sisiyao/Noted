@@ -2,7 +2,7 @@
 
 [Noted live][heroku]
 
-[heroku]: https://wellnoted.herokuapp.com
+[heroku]: http://www.wellnoted.xyz/
 
 Noted is a full-stack web application inspired by Google Keep.  It utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Redux architectural framework on the frontend.  
 
