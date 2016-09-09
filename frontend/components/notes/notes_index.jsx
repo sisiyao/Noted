@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteIndexItem from './note_index_item';
 import Masonry from 'react-masonry-component';
+import noteSearch from '../../util/note_search_util';
 
 const masonryOptions = {
     itemSelector: '.note-index-item',
@@ -33,15 +34,14 @@ class NotesIndex extends React.Component {
       this.props.fetchAllNotes({});
     } else if (nextPath.slice(0,7) === '/notes/' && thisPath !== nextPath) {
       this.props.fetchAllNotes({collection_name: nextPath.slice(7)});
-    } else if (nextPath === '/search' &&
-    Object.keys(nextProps.location.query).length !== 0) {
-      const searchParams = Object.keys(nextProps.location.query)[0];
-      this.props.fetchAllNotes({search: searchParams});
     }
   }
 
   listNotes () {
-    return this.props.notes.map(note => {
+    const notes = this.props.location.pathname === '/search' ?
+      noteSearch(Object.keys(this.props.location.query)[0],
+      this.props.notes, this.props.collections) : this.props.notes;
+    return notes.map(note => {
       return <NoteIndexItem key={`${note.id}${note.title}`}
         destroyNote={this.props.destroyNote} note={note}/>;
     });
