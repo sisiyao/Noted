@@ -1,0 +1,20 @@
+.profile-modal-body {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+
+.profile-heading {
+  font-size: 14px;
+}
+
+.profile-username {
+  font-size: 20px;
+}
+
+.profile-heading, .profile-username {
+  margin: 10px 0;
+}

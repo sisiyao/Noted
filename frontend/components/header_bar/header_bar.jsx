@@ -1,12 +1,16 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
 import Search from '../search/search';
+import ProfileModal from './profile_modal';
 
 class HeaderBar extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {modalOpen: false};
     this.linkToHome = this.linkToHome.bind(this);
     this.linkToNewNote = this.linkToNewNote.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   shouldComponentUpdate (nextProps) {
@@ -26,6 +30,14 @@ class HeaderBar extends React.Component {
 
   linkToNewNote () {
     this.props.router.push("/new-note");
+  }
+
+  closeModal () {
+    this.setState({ modalOpen: false });
+  }
+
+  openModal () {
+    this.setState({ modalOpen: true });
   }
 
   render () {
@@ -48,8 +60,8 @@ class HeaderBar extends React.Component {
             <div className="header-add-note-text">Add Note</div>
           </div>
           <div className="header-admin">
-            <div className="header-profile-icon">
-              <div className="label">{this.props.currentUser.username}</div>
+            <div className="header-profile-icon" onClick={this.openModal}>
+              <div className="label">Profile</div>
               <i className="fa fa-user" aria-hidden="true"></i>
             </div>
             <div className="header-logout-icon" onClick={this.props.logout}>
@@ -58,6 +70,9 @@ class HeaderBar extends React.Component {
             </div>
           </div>
         </div>
+
+        <ProfileModal currentUser={this.props.currentUser}
+          modalOpen={this.state.modalOpen} closeModal={this.closeModal} />
       </div>
     );
   }

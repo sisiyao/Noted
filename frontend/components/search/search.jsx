@@ -19,7 +19,7 @@ class Search extends React.Component {
 
   update (e) {
     this.setState({searchParams: e.currentTarget.value}, () => {
-      if (this.state.searchParams.length > 2) {
+      if (this.state.searchParams.length > 1) {
         this.props.router.push(`/search?${this.state.searchParams}`);
       }
     });
