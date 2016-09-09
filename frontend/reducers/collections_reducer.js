@@ -1,4 +1,5 @@
 import { CollectionConstants } from '../actions/collection_actions';
+import { SessionConstants } from '../actions/session_actions';
 import merge from 'lodash/merge';
 
 const _nullCollections = {collections: {}, errors: [], formStatus: null};
@@ -24,6 +25,8 @@ const CollectionsReducer = (state = _nullCollections, action) => {
       return merge({}, _nullCollections, {collections: newCollections});
     case CollectionConstants.RECEIVE_COLLECTION_ERRORS:
       return merge({}, state, {errors: action.errors, formStatus: 'error'});
+    case SessionConstants.CLEAR_STORE:
+      return _nullCollections;
     default:
       return state;
   }
