@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from 'react-modal';
+import modalStyle from './tag_modal_style';
 
 class TagForm extends React.Component {
   constructor (props) {
@@ -23,14 +25,14 @@ class TagForm extends React.Component {
 
   render () {
     return (
-      <div className="tag-form" onClick={this.props.showDropdown}>
-        <div className="tag-form-label">
-          <span>Edit collections</span>
-          <i className="fa fa-caret-down" aria-hidden="true" />
+      <Modal isOpen={this.props.modalOpen}
+        onRequestClose={this.props.closeModal} style={modalStyle}>
+        <div className="tag-form" onClick={this.props.showDropdown}>
+          <div className="tag-form-label"><span>EDIT COLLECTIONS</span></div>
+          <div className={"tag-form-checkboxes"}>
+            {this.checkboxes()}</div>
         </div>
-        <div className={`tag-form-checkboxes-${this.props.dropdownStatus}`}>
-          {this.checkboxes()}</div>
-      </div>
+      </Modal>
     );
   }
 }

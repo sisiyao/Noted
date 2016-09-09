@@ -9,19 +9,8 @@
   margin-bottom: 40px;
 }
 
-.note-container, .note-form-container, .note-form-header, .edit-headers {
+.note-container, .note-form-container, .note-form-header {
   min-width: 640px;
-}
-
-.edit-headers {
-  font-size: 12px;
-  display: flex;
-  flex-direction: row;
-}
-
-.edit-coll-header {
-  min-width: 77.5%;
-  max-width: 77.5%;
 }
 
 .note-form-container {
@@ -144,14 +133,9 @@
    color: var(--dark-grey);
 }
 
-.tag-form, .note-color {
+.note-color {
   font-size: 12px;
   box-sizing: border-box;
-}
-
-.tag-form {
-  min-width: 80%;
-  max-width: 80%;
 }
 
 .note-color {

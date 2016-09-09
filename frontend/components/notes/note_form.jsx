@@ -3,14 +3,15 @@ import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
 import NoteColor from './note_color';
-import TagListContainer from '../collection_tags/tag_list';
+import TagListContainer from '../collection_tags/tag_list_container';
 
 class NoteForm extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = { id: "", title: "", body: "", collection_ids: [],
-      color: "white", titleHeight: '1', bodyHeight: '1'};
+      color: "white", titleHeight: '1', bodyHeight: '1',
+      collModalOpen: false, colorModalOpen: false };
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
@@ -22,6 +23,10 @@ class NoteForm extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.updateCheckbox = this.updateCheckbox.bind(this);
     this.updateColor = this.updateColor.bind(this);
+    this.closeCollModal = this.closeCollModal.bind(this);
+    this.openCollModal = this.openCollModal.bind(this);
+    this.closeColorModal = this.closeColorModal.bind(this);
+    this.openColorModal = this.openColorModal.bind(this);
   }
 
   componentDidMount () {
@@ -101,21 +106,36 @@ class NoteForm extends React.Component {
     this.props.destroyNote(this.noteId);
   }
 
+  closeCollModal () {
+    this.setState({ collModalOpen: false });
+  }
+
+  openCollModal () {
+    this.setState({ collModalOpen: true });
+  }
+
+  closeColorModal () {
+    this.setState({ colorModalOpen: false });
+  }
+
+  openColorModal () {
+    this.setState({ colorModalOpen: true });
+  }
+
   render () {
     if (this.props.formType !== 'new-note' && this.state.id === "") {
       return <div></div>;
     } else {
       return (
         <div className="note-container">
-          <div className="edit-headers">
-            <div className="edit-coll-header">Collections</div>
-            <div className="edit-note-header">Color</div>
-          </div>
           <div className="note-form-header">
+            <div onClick={this.openCollModal}>Edit Collections</div>
             <TagFormContainer collectionIds={this.state.collection_ids}
               updateCheckbox={this.updateCheckbox.bind(this)}
               showDropdown={this.showDropdown}
-              dropdownStatus={this.state.dropdownStatus} />
+              dropdownStatus={this.state.dropdownStatus}
+              modalOpen={this.state.collModalOpen}
+              closeModal={this.closeCollModal}/>
             <NoteColor color={this.state.color} updateColor={this.updateColor}/>
             <NoteFormHeader handleDelete={this.handleDelete}
               deleteButton={this.deleteButton} cancel={this.cancel} />
