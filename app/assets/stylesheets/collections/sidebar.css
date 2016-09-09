@@ -10,6 +10,7 @@
   left: 0;
   top: 64px;
   transition: left 0.08s linear;
+  z-index: 1;
 }
 
 .sidebar-hide, .sidebar-show {

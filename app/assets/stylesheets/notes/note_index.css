@@ -12,6 +12,13 @@
   color: var(--dark-grey);
 }
 
+.blank-notes-search {
+  font-size: 230px;
+  margin: 10px 0;
+  color: var(--med-light-grey);
+  text-align: center;
+}
+
 .my-gallery-class {
   margin: 0 auto;
 }

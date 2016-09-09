@@ -64,6 +64,8 @@ class NotesIndex extends React.Component {
       return (
         <div className="note-index">
           <div className="notes-header"> Type to search... </div>
+          <div className="blank-notes-search">
+            <i className="fa fa-cog" aria-hidden="true" /></div>
         </div>
       );
     } else {
