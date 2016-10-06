@@ -2,6 +2,7 @@ import React from 'react';
 import NoteIndexItem from './note_index_item';
 import Masonry from 'react-masonry-component';
 import noteSearch from '../../util/note_search_util';
+import noteFilter from '../../util/note_filter_util';
 
 const masonryOptions = {
     itemSelector: '.note-index-item',
@@ -19,28 +20,22 @@ class NotesIndex extends React.Component {
 
   componentDidMount () {
     const path = this.props.location.pathname;
-    if (path === '/home') {
-      this.props.fetchAllNotes({});
-    } else if (path.slice(0,7) === '/notes/') {
-      this.props.fetchAllNotes({collection_name: path.slice(7)});
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const thisPath = this.props.location.pathname;
-    const nextPath = nextProps.location.pathname;
-    if (nextPath === '/home' && thisPath !== nextPath) {
-      this.props.fetchAllNotes({});
-    } else if (nextPath.slice(0,7) === '/notes/' && thisPath !== nextPath) {
-      this.props.fetchAllNotes({collection_name: nextPath.slice(7)});
-    }
+    this.props.fetchAllNotes({});
   }
 
   listNotes () {
     const searchParams = Object.keys(this.props.location.query)[0];
-    const notes = this.props.location.pathname === '/search' && searchParams?
-      noteSearch(Object.keys(this.props.location.query)[0],
-      this.props.notes, this.props.collections) : this.props.notes;
+
+    let notes;
+    if (this.props.location.pathname === '/search' && searchParams) {
+      notes = noteSearch(Object.keys(this.props.location.query)[0],
+      this.props.notes, this.props.collections);
+    } else if (this.props.location.pathname === '/home') {
+      notes = this.props.notes;
+    } else {
+      notes = noteFilter(this.props.params.collectionName, this.props.notes, this.props.collections);
+    }
+
     return notes.map(note => {
       return <NoteIndexItem key={`${note.id}${note.title}`}
         destroyNote={this.props.destroyNote} note={note}/>;
