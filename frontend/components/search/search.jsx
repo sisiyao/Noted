@@ -9,12 +9,7 @@ class Search extends React.Component {
     this.reset = this.reset.bind(this);
     this.setSearchParams = this.setSearchParams.bind(this);
     this.redirectToSearch = this.redirectToSearch.bind(this);
-  }
-
-  componentWillReceiveProps () {
-    if (!this.props.router.isActive('/search')) {
-      this.setState({atRoute: false, searchParams: ""});
-    }
+    this.closeSearch = this.closeSearch.bind(this);
   }
 
   update (e) {
@@ -45,6 +40,11 @@ class Search extends React.Component {
     }
   }
 
+  closeSearch (e) {
+    e.preventDefault();
+    this.setState({atRoute: false});
+  }
+
   render () {
     return (
       <div className={`search-bar-container-${this.state.atRoute}`}
@@ -54,7 +54,7 @@ class Search extends React.Component {
         <form onSubmit={this.setSearchParams}>
           <input className="search-bar" type='text'
             value={this.state.searchParams} onChange={this.update}
-            placeholder="Search" />
+            onBlur={this.closeSearch} placeholder="Search" />
         </form>
         <div className={`search-cancel-icon-${this.state.atRoute}`}
           onClick={this.reset}>
