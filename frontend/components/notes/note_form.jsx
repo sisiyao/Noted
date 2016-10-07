@@ -12,7 +12,7 @@ class NoteForm extends React.Component {
 
     this.state = { id: "", title: "", body: "", collection_ids: [],
       color: "white", titleHeight: '1', bodyHeight: '1',
-      collModalOpen: false, colorModalOpen: false };
+      collModalOpen: false, colorModalOpen: false, updatedAt: "" };
     if (this.props.formType !== 'new-note') {
       this.noteId = this.props.location.pathname.slice(6);
     }
@@ -20,7 +20,7 @@ class NoteForm extends React.Component {
     bindAll(this, ['deleteButton', 'textAreaChange', 'cancel', 'handleSubmit',
       'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
       'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
-      'editCollections', 'tagForm', 'noteActions']);
+      'editCollections', 'tagForm', 'noteActions', 'date']);
   }
 
   componentDidMount () {
@@ -32,12 +32,13 @@ class NoteForm extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.route.path === '/new-note') {
       this.setState({ id: '', title: '', body: '', collection_ids: [],
-        color: 'white', titleHeight: '1', bodyHeight: '1'});
+        color: 'white', titleHeight: '1', bodyHeight: '1', updatedAt: ''});
     } else if (nextProps.formStatus !== "deleted") {
       const note = nextProps.notes[this.noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
         collection_ids: note.collection_ids, color: note.color,
-        titleHeight: `${note.titleHeight}`, bodyHeight: `${note.bodyHeight}` });
+        titleHeight: `${note.titleHeight}`, bodyHeight: `${note.bodyHeight}`,
+        updatedAt: new Date(note.updated_at)});
     }
   }
 
@@ -116,22 +117,38 @@ class NoteForm extends React.Component {
     this.setState({ colorModalOpen: true });
   }
 
+  date () {
+    const dateObj = this.state.updatedAt;
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const minutes = dateObj.getMinutes() >= 10 ? dateObj.getMinutes()
+      : `0${dateObj.getMinutes()}`;
+    const seconds = dateObj.getSeconds() >= 10 ? dateObj.getSeconds()
+      : `0${dateObj.getSeconds()}`;
+    const date = `${months[dateObj.getMonth()]} ${dateObj.getDate()},
+      ${dateObj.getFullYear()} ${dateObj.getHours()}:${minutes}:${seconds}`;
+    return <div className="note-last-saved">Last saved {date}</div>;
+  }
+
   noteForm () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <TagListContainer collectionIds={this.state.collection_ids}/>
-        <textarea id='textarea-title'
-          onChange={this.textAreaChange("title")}
-          placeholder="Title"
-          className="note-form-title"
-          value={this.state.title} rows={this.state.titleHeight} />
-        <textarea id='textarea-body'
-          onChange={this.textAreaChange("body")}
-          placeholder="Take a note..."
-          className="note-form-body"
-          value={this.state.body} rows={this.state.bodyHeight} />
-        <input className="note-submit-button" type="submit" value="SAVE" />
-      </form>
+      <div className={`note-form-container ${this.state.color}`}>
+        <form onSubmit={this.handleSubmit}>
+          <TagListContainer collectionIds={this.state.collection_ids}/>
+          <textarea id='textarea-title'
+            onChange={this.textAreaChange("title")}
+            placeholder="Title"
+            className="note-form-title"
+            value={this.state.title} rows={this.state.titleHeight} />
+          <textarea id='textarea-body'
+            onChange={this.textAreaChange("body")}
+            placeholder="Take a note..."
+            className="note-form-body"
+            value={this.state.body} rows={this.state.bodyHeight} />
+          {this.date()}
+          <input className="note-submit-button" type="submit" value="DONE" />
+        </form>
+      </div>
     );
   }
 
@@ -176,9 +193,7 @@ class NoteForm extends React.Component {
             {this.tagForm()}
             {this.noteActions()}
           </div>
-          <div className={`note-form-container ${this.state.color}`}>
-            {this.noteForm()}
-          </div>
+          {this.noteForm()}
           <ul className='note-form-errors'>{this.errors()}</ul>
         </div>
       );
