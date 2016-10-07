@@ -4,6 +4,7 @@ import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
 import NoteColor from './note_color';
 import TagListContainer from '../collection_tags/tag_list_container';
+import bindAll from 'lodash.bindall';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -16,17 +17,10 @@ class NoteForm extends React.Component {
       this.noteId = this.props.location.pathname.slice(6);
     }
 
-    this.deleteButton = this.deleteButton.bind(this);
-    this.textAreaChange = this.textAreaChange.bind(this);
-    this.cancel = this.cancel.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.updateCheckbox = this.updateCheckbox.bind(this);
-    this.updateColor = this.updateColor.bind(this);
-    this.closeCollModal = this.closeCollModal.bind(this);
-    this.openCollModal = this.openCollModal.bind(this);
-    this.closeColorModal = this.closeColorModal.bind(this);
-    this.openColorModal = this.openColorModal.bind(this);
+    bindAll(this, ['deleteButton', 'textAreaChange', 'cancel', 'handleSubmit',
+      'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
+      'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
+      'editCollections', 'tagForm', 'noteActions']);
   }
 
   componentDidMount () {
@@ -89,8 +83,8 @@ class NoteForm extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    const note = {id: this.state.id, title: this.state.title,
-      body: this.state.body, collection_ids: this.state.collection_ids,
+    const note = {id: this.state.id, title: this.state.title.trim(),
+      body: this.state.body.trim(), collection_ids: this.state.collection_ids,
       color: this.state.color};
     this.props.processForm(note);
   }
@@ -122,6 +116,55 @@ class NoteForm extends React.Component {
     this.setState({ colorModalOpen: true });
   }
 
+  noteForm () {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <TagListContainer collectionIds={this.state.collection_ids}/>
+        <textarea id='textarea-title'
+          onChange={this.textAreaChange("title")}
+          placeholder="Title"
+          className="note-form-title"
+          value={this.state.title} rows={this.state.titleHeight} />
+        <textarea id='textarea-body'
+          onChange={this.textAreaChange("body")}
+          placeholder="Take a note..."
+          className="note-form-body"
+          value={this.state.body} rows={this.state.bodyHeight} />
+        <input className="note-submit-button" type="submit" value="SAVE" />
+      </form>
+    );
+  }
+
+  editCollections () {
+    return (
+      <div className="note-form-edit-coll" onClick={this.openCollModal}>
+        <div>Edit Collections</div>
+        <div><i className="fa fa-pencil" aria-hidden="true" /></div>
+      </div>
+    );
+  }
+
+  tagForm () {
+    return (
+      <TagFormContainer collectionIds={this.state.collection_ids}
+        updateCheckbox={this.updateCheckbox.bind(this)}
+        showDropdown={this.showDropdown}
+        dropdownStatus={this.state.dropdownStatus}
+        modalOpen={this.state.collModalOpen}
+        closeModal={this.closeCollModal}/>
+    );
+  }
+
+  noteActions () {
+    return (
+      <div className="note-form-header-right">
+        <NoteColor color={this.state.color} updateColor={this.updateColor}/>
+        <NoteFormHeader handleDelete={this.handleDelete}
+          deleteButton={this.deleteButton} cancel={this.cancel} />
+      </div>
+    );
+  }
+
   render () {
     if (this.props.formType !== 'new-note' && this.state.id === "") {
       return <div></div>;
@@ -129,37 +172,12 @@ class NoteForm extends React.Component {
       return (
         <div className="note-container">
           <div className="note-form-header">
-            <div className="note-form-edit-coll" onClick={this.openCollModal}>
-              <div>Edit Collections</div>
-              <div><i className="fa fa-pencil" aria-hidden="true" /></div>
-            </div>
-            <TagFormContainer collectionIds={this.state.collection_ids}
-              updateCheckbox={this.updateCheckbox.bind(this)}
-              showDropdown={this.showDropdown}
-              dropdownStatus={this.state.dropdownStatus}
-              modalOpen={this.state.collModalOpen}
-              closeModal={this.closeCollModal}/>
-            <div className="note-form-header-right">
-              <NoteColor color={this.state.color} updateColor={this.updateColor}/>
-              <NoteFormHeader handleDelete={this.handleDelete}
-                deleteButton={this.deleteButton} cancel={this.cancel} />
-            </div>
+            {this.editCollections()}
+            {this.tagForm()}
+            {this.noteActions()}
           </div>
           <div className={`note-form-container ${this.state.color}`}>
-            <form onSubmit={this.handleSubmit}>
-              <TagListContainer collectionIds={this.state.collection_ids}/>
-              <textarea id='textarea-title'
-  							onChange={this.textAreaChange("title")}
-  							placeholder="Title"
-  							className="note-form-title"
-                value={this.state.title} rows={this.state.titleHeight} />
-              <textarea id='textarea-body'
-  							onChange={this.textAreaChange("body")}
-  							placeholder="Take a note..."
-  							className="note-form-body"
-                value={this.state.body} rows={this.state.bodyHeight} />
-              <input className="note-submit-button" type="submit" value="SAVE" />
-            </form>
+            {this.noteForm()}
           </div>
           <ul className='note-form-errors'>{this.errors()}</ul>
         </div>
