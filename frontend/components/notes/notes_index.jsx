@@ -20,7 +20,7 @@ class NotesIndex extends React.Component {
 
   componentDidMount () {
     const path = this.props.location.pathname;
-    this.props.fetchAllNotes({});
+    this.props.fetchAllNotes();
   }
 
   listNotes () {

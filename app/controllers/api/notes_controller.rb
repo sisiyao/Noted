@@ -1,13 +1,6 @@
 class Api::NotesController < ApplicationController
   def index
-    if params[:collection_name]
-      @notes = Note.all.joins(:collections)
-        .where(user_id: current_user.id)
-        .where("collections.name = ?", params[:collection_name])
-        .includes(:collections)
-    else
-      @notes = Note.all.where(user_id: current_user.id).includes(:collections)
-    end
+    @notes = Note.all.where(user_id: current_user.id).includes(:collections)
   end
 
   def show

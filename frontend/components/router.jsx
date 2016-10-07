@@ -7,7 +7,6 @@ import Home from './structural/home';
 import NotesIndex from './notes/notes_index_container';
 import NoteFormContainer from './notes/note_form_container';
 import CollectionFormContainer from './collections/collection_form_container';
-import { fetchAllNotes } from '../actions/note_actions';
 
 class AppRouter extends React.Component{
   constructor (props) {
@@ -30,11 +29,6 @@ class AppRouter extends React.Component{
     if (currentUser) {
       replace('/home');
     }
-  }
-
-  _fetchSearchResults (prevState, nextState, replace, callback) {
-    const searchParams = Object.keys(nextState.location.query)[0];
-    this.context.store.dispatch(fetchAllNotes({search: searchParams}));
   }
 
   render(){

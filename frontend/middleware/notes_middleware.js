@@ -15,7 +15,7 @@ const NotesMiddleware = ({dispatch}) => next => action => {
   switch(action.type){
     case NoteConstants.FETCH_ALL_NOTES:
       success = notes => dispatch(receiveAllNotes(notes));
-      fetchAllNotes(action.filters, success);
+      fetchAllNotes(success);
       next(action);
       break;
     case NoteConstants.FETCH_SINGLE_NOTE:

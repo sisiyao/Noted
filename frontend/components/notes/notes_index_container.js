@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllNotes: (filters) => dispatch(fetchAllNotes(filters)),
+  fetchAllNotes: () => dispatch(fetchAllNotes()),
   destroyNote: noteId => dispatch(destroyNote(noteId)),
 });
 
