@@ -77,8 +77,8 @@ class CollectionsIndex extends React.Component {
     return (
       <div className="sidebar-collections">
         <div className="collection-header">Collections</div>
-        {this.listCollections()}
         {this.newCollection()}
+        {this.listCollections()}
         <Modal isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal} style={modalStyle}>
             {this.modalContent()}

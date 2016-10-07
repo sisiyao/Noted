@@ -16,7 +16,7 @@ const masonryOptions = {
 class NotesIndex extends React.Component {
   constructor (props) {
     super(props);
-    bindAll(this, ['listNotes', 'searchDefaultView', 'searchResultsView']);
+    bindAll(this, ['listNotes', 'searchDefaultView', 'listNotesView']);
   }
 
   componentDidMount () {
@@ -63,7 +63,7 @@ class NotesIndex extends React.Component {
     );
   }
 
-  searchResultsView (notes) {
+  listNotesView (notes) {
     return (
       <div className="note-index">
         <div className="notes-header">
@@ -83,8 +83,10 @@ class NotesIndex extends React.Component {
     if (this.props.location.pathname === '/search' &&
       Object.keys(this.props.location.query).length === 0) {
       return this.searchDefaultView();
+    } else if (notes.length === 0) {
+      return <div></div>;
     } else {
-      return this.searchResultsView(notes);
+      return this.listNotesView(notes);
     }
   }
 }

@@ -141,7 +141,7 @@ Note.create(color: 'red', title: "TIL Tulsa Center of the Universe", body: "TIL 
 Note.create(color: 'red', title: "TIL Golden Orb Spiders", body: "TIL 1.2 million golden orb spiders were individually collected to weave the largest piece of golden spider silk cloth in the world", user_id: 1)
 Note.create(color: 'red', title: "TIL Sri Lanka", body: "TIL The penalty for killing an elephant in Sri Lanka is death", user_id: 1)
 Note.create(color: 'red', title: "TIL Landmines", body: "TIL that the 20,000 landmines used during the Britain/Argentina conflict over the Falklands have led to a booming population of penguins. Cows and humans avoid the fenced-off fields, but penguins are too light to set off the mines. The deadly fields have turned into penguin sanctuaries.", user_id: 1)
-Note.create(color: 'red', title: "TIL Oscare the Cat", body: "TIL of Oscar the Cat who predicted when people in his nursing home were about to die with such accuracy that staff would call relatives.", user_id: 1)
+Note.create(color: 'red', title: "TIL Oscar the Cat", body: "TIL of Oscar the Cat who predicted when people in his nursing home were about to die with such accuracy that staff would call relatives.", user_id: 1)
 Note.create(color: 'red', title: "TIL Bryan Cranston", body: "TIL Bryan Cranston spent hundreds of hours practicing roller skating so that he could perform in the episode of Malcolm in the Middle where he teaches Malcom to roller blade.", user_id: 1)
 Note.create(color: 'red', title: "TIL Norway", body: "TIL Norway actually introduced Salmon Sushi to Japan", user_id: 1)
 
