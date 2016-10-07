@@ -7,12 +7,15 @@ import Home from './structural/home';
 import NotesIndex from './notes/notes_index_container';
 import NoteFormContainer from './notes/note_form_container';
 import CollectionFormContainer from './collections/collection_form_container';
+import { exitSearch, enterSearch } from '../actions/search_actions';
 
 class AppRouter extends React.Component{
   constructor (props) {
     super(props);
     this._ensureLoggedIn = this._ensureLoggedIn.bind(this);
     this._redirectIfLoggedIn = this._redirectIfLoggedIn.bind(this);
+    this._exitSearch = this._exitSearch.bind(this);
+    this._enterSearch = this._enterSearch.bind(this);
   }
 
   _ensureLoggedIn (nextState, replace) {
@@ -29,6 +32,14 @@ class AppRouter extends React.Component{
     if (currentUser) {
       replace('/home');
     }
+  }
+
+  _exitSearch (prevState) {
+    this.context.store.dispatch(exitSearch());
+  }
+
+  _enterSearch (nextState, replace) {
+    this.context.store.dispatch(enterSearch());
   }
 
   render(){
@@ -48,7 +59,8 @@ class AppRouter extends React.Component{
             <Route path="/new-collection" component={ CollectionFormContainer } />
             <Route path="/collection/:collectionId" component={ CollectionFormContainer } />
             <Route path="/notes/:collectionName" component={ NotesIndex } />
-            <Route path="/search" component={ NotesIndex }/>
+            <Route path="/search" component={ NotesIndex } onLeave={ this._exitSearch }
+              onEnter={ this._enterSearch }/>
           </ Route>
         </Route>
       </Router>

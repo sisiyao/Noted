@@ -4,12 +4,15 @@ import { withRouter } from 'react-router';
 class Search extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {searchParams: "", atRoute: false};
+    this.state = {searchParams: "", atRoute: this.props.atRoute};
     this.update = this.update.bind(this);
     this.reset = this.reset.bind(this);
     this.setSearchParams = this.setSearchParams.bind(this);
     this.redirectToSearch = this.redirectToSearch.bind(this);
-    this.closeSearch = this.closeSearch.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({atRoute: nextProps.atRoute, searchParams: ""});
   }
 
   update (e) {
@@ -23,9 +26,8 @@ class Search extends React.Component {
   }
 
   reset (e) {
-    this.setState({searchParams: "", atRoute: false}, () => (
-      this.props.router.push('home')
-    ));
+    e.preventDefault();
+    this.props.router.push('home');
   }
 
   setSearchParams (e) {
@@ -33,16 +35,11 @@ class Search extends React.Component {
     this.props.router.push(`/search?${this.state.searchParams}`);
   }
 
-  redirectToSearch () {
-    if (this.state.atRoute === false) {
-      this.setState({atRoute: true}, () =>
-        this.props.router.push('/search'));
-    }
-  }
-
-  closeSearch (e) {
+  redirectToSearch (e) {
     e.preventDefault();
-    this.setState({atRoute: false});
+    if (this.state.atRoute === false) {
+        this.props.router.push('/search');
+    }
   }
 
   render () {
@@ -54,7 +51,7 @@ class Search extends React.Component {
         <form onSubmit={this.setSearchParams}>
           <input className="search-bar" type='text'
             value={this.state.searchParams} onChange={this.update}
-            onBlur={this.closeSearch} placeholder="Search" />
+            placeholder="Search" />
         </form>
         <div className={`search-cancel-icon-${this.state.atRoute}`}
           onClick={this.reset}>

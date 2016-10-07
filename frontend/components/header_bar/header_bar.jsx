@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
-import Search from '../search/search';
+import SearchContainer from '../search/search_container';
 import ProfileModal from './profile_modal';
 
 class HeaderBar extends React.Component {
@@ -50,7 +50,7 @@ class HeaderBar extends React.Component {
           <div className="header-logo" onClick={this.linkToHome}>Noted</div>
         </div>
 
-        <Search />
+        <SearchContainer />
 
         <div className="header-bar-right">
           <div className="header-add-note" onClick={this.linkToNewNote}>

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NotesIndex from './notes_index.jsx';
+import NotesIndex from './notes_index';
 import { fetchAllNotes, destroyNote }
   from '../../actions/note_actions';
 import notesSelector from '../../util/note_selector';
