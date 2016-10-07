@@ -19,7 +19,6 @@ class Api::SessionsController < ApplicationController
       params[:user][:username],
       params[:user][:password]
     )
-
     if @user
       login!(@user)
       render 'api/users/show'
@@ -91,9 +90,9 @@ Currently, notes only save upon clicking the save button. I would like to implem
 
 I plan on implementing better search functionality by using a fuzzy search javascript library and creating a lightweight search ranking.
 
-### IBM Watson API
+### Natural Language Classifiers
 
-I'd like to use the IBM Watson API for AI categorization of notes via their natural language classifiers.
+I'd like to use the Google Cloud Natural Language API for AI categorization of notes via natural language classifiers.
 
 ### Other
 
