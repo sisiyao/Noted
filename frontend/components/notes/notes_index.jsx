@@ -3,6 +3,7 @@ import NoteIndexItem from './note_index_item';
 import Masonry from 'react-masonry-component';
 import noteSearch from '../../util/note_search_util';
 import noteFilter from '../../util/note_filter_util';
+import bindAll from 'lodash.bindall';
 
 const masonryOptions = {
     itemSelector: '.note-index-item',
@@ -15,7 +16,7 @@ const masonryOptions = {
 class NotesIndex extends React.Component {
   constructor (props) {
     super(props);
-    this.listNotes = this.listNotes.bind(this);
+    bindAll(this, ['listNotes', 'searchDefaultView', 'searchResultsView']);
   }
 
   componentDidMount () {
@@ -52,28 +53,38 @@ class NotesIndex extends React.Component {
     }
   }
 
+  searchDefaultView () {
+    return (
+      <div className="note-index">
+        <div className="notes-header"> Type to search... </div>
+        <div className="blank-notes-search">
+          <i className="fa fa-cog" aria-hidden="true" /></div>
+      </div>
+    );
+  }
+
+  searchResultsView (notes) {
+    return (
+      <div className="note-index">
+        <div className="notes-header">
+          {`${this.notesHeader()}: ${notes.length} total`}
+        </div>
+        <Masonry className={'my-gallery-class'} elementType={'div'}
+          options={masonryOptions} disableImagesLoaded={false}
+          updateOnEachImageLoad={false}>
+            {notes}
+        </Masonry>
+      </div>
+    );
+  }
+
   render () {
     const notes = this.listNotes();
     if (this.props.location.pathname === '/search' &&
       Object.keys(this.props.location.query).length === 0) {
-      return (
-        <div className="note-index">
-          <div className="notes-header"> Type to search... </div>
-          <div className="blank-notes-search">
-            <i className="fa fa-cog" aria-hidden="true" /></div>
-        </div>
-      );
+      return this.searchDefaultView();
     } else {
-      return (
-        <div className="note-index">
-          <div className="notes-header"> {`${this.notesHeader()}: ${notes.length} total`} </div>
-          <Masonry className={'my-gallery-class'} elementType={'div'}
-            options={masonryOptions} disableImagesLoaded={false}
-            updateOnEachImageLoad={false}>
-              {notes}
-          </Masonry>
-        </div>
-      );
+      return this.searchResultsView(notes);
     }
   }
 }

@@ -4,17 +4,15 @@ import SidebarItem from '../structural/sidebar_item';
 import { withRouter } from 'react-router';
 import Modal from 'react-modal';
 import modalStyle from './collection_modal_style';
+import bindAll from 'lodash.bindall';
 
 class CollectionsIndex extends React.Component {
   constructor (props) {
     super(props);
     this.state = {modalOpen: false, collectionToDelete: null};
 
-    this.listCollections = this.listCollections.bind(this);
-    this.newNote = this.newNote.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.deleteCollection = this.deleteCollection.bind(this);
+    bindAll(this, ['listCollections', 'newCollectionLink', 'newCollection',
+      'openModal', 'closeModal', 'deleteCollection', 'modalContent']);
   }
 
   componentDidMount () {
@@ -39,8 +37,17 @@ class CollectionsIndex extends React.Component {
     ));
   }
 
-  newNote () {
+  newCollectionLink () {
     this.props.router.push('/new-collection');
+  }
+
+  newCollection () {
+    return (
+      <div>
+        <SidebarItem item="Create new collection" icon="fa fa-plus"
+          link={this.newCollectionLink}/>
+      </div>
+    );
   }
 
   closeModal () {
@@ -51,28 +58,30 @@ class CollectionsIndex extends React.Component {
     this.setState({ modalOpen: true });
   }
 
+  modalContent () {
+    return (
+      <div className='modal-body'>
+        <div>We’ll delete this label and remove it from all of your
+          notes. Your notes won’t be deleted.</div>
+        <div className='modal-buttons'>
+          <div className='modal-cancel'
+            onClick={this.closeModal}>Cancel</div>
+          <div className='modal-delete'
+            onClick={this.deleteCollection}>Delete</div>
+        </div>
+      </div>
+    );
+  }
+
   render () {
     return (
       <div className="sidebar-collections">
         <div className="collection-header">Collections</div>
         {this.listCollections()}
-        <div>
-          <SidebarItem item="Create new collection" icon="fa fa-plus"
-            link={this.newNote}/>
-        </div>
-
+        {this.newCollection()}
         <Modal isOpen={this.state.modalOpen}
           onRequestClose={this.closeModal} style={modalStyle}>
-            <div className='modal-body'>
-              <div>We’ll delete this label and remove it from all of your
-                notes. Your notes won’t be deleted.</div>
-              <div className='modal-buttons'>
-                <div className='modal-cancel'
-                  onClick={this.closeModal}>Cancel</div>
-                <div className='modal-delete'
-                  onClick={this.deleteCollection}>Delete</div>
-              </div>
-            </div>
+            {this.modalContent()}
         </Modal>
       </div>
     );

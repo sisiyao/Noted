@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import style from './collection_modal_style';
 import { withRouter } from 'react-router';
+import bindAll from 'lodash.bindall';
 
 class CollectionForm extends React.Component {
   constructor (props) {
@@ -9,10 +10,8 @@ class CollectionForm extends React.Component {
 
     this.state = { id: "", name: ""};
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.formText = this.formText.bind(this);
-    this.cancel = this.cancel.bind(this);
-    this.errors = this.errors.bind(this);
+    bindAll(this, ['handleSubmit', 'formText', 'cancel', 'errors',
+      'collectionForm']);
   }
 
   componentDidMount () {
@@ -76,24 +75,28 @@ class CollectionForm extends React.Component {
     }
   }
 
+  collectionForm () {
+    return (
+      <div>
+        <form className="collection-form" onSubmit={this.handleSubmit}>
+          <input className="collection-form-input" type='text' value={this.state.name}
+            onChange={this.update("name")}
+            placeholder="Name"/>
+          <ul className="collection-form-errors">{this.errors()}</ul>
+          <input className={this.submitButtonStyle()} type='submit'
+            value={this.formText()} disabled={this.submitButtonStatus()}/>
+        </form>
+      </div>
+    );
+  }
+
   render () {
     return (
       <div className="collection-form-container">
         <div className="collection-form-icon">
           <i className="fa fa-folder-open-o" aria-hidden="true"></i></div>
         <div className="collection-form-title">{this.formText()} collection</div>
-
-        <div>
-          <form className="collection-form" onSubmit={this.handleSubmit}>
-            <input className="collection-form-input" type='text' value={this.state.name}
-              onChange={this.update("name")}
-              placeholder="Name"/>
-            <ul className="collection-form-errors">{this.errors()}</ul>
-            <input className={this.submitButtonStyle()} type='submit'
-              value={this.formText()} disabled={this.submitButtonStatus()}/>
-          </form>
-        </div>
-
+        {this.collectionForm()}
         <div className="close-collection-form" onClick={this.cancel}>Cancel</div>
       </div>
     );
