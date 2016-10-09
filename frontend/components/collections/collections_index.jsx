@@ -20,11 +20,15 @@ class CollectionsIndex extends React.Component {
   }
 
   setCollectionToDelete (collectionId) {
-    this.setState({collectionToDelete: collectionId});
-    this.openModal();
+    return (e) => {
+      e.preventDefault();
+      this.setState({collectionToDelete: collectionId});
+      this.openModal();
+    };
   }
 
-  deleteCollection () {
+  deleteCollection (e) {
+    e.preventDefault();
     this.props.destroyCollection(this.state.collectionToDelete);
     this.closeModal();
   }

@@ -40,9 +40,12 @@ const CollectionsMiddleware = ({dispatch}) => next => action => {
       next(action);
       break;
     case CollectionConstants.DESTROY_COLLECTION:
+      console.log(window.location);
       success = (collection) => {
         dispatch(removeCollection(collection.collection.id));
-        hashHistory.push('/home');
+        if (window.location.hash.includes(`#/collection/${action.collectionId}`)) {
+          hashHistory.push('/home');
+        }
       };
       destroyCollection(action.collectionId, success, error);
       next(action);

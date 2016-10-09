@@ -40,7 +40,9 @@ const NotesMiddleware = ({dispatch}) => next => action => {
     case NoteConstants.DESTROY_NOTE:
       success = note => {
         dispatch(removeNote(note));
-        hashHistory.push('/home');
+        if (action.actionOrigin !== "home") {
+          hashHistory.push('/home');
+        }
       };
       destroyNote(action.noteId, success, error);
       next(action);

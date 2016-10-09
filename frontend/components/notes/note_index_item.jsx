@@ -15,7 +15,7 @@ const NoteIndexItem = ({note, router, destroyNote}) => {
         <TagListContainer collectionIds={note.collection_ids} />
       </div>
       <div className="note-options">
-        <div><i className="fa fa-trash-o" onClick={destroyNote.bind(null, note.id)}
+        <div><i className="fa fa-trash-o" onClick={destroyNote.bind(null, note.id, "home")}
           aria-hidden="true" /></div>
         <div className="note-options-space" onClick={linkToNote}></div>
       </div>

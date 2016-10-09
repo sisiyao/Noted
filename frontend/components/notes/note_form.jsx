@@ -51,7 +51,7 @@ class NoteForm extends React.Component {
       case false:
         const titleHeight = note.titleHeight < 1 ? 1 : note.titleHeight;
         const title = note.title ? note.title : "";
-        const body = note.body ? note.title : "";
+        const body = note.body ? note.body : "";
         this.setState({ id: note.id, title: title, body: body,
           collection_ids: note.collection_ids, color: note.color,
           titleHeight: `${titleHeight}`, bodyHeight: `${note.bodyHeight}`,
@@ -71,12 +71,7 @@ class NoteForm extends React.Component {
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
       this.setState({ [field]: e.currentTarget.value}, () => {
-        if (this.timeoutId) {
-          clearTimeout(this.timeoutId);
-        }
-        this.timeoutId = setTimeout(() => {
-          this.handleTextSubmit();
-        }, 750);
+        this.handleTextSubmit(field);
       });
     };
   }
@@ -107,9 +102,13 @@ class NoteForm extends React.Component {
     this.props.router.push('/home');
   }
 
-  handleTextSubmit () {
-    const note = {id: this.state.id, title: this.state.title.trim(),
-      body: this.state.body.trim()};
+  handleTextSubmit (field) {
+    let note;
+    if (field === 'title') {
+      note = {id: this.state.id, title: this.state.title.trim()};
+    } else {
+      note = {id: this.state.id, body: this.state.body.trim()};
+    }
     if (this.state.id !== "") {
       this.props.updateNote(note);
     } else {
@@ -127,7 +126,6 @@ class NoteForm extends React.Component {
   }
 
   handleCollectionSubmit () {
-    console.log(this.state.collection_ids);
     const collectionIds = this.state.collection_ids.length === 0 ?
       [""] : this.state.collection_ids;
     const note = {id: this.state.id, collection_ids: collectionIds};

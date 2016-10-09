@@ -29,9 +29,10 @@ export const updateNote = note => ({
   note
 });
 
-export const destroyNote = noteId => ({
+export const destroyNote = (noteId, actionOrigin = "") => ({
   type: NoteConstants.DESTROY_NOTE,
-  noteId
+  noteId,
+  actionOrigin
 });
 
 export const receiveAllNotes = notes => ({

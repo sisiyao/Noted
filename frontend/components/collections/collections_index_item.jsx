@@ -41,7 +41,7 @@ class CollectionsIndexItem extends React.Component {
   collectionDeleteAction () {
     return (
       <div className="collection-item-options"
-        onClick={this.props.delete}>
+        onClick={this.props.delete()}>
         <i className="fa fa-trash-o" aria-hidden="true" />
       </div>
     );

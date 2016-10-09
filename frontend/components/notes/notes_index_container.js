@@ -7,13 +7,12 @@ import notesSelector from '../../util/note_selector';
 const mapStateToProps = state => ({
   notes: notesSelector(state),
   errors: state.notes.errors,
-  collections: state.collections.collections,
-  notesTest: state.notes.notes
+  collections: state.collections.collections
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchAllNotes: () => dispatch(fetchAllNotes()),
-  destroyNote: noteId => dispatch(destroyNote(noteId)),
+  destroyNote: (noteId, actionOrigin) => dispatch(destroyNote(noteId, actionOrigin)),
 });
 
 export default connect(

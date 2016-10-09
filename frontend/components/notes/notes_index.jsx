@@ -20,8 +20,12 @@ class NotesIndex extends React.Component {
   }
 
   componentDidMount () {
-    const path = this.props.location.pathname;
+    console.log("mounting");
     this.props.fetchAllNotes();
+  }
+
+  componentWillReceiveProps () {
+    // console.log("receiving");
   }
 
   listNotes () {
@@ -79,13 +83,11 @@ class NotesIndex extends React.Component {
   }
 
   render () {
-    console.log(this.props.notes);
-    console.log(this.props.notesTest);
     const notes = this.listNotes();
     if (this.props.location.pathname === '/search' &&
       Object.keys(this.props.location.query).length === 0) {
       return this.searchDefaultView();
-    } else if (notes.length === 0) {
+    } else if (notes.length === 0 && this.props.location.pathname === '/home') {
       return <div></div>;
     } else {
       return this.listNotesView(notes);

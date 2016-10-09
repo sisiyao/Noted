@@ -16,11 +16,11 @@ const NotesReducer = (state = _nullNotes, action) => {
       const noteId = action.note.note.id;
       newNotes = merge(
         {},
-        state.notes,
-        {[noteId]: action.note.note}
+        state.notes
       );
+      newNotes[noteId] = action.note.note;
       if (action.actionType === 'created') {
-        setTimeout(() => hashHistory.push(`/note/${noteId}`), 100);
+        setTimeout(() => hashHistory.push(`/note/${noteId}`), 1);
       }
       return merge({}, _nullNotes, {notes: newNotes});
     case NoteConstants.REMOVE_NOTE:
@@ -32,6 +32,7 @@ const NotesReducer = (state = _nullNotes, action) => {
     case SessionConstants.CLEAR_STORE:
       return _nullNotes;
     case CollectionConstants.REMOVE_COLLECTION:
+      console.log("here");
       newNotes = noteCollectionDeleter(action.collectionId, state.notes);
       return merge({}, _nullNotes, {notes: newNotes});
     default:
