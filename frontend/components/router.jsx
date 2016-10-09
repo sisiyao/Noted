@@ -8,14 +8,13 @@ import NotesIndex from './notes/notes_index_container';
 import NoteFormContainer from './notes/note_form_container';
 import CollectionFormContainer from './collections/collection_form_container';
 import { exitSearch, enterSearch } from '../actions/search_actions';
+import bindAll from 'lodash.bindall';
 
 class AppRouter extends React.Component{
   constructor (props) {
     super(props);
-    this._ensureLoggedIn = this._ensureLoggedIn.bind(this);
-    this._redirectIfLoggedIn = this._redirectIfLoggedIn.bind(this);
-    this._exitSearch = this._exitSearch.bind(this);
-    this._enterSearch = this._enterSearch.bind(this);
+    bindAll(this, ['_ensureLoggedIn', '_redirectIfLoggedIn', '_exitSearch',
+      '_enterSearch']);
   }
 
   _ensureLoggedIn (nextState, replace) {

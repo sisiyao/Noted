@@ -26,7 +26,7 @@ const NotesReducer = (state = _nullNotes, action) => {
     case NoteConstants.REMOVE_NOTE:
       newNotes = merge({}, state.notes);
       delete newNotes[`${action.note.note.id}`];
-      return merge({}, _nullNotes, {notes: newNotes, formStatus: "deleted"});
+      return {notes: newNotes, errors: [], formStatus: "deleted"};
     case NoteConstants.RECEIVE_NOTE_ERRORS:
       return merge({}, state, {errors: action.errors, formStatus: null});
     case SessionConstants.CLEAR_STORE:

@@ -42,14 +42,17 @@ class NoteForm extends React.Component {
       && nextProps.route.path !== '/new-note') {
       const noteId = nextProps.location.pathname.slice(6);
       const note = nextProps.notes[noteId];
-      this.updateNoteForm(note);
+      if (note) {
+        this.updateNoteForm(note);
+      }
     }
   }
 
   updateNoteForm (note) {
     switch (this.firstAutosave) {
       case false:
-        const titleHeight = note.titleHeight < 1 ? 1 : note.titleHeight;
+        const titleHeight = note.titleHeight < 1
+          ? 1 : note.titleHeight;
         const title = note.title ? note.title : "";
         const body = note.body ? note.body : "";
         this.setState({ id: note.id, title: title, body: body,
@@ -126,12 +129,17 @@ class NoteForm extends React.Component {
   }
 
   handleCollectionSubmit () {
-    const collectionIds = this.state.collection_ids.length === 0 ?
+    let collectionIds = this.state.collection_ids.length === 0 ?
       [""] : this.state.collection_ids;
-    const note = {id: this.state.id, collection_ids: collectionIds};
+    let note;
     if (this.state.id !== "") {
+      collectionIds = collectionIds.filter(id => {
+        return this.props.collections[id];
+      });
+      note = {id: this.state.id, collection_ids: collectionIds};
       this.props.updateNote(note);
     } else {
+      note = {id: this.state.id, collection_ids: collectionIds};
       this.props.createNote(note);
     }
   }
