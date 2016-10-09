@@ -20,12 +20,7 @@ class NotesIndex extends React.Component {
   }
 
   componentDidMount () {
-    console.log("mounting");
     this.props.fetchAllNotes();
-  }
-
-  componentWillReceiveProps () {
-    // console.log("receiving");
   }
 
   listNotes () {

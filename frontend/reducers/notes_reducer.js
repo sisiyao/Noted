@@ -32,7 +32,6 @@ const NotesReducer = (state = _nullNotes, action) => {
     case SessionConstants.CLEAR_STORE:
       return _nullNotes;
     case CollectionConstants.REMOVE_COLLECTION:
-      console.log("here");
       newNotes = noteCollectionDeleter(action.collectionId, state.notes);
       return merge({}, _nullNotes, {notes: newNotes});
     default:
