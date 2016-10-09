@@ -6,16 +6,17 @@ import NoteForm from './note_form';
 const mapStateToProps = state => ({
   errors: state.notes.errors,
   notes: state.notes.notes,
-  formStatus: state.notes.formStatus
+  formStatus: state.notes.formStatus,
+  noteId: state.notes.createdNote
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const formType = ownProps.location.pathname.slice(1);
-  const processForm = formType === "new-note" ? createNote : updateNote;
 
   return {
     fetchSingleNote: noteId => dispatch(fetchSingleNote(noteId)),
-    processForm: form => dispatch(processForm(form)),
+    createNote: note => dispatch(createNote(note)),
+    updateNote: note => dispatch(updateNote(note)),
     destroyNote: noteId => dispatch(destroyNote(noteId)),
     formType
   };

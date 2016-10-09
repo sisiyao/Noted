@@ -25,16 +25,14 @@ const NotesMiddleware = ({dispatch}) => next => action => {
       break;
     case NoteConstants.CREATE_NOTE:
       success = note => {
-        dispatch(receiveSingleNote(note));
-        hashHistory.push('/home');
+        dispatch(receiveSingleNote(note, "created"));
       };
       createNote(action.note, success, error);
       next(action);
       break;
     case NoteConstants.UPDATE_NOTE:
       success = note => {
-        dispatch(receiveSingleNote(note));
-        hashHistory.push('/home');
+        dispatch(receiveSingleNote(note, "updated"));
       };
       updateNote(action.note, success, error);
       next(action);

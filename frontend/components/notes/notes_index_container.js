@@ -7,7 +7,8 @@ import notesSelector from '../../util/note_selector';
 const mapStateToProps = state => ({
   notes: notesSelector(state),
   errors: state.notes.errors,
-  collections: state.collections.collections
+  collections: state.collections.collections,
+  notesTest: state.notes.notes
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ import { SessionConstants } from '../actions/session_actions';
 import { CollectionConstants } from '../actions/collection_actions';
 import merge from 'lodash/merge';
 import noteCollectionDeleter from '../util/note_collection_deleter';
+import { hashHistory } from 'react-router';
 
 const _nullNotes = {notes: {}, errors: [], formStatus: null};
 
@@ -18,6 +19,9 @@ const NotesReducer = (state = _nullNotes, action) => {
         state.notes,
         {[noteId]: action.note.note}
       );
+      if (action.actionType === 'created') {
+        setTimeout(() => hashHistory.push(`/note/${noteId}`), 100);
+      }
       return merge({}, _nullNotes, {notes: newNotes});
     case NoteConstants.REMOVE_NOTE:
       newNotes = merge({}, state.notes);

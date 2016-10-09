@@ -27,10 +27,14 @@ class ApplicationController < ActionController::Base
   def calculate_height (note, text_type)
     text_type == "body" ? text = note.body : text = note.title
     height = 0
-    split_text = text.split("\n")
-    split_text.each do |text|
-      height += (text.length / 40.0).ceil if text.length > 0
-      height += 1 if text.length == 0
+    if text
+      split_text = text.split("\n")
+      split_text.each do |text|
+        height += (text.length / 40.0).ceil if text.length > 0
+        height += 1 if text.length == 0
+      end
+    else
+      height = 0
     end
     height
   end

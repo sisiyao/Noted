@@ -6,6 +6,7 @@ import TagListContainer from '../collection_tags/tag_list_container';
 import bindAll from 'lodash.bindall';
 import Modal from 'react-modal';
 import modalStyle from './note_color_modal_style';
+import { convertDate } from '../../util/date_util';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -14,11 +15,14 @@ class NoteForm extends React.Component {
     this.state = { id: "", title: "", body: "", collection_ids: [],
       color: "white", titleHeight: '1', bodyHeight: '1',
       collModalOpen: false, colorModalOpen: false, updatedAt: "" };
+    this.firstAutosave = false;
+    this.timeoutId = null;
 
-    bindAll(this, ['textAreaChange', 'cancel', 'handleSubmit',
+    bindAll(this, ['textAreaChange', 'cancel', 'handleTextSubmit',
       'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
       'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
-      'editCollections', 'tagForm', 'noteActions', 'date', 'noteColor']);
+      'editCollections', 'tagForm', 'noteActions', 'noteColor',
+      'handleColorSubmit', 'handleCollectionSubmit', 'updateNoteForm']);
   }
 
   componentDidMount () {
@@ -29,25 +33,51 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.route.path === '/new-note') {
-      this.setState({ id: '', title: '', body: '', collection_ids: [],
-        color: 'white', titleHeight: '1', bodyHeight: '1', updatedAt: ''});
-    } else if (nextProps.formStatus !== "deleted") {
-      const noteId = this.props.location.pathname.slice(6);
+    if (nextProps.route.path === '/new-note' &&
+      this.props.location.pathname !== '/new-note') {
+      this.setState({id: "", title: "", body: "", collection_ids: [],
+        color: "white", titleHeight: '1', bodyHeight: '1', updatedAt: ""});
+      this.firstAutosave = false;
+    } else if (nextProps.formStatus !== "deleted"
+      && nextProps.route.path !== '/new-note') {
+      const noteId = nextProps.location.pathname.slice(6);
       const note = nextProps.notes[noteId];
-      this.setState({ id: note.id, title: note.title, body: note.body,
-        collection_ids: note.collection_ids, color: note.color,
-        titleHeight: `${note.titleHeight}`, bodyHeight: `${note.bodyHeight}`,
-        updatedAt: new Date(note.updated_at)});
+      this.updateNoteForm(note);
+    }
+  }
+
+  updateNoteForm (note) {
+    switch (this.firstAutosave) {
+      case false:
+        const titleHeight = note.titleHeight < 1 ? 1 : note.titleHeight;
+        const title = note.title ? note.title : "";
+        const body = note.body ? note.title : "";
+        this.setState({ id: note.id, title: title, body: body,
+          collection_ids: note.collection_ids, color: note.color,
+          titleHeight: `${titleHeight}`, bodyHeight: `${note.bodyHeight}`,
+          updatedAt: new Date(note.updated_at)});
+        this.firstAutosave = true;
+        break;
+      case true:
+        this.setState({ updatedAt: new Date(note.updated_at) });
+        break;
     }
   }
 
   textAreaChange (field) {
     return e => {
+      e.preventDefault();
       const textarea = document.getElementById(`textarea-${field}`);
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight+'px';
-      this.setState({ [field]: e.currentTarget.value});
+      this.setState({ [field]: e.currentTarget.value}, () => {
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+        this.timeoutId = setTimeout(() => {
+          this.handleTextSubmit();
+        }, 750);
+      });
     };
   }
 
@@ -61,13 +91,15 @@ class NoteForm extends React.Component {
       } else {
         newCollectionIds.splice(idx, 1);
       }
-      this.setState({collection_ids: newCollectionIds});
+      this.setState({collection_ids: newCollectionIds}, () => (
+        this.handleCollectionSubmit()
+      ));
     };
   }
 
   updateColor (color) {
     return () => {
-      this.setState({color: color});
+      this.setState({color: color}, () => this.handleColorSubmit());
     };
   }
 
@@ -75,12 +107,35 @@ class NoteForm extends React.Component {
     this.props.router.push('/home');
   }
 
-  handleSubmit (e) {
-    e.preventDefault();
+  handleTextSubmit () {
     const note = {id: this.state.id, title: this.state.title.trim(),
-      body: this.state.body.trim(), collection_ids: this.state.collection_ids,
-      color: this.state.color};
-    this.props.processForm(note);
+      body: this.state.body.trim()};
+    if (this.state.id !== "") {
+      this.props.updateNote(note);
+    } else {
+      this.props.createNote(note);
+    }
+  }
+
+  handleColorSubmit () {
+    const note = {id: this.state.id, color: this.state.color};
+    if (this.state.id !== "") {
+      this.props.updateNote(note);
+    } else {
+      this.props.createNote(note);
+    }
+  }
+
+  handleCollectionSubmit () {
+    console.log(this.state.collection_ids);
+    const collectionIds = this.state.collection_ids.length === 0 ?
+      [""] : this.state.collection_ids;
+    const note = {id: this.state.id, collection_ids: collectionIds};
+    if (this.state.id !== "") {
+      this.props.updateNote(note);
+    } else {
+      this.props.createNote(note);
+    }
   }
 
   errors () {
@@ -114,29 +169,12 @@ class NoteForm extends React.Component {
     this.setState({ colorModalOpen: true });
   }
 
-  date () {
-    const dateObj = this.state.updatedAt;
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-      'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    if (dateObj === "") {
-      return;
-    } else {
-      const minutes = dateObj.getMinutes() >= 10 ? dateObj.getMinutes()
-      : `0${dateObj.getMinutes()}`;
-      const seconds = dateObj.getSeconds() >= 10 ? dateObj.getSeconds()
-      : `0${dateObj.getSeconds()}`;
-      const date = `${months[dateObj.getMonth()]} ${dateObj.getDate()},
-      ${dateObj.getFullYear()} ${dateObj.getHours()}:${minutes}:${seconds}`;
-      return <div className="note-last-saved">Last saved {date}</div>;
-    }
-  }
-
   noteForm () {
     return (
       <div className={`note-form-container ${this.state.color}`}>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.cancel}>
           <TagListContainer collectionIds={this.state.collection_ids}/>
-          {this.date()}
+          {convertDate(this.state.updatedAt)}
           <textarea id='textarea-title'
             onChange={this.textAreaChange("title")}
             placeholder="Title"

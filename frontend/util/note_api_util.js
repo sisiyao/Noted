@@ -18,19 +18,18 @@ export const createNote = (note, success, error) => {
   $.ajax({
     url: "/api/notes",
     method: "POST",
-    data: {note: {title: note.title, body: note.body,
-      collection_ids: note.collection_ids, color: note.color}},
+    data: {note: note},
     success,
     error
   });
 };
 
 export const updateNote = (note, success, error) => {
+  console.log(note);
   $.ajax({
     url: `/api/notes/${note.id}`,
     method: "PATCH",
-    data: {note: {title: note.title, body: note.body,
-      collection_ids: note.collection_ids, color: note.color}},
+    data: {note: note},
     success,
     error
   });

@@ -39,9 +39,10 @@ export const receiveAllNotes = notes => ({
   notes
 });
 
-export const receiveSingleNote = note => ({
+export const receiveSingleNote = (note, actionType) => ({
   type: NoteConstants.RECEIVE_SINGLE_NOTE,
-  note
+  note,
+  actionType
 });
 
 export const removeNote = note => ({

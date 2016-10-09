@@ -26,6 +26,7 @@ class Api::NotesController < ApplicationController
   def update
     if current_user.notes.exists?(params[:id].to_i)
       @note = Note.find(params[:id].to_i)
+      p note_params
 
       if @note.update(note_params)
         render :show
