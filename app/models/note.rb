@@ -1,5 +1,5 @@
 class Note < ActiveRecord::Base
-  validates :title, :user_id, :color, presence: true
+  validates :user_id, :color, presence: true
 
   belongs_to :user
 

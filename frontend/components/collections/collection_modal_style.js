@@ -11,7 +11,7 @@ const modalStyle = {
   content : {
     position        : 'fixed',
     margin          : 'auto',
-    top             : '10%',
+    top             : '7%',
     border          : '1px solid #fff',
     padding         : '36px 30px 30px 30px',
     'minWidth'      : '400px',

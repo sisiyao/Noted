@@ -11,7 +11,7 @@ const profileModalStyle = {
   content : {
     position        : 'fixed',
     margin          : 'auto',
-    top             : '10%',
+    top             : '7%',
     border          : '1px solid #fff',
     padding         : '20px 30px 15px 30px',
     'minWidth'      : '300px',

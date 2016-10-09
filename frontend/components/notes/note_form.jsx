@@ -2,9 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import NoteFormHeader from './note_form_header';
 import TagFormContainer from '../collection_tags/tag_form_container';
-import NoteColor from './note_color';
 import TagListContainer from '../collection_tags/tag_list_container';
 import bindAll from 'lodash.bindall';
+import Modal from 'react-modal';
+import modalStyle from './note_color_modal_style';
 
 class NoteForm extends React.Component {
   constructor (props) {
@@ -20,7 +21,7 @@ class NoteForm extends React.Component {
     bindAll(this, ['deleteButton', 'textAreaChange', 'cancel', 'handleSubmit',
       'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
       'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
-      'editCollections', 'tagForm', 'noteActions', 'date']);
+      'editCollections', 'tagForm', 'noteActions', 'date', 'noteColor']);
   }
 
   componentDidMount () {
@@ -71,11 +72,9 @@ class NoteForm extends React.Component {
   }
 
   updateColor (color) {
-    if (color) {
-      this.setState({color: color.value});
-    } else {
-      this.setState({color: 'white'});
-    }
+    return () => {
+      this.setState({color: color});
+    };
   }
 
   cancel () {
@@ -139,6 +138,7 @@ class NoteForm extends React.Component {
       <div className={`note-form-container ${this.state.color}`}>
         <form onSubmit={this.handleSubmit}>
           <TagListContainer collectionIds={this.state.collection_ids}/>
+          {this.date()}
           <textarea id='textarea-title'
             onChange={this.textAreaChange("title")}
             placeholder="Title"
@@ -149,7 +149,6 @@ class NoteForm extends React.Component {
             placeholder="Take a note..."
             className="note-form-body"
             value={this.state.body} rows={this.state.bodyHeight} />
-          {this.date()}
           <input className="note-submit-button" type="submit" value="DONE" />
         </form>
       </div>
@@ -168,9 +167,7 @@ class NoteForm extends React.Component {
   tagForm () {
     return (
       <TagFormContainer collectionIds={this.state.collection_ids}
-        updateCheckbox={this.updateCheckbox.bind(this)}
-        showDropdown={this.showDropdown}
-        dropdownStatus={this.state.dropdownStatus}
+        updateCheckbox={this.updateCheckbox}
         modalOpen={this.state.collModalOpen}
         closeModal={this.closeCollModal}/>
     );
@@ -179,10 +176,30 @@ class NoteForm extends React.Component {
   noteActions () {
     return (
       <div className="note-form-header-right">
-        <NoteColor color={this.state.color} updateColor={this.updateColor}/>
         <NoteFormHeader handleDelete={this.handleDelete}
-          deleteButton={this.deleteButton} cancel={this.cancel} />
+          deleteButton={this.deleteButton} cancel={this.cancel}
+          openColorModal={this.openColorModal}/>
       </div>
+    );
+  }
+
+  noteColorSelected (color) {
+    return color === this.state.color ? "color-selected" : "";
+  }
+
+  noteColor () {
+    const colors = ['white', 'yellow', 'green', 'blue', 'red', 'lavender'];
+    const colorList = colors.map(color => {
+      return <div key={color} className={`color-choice ${color}
+          ${this.noteColorSelected(color)}`}
+          onClick={this.updateColor(color)}></div>;
+    });
+    return (
+      <Modal isOpen={this.state.colorModalOpen}
+        onRequestClose={this.closeColorModal} style={modalStyle}>
+        <div className="color-choice-header">NOTE COLOR</div>
+        <div className="color-choices">{colorList}</div>
+      </Modal>
     );
   }
 
@@ -196,6 +213,7 @@ class NoteForm extends React.Component {
             {this.editCollections()}
             {this.tagForm()}
             {this.noteActions()}
+            {this.noteColor()}
           </div>
           {this.noteForm()}
           <ul className='note-form-errors'>{this.errors()}</ul>

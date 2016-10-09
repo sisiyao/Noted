@@ -27,7 +27,7 @@ class TagForm extends React.Component {
     return (
       <Modal isOpen={this.props.modalOpen}
         onRequestClose={this.props.closeModal} style={modalStyle}>
-        <div className="tag-form" onClick={this.props.showDropdown}>
+        <div className="tag-form">
           <div className="tag-form-label"><span>EDIT COLLECTIONS</span></div>
           <div className={"tag-form-checkboxes"}>
             {this.checkboxes()}</div>

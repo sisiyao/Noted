@@ -1,11 +1,13 @@
 .tag-form-label {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
+  margin-top: 10px;
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .checkbox {
-  padding: 5px 7px;
+  padding: 5px 20px;
 }
 
 .checkbox:hover {

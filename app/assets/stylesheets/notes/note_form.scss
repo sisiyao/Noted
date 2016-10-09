@@ -4,17 +4,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 15%;
+  top: 11%;
   margin-left: 20px;
   margin-bottom: 40px;
 }
 
 .note-container, .note-form-container, .note-form-header {
-  min-width: 640px;
+  min-width: 790px;
 }
 
 .note-form-container {
-  max-width: 640px;
+  max-width: 790px;
 }
 
 .note-form-header, .note-form-header-right, .note-form-edit-coll {
@@ -38,7 +38,7 @@
   padding: 0 8px 0 20px;
 }
 
-.note-form-edit-coll:hover, .note-color-container:hover {
+.note-form-edit-coll:hover {
   cursor: pointer;
 }
 
@@ -69,7 +69,7 @@
   box-shadow: none;
   border-radius: none;
   border: none;
-  padding: 25px 20px;
+  padding: 25px 45px;
   width: 100%;
   text-align: left;
   color: black;
@@ -86,7 +86,7 @@
   font-family: 'Roboto Slab', serif;
   font-size: 16px;
   line-height: 1.5;
-  min-height: 110px;
+  min-height: 228px;
 }
 
 .note-form-title {
@@ -109,14 +109,14 @@
   box-sizing: border-box;
 }
 
-.note-form-delete, .note-form-cancel {
+.note-form-color, .note-form-delete, .note-form-cancel {
   padding: 0 10px;
   border-radius: 3px;
   background-color: transparent;
   margin: 0 3px;
 }
 
-.note-submit-button:hover, .note-form-delete:hover, .note-form-cancel:hover {
+.note-submit-button:hover, .note-form-color:hover, .note-form-delete:hover, .note-form-cancel:hover {
   background-color: var(--light-grey);
   cursor: pointer;
 }
@@ -150,19 +150,11 @@
    color: var(--dark-grey);
 }
 
-.note-color-container {
-  font-size: 12px;
-  box-sizing: border-box;
-  min-width: 85px;
-  max-width: 85px;
-  margin-right: 15px;
-}
-
 .note-last-saved {
   font-size: 12px;
   font-style: italic;
   color: #494949;
   position: absolute;
-  left: 8px;
-  bottom: 8px;
+  right: 12px;
+  top: 12px;
 }
