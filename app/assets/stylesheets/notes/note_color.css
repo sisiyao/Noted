@@ -38,11 +38,12 @@
   min-height: 40px;
   max-height: 40px;
   margin: 10px;
-  border: 1px solid gray;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
 }
 
 .color-choice:hover {
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 
 .color-choice-header {

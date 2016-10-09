@@ -14,11 +14,8 @@ class NoteForm extends React.Component {
     this.state = { id: "", title: "", body: "", collection_ids: [],
       color: "white", titleHeight: '1', bodyHeight: '1',
       collModalOpen: false, colorModalOpen: false, updatedAt: "" };
-    if (this.props.formType !== 'new-note') {
-      this.noteId = this.props.location.pathname.slice(6);
-    }
 
-    bindAll(this, ['deleteButton', 'textAreaChange', 'cancel', 'handleSubmit',
+    bindAll(this, ['textAreaChange', 'cancel', 'handleSubmit',
       'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
       'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
       'editCollections', 'tagForm', 'noteActions', 'date', 'noteColor']);
@@ -26,7 +23,8 @@ class NoteForm extends React.Component {
 
   componentDidMount () {
     if (this.props.formType !== 'new-note') {
-      this.props.fetchSingleNote(this.noteId);
+      const noteId = this.props.location.pathname.slice(6);
+      this.props.fetchSingleNote(noteId);
     }
   }
 
@@ -35,17 +33,13 @@ class NoteForm extends React.Component {
       this.setState({ id: '', title: '', body: '', collection_ids: [],
         color: 'white', titleHeight: '1', bodyHeight: '1', updatedAt: ''});
     } else if (nextProps.formStatus !== "deleted") {
-      const note = nextProps.notes[this.noteId];
+      const noteId = this.props.location.pathname.slice(6);
+      const note = nextProps.notes[noteId];
       this.setState({ id: note.id, title: note.title, body: note.body,
         collection_ids: note.collection_ids, color: note.color,
         titleHeight: `${note.titleHeight}`, bodyHeight: `${note.bodyHeight}`,
         updatedAt: new Date(note.updated_at)});
     }
-  }
-
-  deleteButton () {
-    return this.props.formType === 'new-note' ? ""
-      : <i className="fa fa-trash-o" aria-hidden="true" />;
   }
 
   textAreaChange (field) {
@@ -97,7 +91,11 @@ class NoteForm extends React.Component {
 
   handleDelete (e) {
     e.preventDefault();
-    this.props.destroyNote(this.noteId);
+    if (this.state.id !== "") {
+      this.props.destroyNote(this.state.id);
+    } else {
+      this.props.router.push('/home');
+    }
   }
 
   closeCollModal () {
@@ -177,8 +175,7 @@ class NoteForm extends React.Component {
     return (
       <div className="note-form-header-right">
         <NoteFormHeader handleDelete={this.handleDelete}
-          deleteButton={this.deleteButton} cancel={this.cancel}
-          openColorModal={this.openColorModal}/>
+          cancel={this.cancel} openColorModal={this.openColorModal}/>
       </div>
     );
   }
