@@ -55,6 +55,9 @@
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  max-height: 90px;
+  overflow-y: hidden;
 }
 
 .note-index-body {
