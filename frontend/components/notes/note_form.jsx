@@ -22,7 +22,8 @@ class NoteForm extends React.Component {
       'handleDelete', 'updateCheckbox', 'updateColor', 'closeCollModal',
       'openCollModal', 'closeColorModal', 'openColorModal', 'noteForm',
       'editCollections', 'tagForm', 'noteActions', 'noteColor',
-      'handleColorSubmit', 'handleCollectionSubmit', 'updateNoteForm']);
+      'handleColorSubmit', 'handleCollectionSubmit', 'updateNoteForm',
+      'manualSubmit']);
   }
 
   componentDidMount () {
@@ -114,8 +115,6 @@ class NoteForm extends React.Component {
     }
     if (this.state.id !== "") {
       this.props.updateNote(note);
-    } else {
-      this.props.createNote(note);
     }
   }
 
@@ -123,8 +122,6 @@ class NoteForm extends React.Component {
     const note = {id: this.state.id, color: this.state.color};
     if (this.state.id !== "") {
       this.props.updateNote(note);
-    } else {
-      this.props.createNote(note);
     }
   }
 
@@ -138,9 +135,6 @@ class NoteForm extends React.Component {
       });
       note = {id: this.state.id, collection_ids: collectionIds};
       this.props.updateNote(note);
-    } else {
-      note = {id: this.state.id, collection_ids: collectionIds};
-      this.props.createNote(note);
     }
   }
 
@@ -175,23 +169,36 @@ class NoteForm extends React.Component {
     this.setState({ colorModalOpen: true });
   }
 
+  manualSubmit (e) {
+    e.preventDefault();
+    if (this.props.location.pathname !== '/new-note') {
+      this.cancel();
+    } else {
+      const note = {id: this.state.id, title: this.state.title,
+         body: this.state.body, collection_ids: this.state.collection_ids,
+        color: this.state.color};
+      this.props.createNote(note);
+      this.props.router.push('/home');
+    }
+  }
+
   noteForm () {
     return (
       <div className={`note-form-container ${this.state.color}`}>
-        <form onSubmit={this.cancel}>
+        <form onSubmit={this.manualSubmit}>
           <TagListContainer collectionIds={this.state.collection_ids}/>
           {convertDate(this.state.updatedAt)}
-          <textarea id='textarea-title'
+          <textarea id='textarea-title' autoFocus
             onChange={this.textAreaChange("title")}
             placeholder="Title"
             className="note-form-title"
-            value={this.state.title} rows={this.state.titleHeight} />
+            value={this.state.title} rows={this.state.titleHeight}/>
           <textarea id='textarea-body'
             onChange={this.textAreaChange("body")}
             placeholder="Take a note..."
             className="note-form-body"
             value={this.state.body} rows={this.state.bodyHeight} />
-          <input className="note-submit-button" type="submit" value="DONE" />
+          <input className="note-submit-button" type="submit" value="SUBMIT" />
         </form>
       </div>
     );

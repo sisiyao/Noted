@@ -81,7 +81,7 @@ class CollectionForm extends React.Component {
         <form className="collection-form" onSubmit={this.handleSubmit}>
           <input className="collection-form-input" type='text' value={this.state.name}
             onChange={this.update("name")}
-            placeholder="Name"/>
+            placeholder="Name" id="collection-form-focus" autoFocus/>
           <ul className="collection-form-errors">{this.errors()}</ul>
           <input className={this.submitButtonStyle()} type='submit'
             value={this.formText()} disabled={this.submitButtonStatus()}/>

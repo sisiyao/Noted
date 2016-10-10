@@ -19,10 +19,8 @@ const NotesReducer = (state = _nullNotes, action) => {
         state.notes
       );
       newNotes[noteId] = action.note.note;
-      if (action.actionType === 'created') {
-        setTimeout(() => hashHistory.push(`/note/${noteId}`), 1);
-      }
-      return merge({}, _nullNotes, {notes: newNotes});
+      const createdNote = action.actionType === 'created' ? noteId : null;
+      return {notes: newNotes, errors: [], formStatus: null};
     case NoteConstants.REMOVE_NOTE:
       newNotes = merge({}, state.notes);
       delete newNotes[`${action.note.note.id}`];

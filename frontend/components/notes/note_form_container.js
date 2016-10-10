@@ -7,7 +7,6 @@ const mapStateToProps = state => ({
   errors: state.notes.errors,
   notes: state.notes.notes,
   formStatus: state.notes.formStatus,
-  noteId: state.notes.createdNote,
   collections: state.collections.collections
 });
 

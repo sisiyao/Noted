@@ -1,5 +1,4 @@
 .search-bar-container-true, .search-bar-container-false {
-  min-width: 200px;
   z-index: 2;
   color: black;
   display: flex;
