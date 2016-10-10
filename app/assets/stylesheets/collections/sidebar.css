@@ -127,6 +127,10 @@
   color: var(--dark-grey);
 }
 
+.sidebar-about {
+  color: var(--dark-grey);
+}
+
 .sidebar-about:visited {
   color: var(--dark-grey);
 }
